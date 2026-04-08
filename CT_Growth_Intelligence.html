@@ -266,9 +266,35 @@ body {
   background: white;
   border: 1px solid var(--paper-3);
   border-radius: var(--radius);
-  padding: 1rem 1.25rem;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  overflow: hidden;
 }
+.quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  gap: 12px;
+}
+.quote-header:hover { background: var(--paper-2); }
+.quote-header .qh-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+.quote-header .qh-name { font-size: 13px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.quote-header .qh-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.quote-header .qh-arrow {
+  font-size: 12px;
+  color: var(--ink-3);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.quote-card.open .qh-arrow { transform: rotate(90deg); }
+.quote-body {
+  display: none;
+  padding: 0 1.25rem 1rem;
+  border-top: 1px solid var(--paper-2);
+}
+.quote-card.open .quote-body { display: block; padding-top: 0.75rem; }
 .quote-card .q { font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 10px; font-style: italic; }
 .quote-card .q::before { content: '\201C'; }
 .quote-card .q::after { content: '\201D'; }
@@ -790,18 +816,34 @@ function renderQuotes() {
     document.getElementById('quotes-list').innerHTML = '<div class="no-results">No responses match this combination.</div>';
     return;
   }
-  document.getElementById('quotes-list').innerHTML = filtered.map(d => {
+  document.getElementById('quotes-list').innerHTML = filtered.map((d, i) => {
     const c = clusters.find(c => c.id === d.cluster);
-    return `<div class="quote-card">
-      <div class="q">${d.stop}</div>
-      <div class="meta">
-        ${d.role !== 'Individual' ? `<span class="tag tag-role">${d.role}</span>` : ''}
-        <span class="tag tag-use">${d.use === 'both' ? 'personal + client' : 'personal use'}</span>
-        <span class="tag tag-cluster" style="background:${c ? c.color + '18' : '#eee'};color:${c ? c.color : '#666'}">${c ? c.label : d.cluster}</span>
+    return `<div class="quote-card" id="qc-${i}">
+      <div class="quote-header" onclick="toggleQuote('qc-${i}')">
+        <div class="qh-left">
+          <span class="qh-name">${d.name}</span>
+          <div class="qh-tags">
+            ${d.role !== 'Individual' ? `<span class="tag tag-role">${d.role}</span>` : ''}
+            <span class="tag tag-cluster" style="background:${c ? c.color + '18' : '#eee'};color:${c ? c.color : '#666'}">${c ? c.label : d.cluster}</span>
+          </div>
+        </div>
+        <span class="qh-arrow">&#9654;</span>
+      </div>
+      <div class="quote-body">
+        <div class="q">${d.stop}</div>
+        <div class="meta">
+          ${d.role !== 'Individual' ? `<span class="tag tag-role">${d.role}</span>` : ''}
+          <span class="tag tag-use">${d.use === 'both' ? 'personal + client' : 'personal use'}</span>
+          <span class="tag tag-cluster" style="background:${c ? c.color + '18' : '#eee'};color:${c ? c.color : '#666'}">${c ? c.label : d.cluster}</span>
+        </div>
       </div>
     </div>`;
   }).join('');
 }
+
+window.toggleQuote = function(id) {
+  document.getElementById(id).classList.toggle('open');
+};
 
 window.selectCluster = function(id) {
   activeCluster = activeCluster === id ? null : id;
