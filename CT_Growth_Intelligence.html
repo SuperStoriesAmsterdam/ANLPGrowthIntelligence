@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CT Foundation — Growth Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a1814;
+  --ink-2: #4a4840;
+  --ink-3: #8a8780;
+  --paper: #f7f4ef;
+  --paper-2: #ede9e2;
+  --paper-3: #e0dbd2;
+  --accent: #2d5a3d;
+  --accent-2: #d4622a;
+  --accent-light: #e8f0eb;
+  --warm-light: #f5ede0;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --radius: 4px;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 3rem 2.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+.header-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247,244,239,0.45);
+  margin-bottom: 1rem;
+}
+.header-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.1;
+  color: var(--paper);
+  margin-bottom: 0.75rem;
+  max-width: 680px;
+}
+.header-sub {
+  font-size: 14px;
+  color: rgba(247,244,239,0.55);
+  max-width: 560px;
+  line-height: 1.6;
+}
+.header-meta {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.header-stat { }
+.header-stat .n {
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--paper);
+  line-height: 1;
+}
+.header-stat .l {
+  font-size: 11px;
+  color: rgba(247,244,239,0.45);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+/* ── NAV TABS ── */
+.nav-bar {
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--paper-3);
+  display: flex;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-tab {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 1rem 1.75rem;
+  border: none;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: var(--paper);
+}
+.nav-indicator {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* ── SECTIONS ── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── LAYOUT ── */
+.container { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+@media (max-width: 640px) {
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .nav-tab { padding: 1rem 1rem; font-size: 12px; }
+}
+
+/* ── SECTION TITLE ── */
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+.section-heading {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.section-intro {
+  font-size: 15px;
+  color: var(--ink-2);
+  max-width: 620px;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.divider { height: 1px; background: var(--paper-3); margin: 2rem 0; }
+
+/* ── STAT CARDS ── */
+.stat-card {
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.stat-card .n {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-card .l { font-size: 12px; color: var(--ink-3); }
+.stat-card .sub { font-size: 13px; color: var(--ink-2); margin-top: 6px; }
+
+/* ── INSIGHT BOX ── */
+.insight-box {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: 2rem;
+}
+.insight-box .label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.insight-box p {
+  font-size: 14px;
+  color: #1e3a28;
+  line-height: 1.7;
+}
+
+.insight-box.warm {
+  background: var(--warm-light);
+  border-left-color: var(--accent-2);
+}
+.insight-box.warm .label { color: var(--accent-2); }
+.insight-box.warm p { color: #5a2810; }
+
+/* ── CLUSTER BARS ── */
+.cluster-section { margin-bottom: 2rem; }
+.cluster-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+.cluster-row:hover { background: var(--paper-2); }
+.cluster-row.selected { background: var(--paper-2); }
+.cluster-name { font-size: 13px; color: var(--ink); width: 210px; flex-shrink: 0; }
+.cluster-name strong { font-weight: 500; display: block; }
+.cluster-name span { font-size: 11px; color: var(--ink-3); }
+.bar-track { flex: 1; height: 6px; background: var(--paper-3); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+.cluster-n { font-size: 13px; font-weight: 500; color: var(--ink-2); width: 24px; text-align: right; flex-shrink: 0; }
+
+/* ── FILTER PILLS ── */
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.f-pill {
+  font-size: 12px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--paper-3);
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--sans);
+}
+.f-pill:hover { border-color: var(--ink-3); color: var(--ink); }
+.f-pill.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ── QUOTE CARDS ── */
+.quotes-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.quote-card {
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 8px;
+}
+.quote-card .q { font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 10px; font-style: italic; }
+.quote-card .q::before { content: '\201C'; }
+.quote-card .q::after { content: '\201D'; }
+.quote-card .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-weight: 400;
+}
+.tag-cluster { background: #e8f0eb; color: #1e3a28; }
+.tag-role { background: var(--paper-2); color: var(--ink-2); }
+.tag-use { background: #f0ebe8; color: #5a2810; }
+.no-results { font-size: 14px; color: var(--ink-3); padding: 2rem; text-align: center; }
+
+/* ── TRACK 2 SPECIFIC ── */
+.track2-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 640px) { .track2-intro { grid-template-columns: 1fr; } }
+
+.mechanism-card {
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.mechanism-card .mc-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--paper-3);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.mechanism-card .mc-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.mechanism-card .mc-body { font-size: 13px; color: var(--ink-2); line-height: 1.65; }
+
+.evidence-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--paper-2);
+}
+.evidence-row:last-child { border-bottom: none; }
+.ev-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--warm-light);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  color: var(--accent-2);
+  font-weight: 500;
+  font-family: var(--serif);
+}
+.ev-body { flex: 1; }
+.ev-body strong { font-size: 13px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
+.ev-body span { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+
+.message-card {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.message-card .mc-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(247,244,239,0.4);
+  margin-bottom: 0.5rem;
+}
+.message-card .mc-msg {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--paper);
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+.message-card .mc-why { font-size: 13px; color: rgba(247,244,239,0.6); line-height: 1.6; }
+
+/* ── AGENDA SECTION ── */
+.agenda-item {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+.agenda-num {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  color: var(--paper-3);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: right;
+}
+.agenda-body { flex: 1; }
+.agenda-body h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.agenda-body p { font-size: 13px; color: var(--ink-2); line-height: 1.65; }
+.agenda-time {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: var(--paper-2);
+  color: var(--ink-3);
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.agenda-decide {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+footer {
+  background: var(--paper-2);
+  border-top: 1px solid var(--paper-3);
+  padding: 1.5rem 2rem;
+  font-size: 12px;
+  color: var(--ink-3);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-label">AndreasNLP × Superstories — April 2026</div>
+  <h1 class="header-title">CT Foundation Growth Intelligence</h1>
+  <p class="header-sub">Two distinct growth levers. One is about converting warm subscribers who never felt urgency. The other is about believers bringing in people who aren't on the list at all.</p>
+  <div class="header-meta">
+    <div class="header-stat">
+      <div class="n">54</div>
+      <div class="l">survey responses — warm non-converters</div>
+    </div>
+    <div class="header-stat">
+      <div class="n">2</div>
+      <div class="l">distinct growth tracks identified</div>
+    </div>
+    <div class="header-stat">
+      <div class="n">Apr 22</div>
+      <div class="l">strategy meeting — decisions needed</div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-bar">
+  <button class="nav-tab active" onclick="showSection('track1', this)">
+    <span class="nav-indicator" style="background:#2d5a3d"></span>Track 1 — Database activation
+  </button>
+  <button class="nav-tab" onclick="showSection('track2', this)">
+    <span class="nav-indicator" style="background:#d4622a"></span>Track 2 — Referral from believers
+  </button>
+  <button class="nav-tab" onclick="showSection('agenda', this)">
+    <span class="nav-indicator" style="background:#4a4840"></span>April 22 agenda
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TRACK 1 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section active" id="track1">
+<div class="container">
+
+  <div class="section-eyebrow">Track 1</div>
+  <h2 class="section-heading">Why warm subscribers don't convert</h2>
+  <p class="section-intro">In 2023, subscribers were asked: what is the #1 thing stopping you from taking CT Foundation? 54 responded. What they say — and what they don't say — reveals the real conversion problem.</p>
+
+  <div class="three-col" style="margin-bottom:2rem">
+    <div class="stat-card">
+      <div class="n">54</div>
+      <div class="l">responses with a stated reason</div>
+      <div class="sub">All are email subscribers who have not taken CT Foundation</div>
+    </div>
+    <div class="stat-card">
+      <div class="n">0</div>
+      <div class="l">are opposed to CT</div>
+      <div class="sub">Not one respondent says CT is the wrong choice for them</div>
+    </div>
+    <div class="stat-card">
+      <div class="n">~30%</div>
+      <div class="l">have been "about to do it" for years</div>
+      <div class="sub">Warm leads frozen in amber — the urgency never arrived</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="label">The core finding</div>
+    <p>The dominant blocker is not opposition, confusion, or price. It is the absence of a felt cost to waiting. Nobody in this dataset experiences a consequence for deferring. This is an <strong>activation problem</strong>, not a positioning or pricing problem.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div style="margin-bottom:1rem">
+    <div class="section-eyebrow" style="margin-bottom:0.75rem">Blocker clusters</div>
+    <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">Click a cluster to filter the responses below</p>
+  </div>
+
+  <div id="cluster-bars" class="cluster-section"></div>
+
+  <div class="divider"></div>
+
+  <div class="filter-row">
+    <button class="f-pill active" onclick="applyFilter('all',this)">All (54)</button>
+    <button class="f-pill" onclick="applyFilter('coach',this)">Coaches</button>
+    <button class="f-pill" onclick="applyFilter('therapist',this)">Therapists</button>
+    <button class="f-pill" onclick="applyFilter('personal',this)">Personal use only</button>
+    <button class="f-pill" onclick="applyFilter('both',this)">Personal + client use</button>
+  </div>
+
+  <div class="quotes-label" id="q-label">All responses</div>
+  <div id="quotes-list"></div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TRACK 2 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="track2">
+<div class="container">
+
+  <div class="section-eyebrow">Track 2</div>
+  <h2 class="section-heading">Referral from believers</h2>
+  <p class="section-intro">A different lever entirely. CT alumni — people who have experienced the training — bringing in people who are not on the list at all. This is not about converting warm subscribers. It is about reaching a new audience through trusted voice.</p>
+
+  <div class="insight-box warm">
+    <div class="label">Why this is a separate track</div>
+    <p>Track 1 works on people who already know about CT but haven't acted. Track 2 reaches people who have never heard of CT — but trust someone who has lived it. The message, the mechanic, and the audience are all different. Building one does not build the other.</p>
+  </div>
+
+  <div class="track2-intro">
+    <div class="mechanism-card">
+      <div class="mc-num">01</div>
+      <div class="mc-title">The mechanism</div>
+      <div class="mc-body">CT alumni receive a personal referral link. A friend who registers through it gets a discount on CT Foundation. The alumni get a meaningful reward in return — a mini-course, a Q&amp;A session, something of genuine value. The transaction is tracked in GHL with minimal new infrastructure.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">02</div>
+      <div class="mc-title">Why alumni can do what email can't</div>
+      <div class="mc-body">The survey shows the #1 blocker for database subscribers is low urgency. Alumni referrals bypass that entirely — they bring in a new person who hasn't been in the CT orbit at all. The conversion dynamic is different: it runs on trust and personal testimony, not on another email from the list.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:1.25rem">The message that makes referral work</div>
+
+  <p style="font-size:14px;color:var(--ink-2);max-width:580px;margin-bottom:1.5rem;line-height:1.7">The survey gave us the exact message. A respondent who had been through NLP training and had CT explained to him wrote this unprompted:</p>
+
+  <div style="background:var(--paper-2);border-left:3px solid var(--accent-2);padding:1.25rem 1.5rem;border-radius:0 4px 4px 0;margin-bottom:2rem">
+    <p style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);line-height:1.5;font-style:italic;margin-bottom:0.5rem">"Emphasize that you need to experience Core Transformation — the theory or a guided example is far less effective."</p>
+    <p style="font-size:12px;color:var(--ink-3)">— Ron Fiedler, survey respondent (NLP practitioner, already familiar with CT)</p>
+  </div>
+
+  <p style="font-size:14px;color:var(--ink-2);max-width:580px;margin-bottom:2rem;line-height:1.7">This is what alumni can say that no promotional email can say. They have the experience. The referral message is not "my friend is offering a discount." It is: <em>"I thought I knew this. I didn't. Here's what changed when I actually did it."</em></p>
+
+  <div class="section-eyebrow" style="margin-bottom:1.25rem">Suggested referral message frames</div>
+
+  <div class="message-card">
+    <div class="mc-label">For alumni who came from the book</div>
+    <div class="mc-msg">"I read the CT book years ago. I thought I had it. The training showed me I had the map — not the territory."</div>
+    <div class="mc-why">Speaks directly to the largest blocker segment in the survey (19% "already know CT"). Alumni who came from the book can speak to this with authority.</div>
+  </div>
+
+  <div class="message-card">
+    <div class="mc-label">For alumni who came from other modalities</div>
+    <div class="mc-msg">"I've trained in IFS, NLP, somatic work. CT doesn't replace any of it. It goes underneath all of it."</div>
+    <div class="mc-why">Addresses the training overload cluster — practitioners who feel their practice is already full. Positions CT as depth, not addition.</div>
+  </div>
+
+  <div class="message-card">
+    <div class="mc-label">Universal frame</div>
+    <div class="mc-msg">"I kept thinking I'd get to it. I finally did. I wish I hadn't waited."</div>
+    <div class="mc-why">Speaks to the low-urgency cluster directly — the people who have been "about to do it" for years. Works for almost any alumni profile.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:1.25rem">What needs to be decided on April 22</div>
+
+  <div class="evidence-row">
+    <div class="ev-icon">?</div>
+    <div class="ev-body">
+      <strong>What is the reward for the alumni referrer?</strong>
+      <span>Free mini-course access, a Q&amp;A session, or something else. This needs to be something an alumni would genuinely value — not a discount on a product they already bought.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">?</div>
+    <div class="ev-body">
+      <strong>Does the friend discount apply to Foundation only, or other trainings too?</strong>
+      <span>Starting with Foundation makes sense — cleaner mechanic, easier to track. Expand later if it works.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">?</div>
+    <div class="ev-body">
+      <strong>Campaign vs permanent journey step?</strong>
+      <span>Run it as a one-time campaign first to test response. If alumni engage, build it into the CT alumni onboarding sequence permanently.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">~</div>
+    <div class="ev-body">
+      <strong>GHL build estimate</strong>
+      <span>One landing page, one referral code field per contact, one automation trigger, two emails. Ivan and Yssa have confirmed this is a contained build. Exact hours to be confirmed before April 22.</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- AGENDA -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="agenda">
+<div class="container">
+
+  <div class="section-eyebrow">April 22 — Strategy meeting</div>
+  <h2 class="section-heading">What we're deciding</h2>
+  <p class="section-intro">Two decisions. Not a discussion about everything — two decisions we can implement immediately after the meeting. Everything else is preparation for a future meeting.</p>
+
+  <div class="insight-box">
+    <div class="label">The framing question</div>
+    <p>Before campaigns, referral builds, or product ladders: who are we actually talking to — and what would make them act this month rather than next year? This question determines which track gets prioritized first and what the message is.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">1</div>
+    <div class="agenda-body">
+      <div class="agenda-time">20 min — diagnosis</div>
+      <h3>Align on the actual blocker</h3>
+      <p>The survey says the problem is activation, not positioning or price. Does the team agree? Review the Track 1 data together. Confirm or challenge the read. This shapes everything that follows.</p>
+      <p class="agenda-decide">Decision needed: Is this an activation problem or a reach problem?</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">2</div>
+    <div class="agenda-body">
+      <div class="agenda-time">25 min — Track 1</div>
+      <h3>One positioning experiment for the existing list</h3>
+      <p>Based on the survey, the most promising angle is the "you think you know CT" segment — people who read the book or did it in an NLP training. Define the message, the audience segment, and how we measure whether it's working. Not a full campaign — one test.</p>
+      <p class="agenda-decide">Decision needed: Which segment, which message, which channel, what does success look like?</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">3</div>
+    <div class="agenda-body">
+      <div class="agenda-time">20 min — Track 2</div>
+      <h3>Green-light the referral build</h3>
+      <p>Decide on the reward structure so Ivan and Yssa can start building immediately after the meeting. The mechanics are clear. The open question is what the alumni reward actually is.</p>
+      <p class="agenda-decide">Decision needed: What is the reward? Foundation only or all trainings? Campaign or permanent?</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:1rem">What ANLP should bring to April 22</div>
+
+  <div class="evidence-row">
+    <div class="ev-icon">1</div>
+    <div class="ev-body">
+      <strong>Historical CT registration data</strong>
+      <span>Last 2–3 Foundation cohorts. List size at promo time, registrations, conversion if available. Even rough numbers.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">2</div>
+    <div class="ev-body">
+      <strong>Jason's "Why did you sign up?" survey results</strong>
+      <span>~80 responses. This is the counterpart to the survey above — it tells us what actually works for people who did convert. The gap between the two datasets is the strategy.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">3</div>
+    <div class="ev-body">
+      <strong>Duff on the call</strong>
+      <span>His ground-level read on what's working and what isn't in the email sends is not in any data file. It should be in the room.</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <span>CT Foundation Growth Intelligence — Superstories BV × AndreasNLP</span>
+  <span>Prepared for April 22, 2026 strategy meeting</span>
+</footer>
+
+<script>
+const data = [
+  { name: "Michelle Baldwin", role: "Individual", use: "personal", stop: "Not sure I can do it self-guided", cluster: "uncertainty" },
+  { name: "Reba", role: "Coach", use: "both", stop: "I need time to go through material I already have before making an informed decision", cluster: "low-urgency" },
+  { name: "Kana Koinuma", role: "Coach", use: "both", stop: "Financial. And not certain I need the training.", cluster: "cost" },
+  { name: "Lorri Espinosa", role: "Therapist", use: "both", stop: "I have taken so many trainings and my practice is already very diverse", cluster: "training-overload" },
+  { name: "Marci", role: "Individual", use: "personal", stop: "Finances and want to be sure it is the right investment for me", cluster: "cost" },
+  { name: "Ron Fiedler", role: "Coach", use: "both", stop: "Too many seminars lately. Wanted to focus elsewhere. Note: you need to emphasize you must EXPERIENCE CT — theory is far less effective", cluster: "training-overload" },
+  { name: "Lucie Brissaud", role: "Coach", use: "both", stop: "The price", cluster: "cost" },
+  { name: "Sivakumar Kumaresan", role: "Coach / NLP Trainer", use: "both", stop: "Lack of time — had a full time job alongside coaching. Read the book 20 years ago. Just went full-time as trainer.", cluster: "low-urgency" },
+  { name: "Michele Drivon", role: "Coach", use: "both", stop: "Reluctance to take yet one more course. Also concern about excessive trauma focus — didn't want to be disappointed.", cluster: "training-overload" },
+  { name: "Adrian Frandes", role: "Therapist", use: "both", stop: "Money — just started practice, no clients yet", cluster: "cost" },
+  { name: "Ruth Gougian", role: "Individual", use: "personal", stop: "Not knowing what CT is or does for you. I signed up for the emails but don't really understand what CT is about.", cluster: "uncertainty" },
+  { name: "Stephen Hedt", role: "Coach / Therapist", use: "both", stop: "Cost and time. Too much commitment elsewhere. This hasn't yet risen to the top.", cluster: "low-urgency" },
+  { name: "Jim", role: "Coach (starting)", use: "both", stop: "Schedule", cluster: "low-urgency" },
+  { name: "Tatiana", role: "Coach", use: "both", stop: "Wondering if it is anything different than what I already know", cluster: "already-know" },
+  { name: "Bryan Van Donslear", role: "Teacher", use: "personal", stop: "Unable to get a feel for how it works from reading. Need to feel it, not just read about it.", cluster: "already-know" },
+  { name: "Ender Tanrikut", role: "Hypnotherapist", use: "both", stop: "Time and money. Actually bought the online course but never finished it.", cluster: "low-urgency" },
+  { name: "Christine Flynn", role: "Coach", use: "both", stop: "Time constraints. Wonder if it's too much to add one more thing.", cluster: "training-overload" },
+  { name: "Margaret Rutherford", role: "Individual", use: "personal", stop: "Skeptic", cluster: "uncertainty" },
+  { name: "Fred Goldstein", role: "Therapist", use: "both", stop: "Money and time", cluster: "low-urgency" },
+  { name: "Amy Geschwell", role: "Individual", use: "personal", stop: "Time constraints", cluster: "low-urgency" },
+  { name: "Paola", role: "Sales agent", use: "personal", stop: "Time — currently studying NLP Master", cluster: "low-urgency" },
+  { name: "Dennis Lawson", role: "Coach", use: "both", stop: "Completing Trainer certification for NATH first", cluster: "low-urgency" },
+  { name: "Shaun Davis", role: "Coach", use: "both", stop: "Read the book, use the process with clients alongside TLT. Haven't taken formal course.", cluster: "already-know" },
+  { name: "Bob Cantoni", role: "Software developer", use: "personal", stop: "Haven't been sure it'll be helpful for me personally", cluster: "uncertainty" },
+  { name: "Shmuel Goldstein", role: "Coach / Rabbi", use: "both", stop: "Timing with life", cluster: "low-urgency" },
+  { name: "Karen Sutherland", role: "Coach (internal)", use: "both", stop: "Still studying coach supervision diploma until later this year. Want to use CT in my coaching but timing is off.", cluster: "low-urgency" },
+  { name: "Douglas Rutherford", role: "Therapist", use: "both", stop: "I don't think it will work for me", cluster: "uncertainty" },
+  { name: "Tom O'Connor", role: "Coach", use: "both", stop: "Scheduling and the fact that I have used the technique for years", cluster: "already-know" },
+  { name: "Hugh Comerford", role: "Coach / NLP Trainer", use: "both", stop: "Travel to the US is potentially problematic due to a past bookkeeping issue", cluster: "logistical" },
+  { name: "Marion Rae", role: "Therapist / NLP Trainer", use: "personal", stop: "Time difference — I'm in Sydney where it's 3–6am when you offer trainings", cluster: "logistical" },
+  { name: "Christina Lynn-Craig", role: "Voice teacher", use: "both", stop: "Time commitment", cluster: "low-urgency" },
+  { name: "Jonathan Kaplan", role: "Coach / Therapist", use: "both", stop: "Unsure how it differs practically from other work I do. Watched intro videos — not sure what the training adds for the time and money investment. I love Wholeness Work.", cluster: "already-know" },
+  { name: "Denn Stewart", role: "Coach / Speaker", use: "both", stop: "Prioritizing time and focus. It's on my list. Just started Wholeness Work I and II.", cluster: "low-urgency" },
+  { name: "Lucie (Therapist)", role: "Therapist", use: "both", stop: "Time mostly, and not understanding the difference between Wholeness Work vs Core Transformation", cluster: "already-know" },
+  { name: "Hannah", role: "Individual (long COVID)", use: "personal", stop: "Not 100% sure what I'm getting. Also the website had a blocking pop-up — that was the biggest stumbling block.", cluster: "uncertainty" },
+  { name: "Rose Sowa", role: "Healthcare", use: "both", stop: "Joined 2 weeks ago but can't get past session 2. Trouble grasping the core concepts in the videos. I tune out.", cluster: "uncertainty" },
+  { name: "Jamie Aylward", role: "Therapist", use: "both", stop: "Time", cluster: "low-urgency" },
+  { name: "Denise", role: "Coach", use: "both", stop: "I have read the book and am using CT in my coaching", cluster: "already-know" },
+  { name: "Linda te Wierike", role: "Coach", use: "both", stop: "The timing and location", cluster: "logistical" },
+  { name: "Nunzia De Gaetano", role: "NLP Trainer", use: "personal", stop: "Too many other NLP commitments this year", cluster: "training-overload" },
+  { name: "Karen (Therapist)", role: "Therapist", use: "both", stop: "Finances", cluster: "cost" },
+  { name: "Lynda White", role: "Admin", use: "both", stop: "Timing — back to work full time", cluster: "low-urgency" },
+  { name: "Elaine", role: "Coach", use: "both", stop: "Time", cluster: "low-urgency" },
+  { name: "Peter Bacon", role: "Coach", use: "both", stop: "Doubts about parts work", cluster: "uncertainty" },
+  { name: "Sedgwick Heskett", role: "Retired teacher", use: "personal", stop: "The cost", cluster: "cost" },
+  { name: "Krishna Madhusudan", role: "Business Analyst", use: "both", stop: "Finished half the course but not the rest. Unsure how to go deeper in Core State.", cluster: "uncertainty" },
+  { name: "Marjolijn", role: "Individual", use: "personal", stop: "I feel a longing to dive in for quite some time now — years — but keep standing on the side. I don't know exactly why.", cluster: "low-urgency" },
+  { name: "Brenda Cacy", role: "Individual", use: "personal", stop: "Hesitancy to do the core transformation work", cluster: "low-urgency" },
+  { name: "Peter (UK)", role: "Coach", use: "both", stop: "Teetering on the edge a few times, but not jumping in", cluster: "low-urgency" },
+  { name: "Kanu Kogod", role: "Coach", use: "both", stop: "Something stops me from getting more involved — not sure what exactly", cluster: "low-urgency" },
+  { name: "Kelley M", role: "Individual", use: "personal", stop: "Hesitant. Multiple family members could benefit. Not sure why I haven't jumped in.", cluster: "low-urgency" },
+  { name: "David Bird (UK)", role: "Individual", use: "personal", stop: "Interested for a long time. Haven't taken the step.", cluster: "low-urgency" },
+  { name: "Ron (IT Trainer)", role: "Coach", use: "both", stop: "Wanted to focus on own YouTube channel. Already guided through CT once in NLP training.", cluster: "already-know" },
+  { name: "Charles Cean", role: "Therapist (retired PTSD)", use: "personal", stop: "Busy providing CBT counseling", cluster: "low-urgency" },
+];
+
+const clusters = [
+  { id: "low-urgency",     label: "Low urgency / timing",          sub: "warm, but the cost of waiting never arrives",  color: "#2d5a3d" },
+  { id: "already-know",   label: "Already know CT",               sub: "book readers, NLP practitioners using it",     color: "#854F0B" },
+  { id: "uncertainty",    label: "Uncertain what they'd get",     sub: "unclear on what the training actually delivers", color: "#185FA5" },
+  { id: "training-overload", label: "Training overload",          sub: "full plates, one more thing",                  color: "#993C1D" },
+  { id: "cost",           label: "Cost / price",                   sub: "price named, but rarely the only reason",      color: "#444441" },
+  { id: "logistical",     label: "Logistical barriers",           sub: "timezone, travel restrictions",                color: "#888780" },
+];
+
+let activeCluster = null;
+let activeFilter = 'all';
+
+function getFiltered() {
+  return data.filter(d => {
+    const cm = !activeCluster || d.cluster === activeCluster;
+    let rm = true;
+    if (activeFilter === 'coach') rm = d.role.toLowerCase().includes('coach');
+    else if (activeFilter === 'therapist') rm = d.role.toLowerCase().includes('therapist');
+    else if (activeFilter === 'personal') rm = d.use === 'personal';
+    else if (activeFilter === 'both') rm = d.use === 'both';
+    return cm && rm;
+  });
+}
+
+function renderBars() {
+  const filtered = getFiltered();
+  const counts = {};
+  filtered.forEach(d => { counts[d.cluster] = (counts[d.cluster] || 0) + 1; });
+  const all = data.filter(d => !activeFilter || activeFilter === 'all' || (activeFilter === 'coach' && d.role.toLowerCase().includes('coach')) || (activeFilter === 'therapist' && d.role.toLowerCase().includes('therapist')) || (activeFilter === 'personal' && d.use === 'personal') || (activeFilter === 'both' && d.use === 'both'));
+  const allCounts = {};
+  all.forEach(d => { allCounts[d.cluster] = (allCounts[d.cluster] || 0) + 1; });
+  const max = Math.max(...Object.values(allCounts), 1);
+
+  document.getElementById('cluster-bars').innerHTML = clusters.map(c => {
+    const n = counts[c.id] || 0;
+    const pct = Math.round((n / max) * 100);
+    const sel = activeCluster === c.id;
+    return `<div class="cluster-row ${sel ? 'selected' : ''}" onclick="selectCluster('${c.id}')">
+      <div class="cluster-name"><strong style="color:${sel ? c.color : 'var(--ink)'}">${c.label}</strong><span>${c.sub}</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${sel ? c.color : 'var(--paper-3)'}"></div></div>
+      <div class="cluster-n" style="color:${sel ? c.color : 'var(--ink-2)'}">${n}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderQuotes() {
+  const filtered = getFiltered();
+  const cl = activeCluster ? clusters.find(c => c.id === activeCluster) : null;
+  document.getElementById('q-label').textContent = cl ? `${cl.label} — ${filtered.length} responses` : `All responses — ${filtered.length}`;
+
+  if (!filtered.length) {
+    document.getElementById('quotes-list').innerHTML = '<div class="no-results">No responses match this combination.</div>';
+    return;
+  }
+  document.getElementById('quotes-list').innerHTML = filtered.map(d => {
+    const c = clusters.find(c => c.id === d.cluster);
+    return `<div class="quote-card">
+      <div class="q">${d.stop}</div>
+      <div class="meta">
+        ${d.role !== 'Individual' ? `<span class="tag tag-role">${d.role}</span>` : ''}
+        <span class="tag tag-use">${d.use === 'both' ? 'personal + client' : 'personal use'}</span>
+        <span class="tag tag-cluster" style="background:${c ? c.color + '18' : '#eee'};color:${c ? c.color : '#666'}">${c ? c.label : d.cluster}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.selectCluster = function(id) {
+  activeCluster = activeCluster === id ? null : id;
+  renderBars();
+  renderQuotes();
+};
+
+window.applyFilter = function(key, btn) {
+  activeFilter = key;
+  document.querySelectorAll('.f-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderBars();
+  renderQuotes();
+};
+
+window.showSection = function(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+};
+
+renderBars();
+renderQuotes();
+</script>
+</body>
+</html>
