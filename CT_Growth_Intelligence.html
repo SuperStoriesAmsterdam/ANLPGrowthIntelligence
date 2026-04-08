@@ -310,6 +310,22 @@ body {
 .tag-use { background: #f0ebe8; color: #5a2810; }
 .no-results { font-size: 14px; color: var(--ink-3); padding: 2rem; text-align: center; }
 
+/* ── RESPONSES TOGGLE ── */
+.responses-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+.responses-toggle:hover .quotes-label { color: var(--ink); }
+.responses-arrow {
+  font-size: 11px;
+  color: var(--ink-3);
+  transition: transform 0.2s;
+}
+.responses-arrow.open { transform: rotate(90deg); }
+
 /* ── TRACK 2 SPECIFIC ── */
 .track2-intro {
   display: grid;
@@ -512,16 +528,21 @@ footer {
 
   <div class="divider"></div>
 
-  <div class="filter-row">
-    <button class="f-pill active" onclick="applyFilter('all',this)">All (54)</button>
-    <button class="f-pill" onclick="applyFilter('coach',this)">Coaches</button>
-    <button class="f-pill" onclick="applyFilter('therapist',this)">Therapists</button>
-    <button class="f-pill" onclick="applyFilter('personal',this)">Personal use only</button>
-    <button class="f-pill" onclick="applyFilter('both',this)">Personal + client use</button>
+  <div class="responses-toggle" onclick="toggleResponses()">
+    <span class="quotes-label" id="q-label" style="margin-bottom:0;cursor:pointer">All responses — 54</span>
+    <span class="responses-arrow" id="responses-arrow">&#9654;</span>
   </div>
 
-  <div class="quotes-label" id="q-label">All responses</div>
-  <div id="quotes-list"></div>
+  <div id="responses-panel" style="display:none">
+    <div class="filter-row" style="margin-top:1rem">
+      <button class="f-pill active" onclick="applyFilter('all',this)">All (54)</button>
+      <button class="f-pill" onclick="applyFilter('coach',this)">Coaches</button>
+      <button class="f-pill" onclick="applyFilter('therapist',this)">Therapists</button>
+      <button class="f-pill" onclick="applyFilter('personal',this)">Personal use only</button>
+      <button class="f-pill" onclick="applyFilter('both',this)">Personal + client use</button>
+    </div>
+    <div id="quotes-list"></div>
+  </div>
 
 </div>
 </section>
@@ -843,6 +864,14 @@ function renderQuotes() {
 
 window.toggleQuote = function(id) {
   document.getElementById(id).classList.toggle('open');
+};
+
+window.toggleResponses = function() {
+  const panel = document.getElementById('responses-panel');
+  const arrow = document.getElementById('responses-arrow');
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  arrow.classList.toggle('open', !isOpen);
 };
 
 window.selectCluster = function(id) {
