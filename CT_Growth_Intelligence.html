@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CT Foundation — Growth Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --ink: #1a1814;
-  --ink-2: #4a4840;
-  --ink-3: #8a8780;
+  --ink-2: #2a2820;
+  --ink-3: #5a5850;
   --paper: #f7f4ef;
   --paper-2: #ede9e2;
   --paper-3: #e0dbd2;
@@ -20,7 +20,7 @@
   --accent-2: #d4622a;
   --accent-light: #e8f0eb;
   --warm-light: #f5ede0;
-  --serif: 'DM Serif Display', Georgia, serif;
+  --serif: 'Source Serif 4', Georgia, serif;
   --sans: 'DM Sans', system-ui, sans-serif;
   --radius: 4px;
 }
@@ -29,8 +29,8 @@ body {
   font-family: var(--sans);
   background: var(--paper);
   color: var(--ink);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -163,9 +163,9 @@ body {
   line-height: 1.2;
 }
 .section-intro {
-  font-size: 15px;
-  color: var(--ink-2);
-  max-width: 620px;
+  font-size: 16px;
+  color: var(--ink);
+  max-width: 660px;
   line-height: 1.7;
   margin-bottom: 2rem;
 }
@@ -204,8 +204,8 @@ body {
   margin-bottom: 0.4rem;
 }
 .insight-box p {
-  font-size: 14px;
-  color: #1e3a28;
+  font-size: 15px;
+  color: #1a1814;
   line-height: 1.7;
 }
 
@@ -295,7 +295,7 @@ body {
   border-top: 1px solid var(--paper-2);
 }
 .quote-card.open .quote-body { display: block; padding-top: 0.75rem; }
-.quote-card .q { font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 10px; font-style: italic; }
+.quote-card .q { font-size: 15px; color: var(--ink); line-height: 1.65; margin-bottom: 10px; font-style: italic; }
 .quote-card .q::before { content: '\201C'; }
 .quote-card .q::after { content: '\201D'; }
 .quote-card .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
@@ -354,7 +354,7 @@ body {
   color: var(--ink);
   margin-bottom: 0.5rem;
 }
-.mechanism-card .mc-body { font-size: 13px; color: var(--ink-2); line-height: 1.65; }
+.mechanism-card .mc-body { font-size: 14px; color: var(--ink); line-height: 1.65; }
 
 .evidence-row {
   display: flex;
@@ -376,8 +376,8 @@ body {
   font-family: var(--serif);
 }
 .ev-body { flex: 1; }
-.ev-body strong { font-size: 13px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
-.ev-body span { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+.ev-body strong { font-size: 14px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
+.ev-body span { font-size: 14px; color: var(--ink); line-height: 1.6; }
 
 .message-card {
   background: var(--ink);
@@ -400,7 +400,7 @@ body {
   line-height: 1.45;
   margin-bottom: 0.75rem;
 }
-.message-card .mc-why { font-size: 13px; color: rgba(247,244,239,0.6); line-height: 1.6; }
+.message-card .mc-why { font-size: 14px; color: rgba(247,244,239,0.7); line-height: 1.6; }
 
 /* ── AGENDA SECTION ── */
 .agenda-item {
@@ -419,8 +419,8 @@ body {
   text-align: right;
 }
 .agenda-body { flex: 1; }
-.agenda-body h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
-.agenda-body p { font-size: 13px; color: var(--ink-2); line-height: 1.65; }
+.agenda-body h3 { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.agenda-body p { font-size: 14px; color: var(--ink); line-height: 1.65; }
 .agenda-time {
   font-size: 11px;
   padding: 2px 8px;
@@ -491,7 +491,7 @@ body {
 .tc-unknown { background: var(--paper-2); color: var(--ink-3); }
 .tc-done { background: #e8f0eb; color: #2d5a3d; }
 .tc-failed { background: #f5e0e0; color: #993C1D; }
-.tc-q { font-size: 14px; font-weight: 500; color: var(--ink); }
+.tc-q { font-size: 15px; font-weight: 500; color: var(--ink); }
 .tc-details { padding: 0 1.25rem 0.75rem; }
 .tc-row {
   font-size: 13px;
@@ -544,7 +544,7 @@ body {
   margin-bottom: 6px;
   line-height: 1.3;
 }
-.qw-body { font-size: 13px; color: var(--ink-2); line-height: 1.65; margin-bottom: 8px; }
+.qw-body { font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; }
 .qw-data { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* ── NEXT STEPS ── */
@@ -926,6 +926,11 @@ footer {
   <div class="insight-box">
     <div class="label">The core finding</div>
     <p>The dominant blocker is not opposition, confusion, or price. It is the absence of a felt cost to waiting. Nobody in this dataset experiences a consequence for deferring. This is an <strong>activation problem</strong>, not a positioning or pricing problem.</p>
+  </div>
+
+  <div class="insight-box warm">
+    <div class="label">Metal fatigue — CT vs WW</div>
+    <p>If CT needs 5× the email touches that Wholeness Work needs to convert the same audience, the problem isn't the product — it's the story. WW is fresh. CT's message has been in circulation for 30 years. Same infrastructure, same list, different response. That's <strong>campaign fatigue</strong>, not a positioning problem. The CT story needs a new reason to be told — not louder, but differently.</p>
   </div>
 
   <div class="divider"></div>
