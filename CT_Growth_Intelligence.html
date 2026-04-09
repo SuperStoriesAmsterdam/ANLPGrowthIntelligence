@@ -475,6 +475,52 @@ body {
 }
 .is-editable:hover { box-shadow: 0 0 0 2px rgba(45,90,61,0.25); }
 .is-editable:focus { box-shadow: 0 0 0 2px rgba(45,90,61,0.5); }
+.is-edited {
+  background: rgba(45,90,61,0.06);
+  border-radius: 2px;
+  position: relative;
+}
+.is-edited::after {
+  content: '✎';
+  position: absolute;
+  top: -6px; right: -6px;
+  font-size: 9px;
+  background: var(--accent);
+  color: white;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ── EDIT CONTEXT MENU ── */
+#edit-ctx {
+  position: absolute;
+  z-index: 300;
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  overflow: hidden;
+  font-family: var(--sans);
+}
+#edit-ctx button {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--sans);
+  white-space: nowrap;
+}
+#edit-ctx button:hover { background: var(--paper-2); }
+#edit-ctx button:first-child { border-bottom: 1px solid var(--paper-2); }
 
 /* ── ANNOTATION TOOL ── */
 #annotate-btn {

@@ -1,14 +1,17 @@
 /* ── INLINE COPY EDITOR ──
    Toggle edit mode to make all text editable.
    Changes saved to localStorage automatically.
+   Right-click an edited field → revert to original.
    No backend needed — this is a review tool. */
 
 (function() {
   'use strict';
 
   const STORAGE_KEY = 'anlp-gi-edits';
+  const ORIGINALS_KEY = 'anlp-gi-originals';
   let editMode = false;
   let edits = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  let originals = JSON.parse(localStorage.getItem(ORIGINALS_KEY) || '{}');
 
   /* ── Selectors for editable elements ── */
   const EDITABLE = [
@@ -29,6 +32,7 @@
     '.agenda-body h3',
     '.agenda-body p',
     '.agenda-decide',
+    '.stat-card .n',
     '.stat-card .l',
     '.stat-card .sub'
   ].join(', ');
@@ -41,7 +45,8 @@
       <div style="display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto">
         <span style="font-size:12px;opacity:0.5">Copy editor</span>
         <div style="display:flex;gap:8px;align-items:center">
-          <span id="edit-status" style="font-size:12px;opacity:0"></span>
+          <span id="edit-count" style="font-size:11px;opacity:0.4"></span>
+          <span id="edit-status" style="font-size:12px;opacity:0;transition:opacity 0.3s"></span>
           <button id="edit-toggle">Edit page</button>
           <button id="edit-reset" style="display:none">Reset all edits</button>
         </div>
@@ -59,11 +64,17 @@
       if (!el.dataset.editId) {
         el.dataset.editId = 'e-' + i;
       }
+      /* Store original text (only first time) */
+      if (!originals[el.dataset.editId]) {
+        originals[el.dataset.editId] = el.textContent;
+      }
       /* Restore saved edits */
       if (edits[el.dataset.editId]) {
         el.textContent = edits[el.dataset.editId];
       }
     });
+    localStorage.setItem(ORIGINALS_KEY, JSON.stringify(originals));
+    updateCount();
   }
 
   /* ── Toggle edit mode ── */
@@ -92,6 +103,11 @@
     document.querySelectorAll(EDITABLE).forEach(function(el) {
       el.contentEditable = 'true';
       el.classList.add('is-editable');
+
+      /* Mark edited fields visually */
+      if (edits[el.dataset.editId]) {
+        el.classList.add('is-edited');
+      }
     });
   }
 
@@ -100,23 +116,94 @@
       el.contentEditable = 'false';
       el.classList.remove('is-editable');
     });
+    removeContextMenu();
   }
 
   /* ── Save changes to localStorage ── */
   function saveAll() {
     document.querySelectorAll('[data-edit-id]').forEach(function(el) {
       var id = el.dataset.editId;
-      edits[id] = el.textContent;
+      /* Only save if different from original */
+      if (el.textContent !== originals[id]) {
+        edits[id] = el.textContent;
+      } else {
+        delete edits[id];
+        el.classList.remove('is-edited');
+      }
     });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+    updateCount();
     flash('Saved');
   }
 
   function resetEdits() {
-    if (confirm('Reset all copy edits? This cannot be undone.')) {
+    if (confirm('Reset ALL copy edits? This cannot be undone.')) {
       localStorage.removeItem(STORAGE_KEY);
       edits = {};
       location.reload();
+    }
+  }
+
+  /* ── Revert a single field ── */
+  function revertField(editId) {
+    var el = document.querySelector('[data-edit-id="' + editId + '"]');
+    if (el && originals[editId]) {
+      el.textContent = originals[editId];
+      delete edits[editId];
+      el.classList.remove('is-edited');
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+      updateCount();
+      flash('Reverted');
+    }
+    removeContextMenu();
+  }
+
+  /* ── Context menu for edited fields ── */
+  function removeContextMenu() {
+    var old = document.getElementById('edit-ctx');
+    if (old) old.remove();
+  }
+
+  document.addEventListener('contextmenu', function(e) {
+    if (!editMode) return;
+    var el = e.target.closest('[data-edit-id]');
+    if (!el) return;
+    if (!edits[el.dataset.editId]) return;
+
+    e.preventDefault();
+    removeContextMenu();
+
+    var menu = document.createElement('div');
+    menu.id = 'edit-ctx';
+    menu.innerHTML = `
+      <button data-action="revert">↩ Revert to original</button>
+      <button data-action="delete">✕ Delete this edit</button>
+    `;
+    menu.style.left = e.pageX + 'px';
+    menu.style.top = e.pageY + 'px';
+    document.body.appendChild(menu);
+
+    menu.querySelector('[data-action="revert"]').addEventListener('click', function() {
+      revertField(el.dataset.editId);
+    });
+    menu.querySelector('[data-action="delete"]').addEventListener('click', function() {
+      revertField(el.dataset.editId);
+    });
+  });
+
+  /* Close context menu on click elsewhere */
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#edit-ctx')) {
+      removeContextMenu();
+    }
+  });
+
+  /* ── Update edit count ── */
+  function updateCount() {
+    var n = Object.keys(edits).length;
+    var el = document.getElementById('edit-count');
+    if (el) {
+      el.textContent = n > 0 ? n + ' edit' + (n !== 1 ? 's' : '') : '';
     }
   }
 
@@ -131,8 +218,16 @@
   /* ── Auto-save on blur ── */
   document.addEventListener('focusout', function(e) {
     if (editMode && e.target.dataset && e.target.dataset.editId) {
-      edits[e.target.dataset.editId] = e.target.textContent;
+      var id = e.target.dataset.editId;
+      if (e.target.textContent !== originals[id]) {
+        edits[id] = e.target.textContent;
+        e.target.classList.add('is-edited');
+      } else {
+        delete edits[id];
+        e.target.classList.remove('is-edited');
+      }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+      updateCount();
       flash('Saved');
     }
   });
