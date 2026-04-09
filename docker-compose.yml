@@ -7,11 +7,6 @@ services:
       POSTGRES_DB: anlp
     volumes:
       - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
 
   app:
     build: .
@@ -22,8 +17,7 @@ services:
       - DATABASE_URL=postgresql://postgres@db:5432/anlp
       - PORT=3000
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
 volumes:
   pgdata:
