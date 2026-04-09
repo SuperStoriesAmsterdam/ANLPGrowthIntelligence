@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - DATABASE_URL=postgresql://anlp:anlp@db:5432/anlp
       - PORT=3000
