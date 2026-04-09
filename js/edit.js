@@ -34,7 +34,20 @@
     '.agenda-decide',
     '.stat-card .n',
     '.stat-card .l',
-    '.stat-card .sub'
+    '.stat-card .sub',
+    '.qw-title',
+    '.qw-body',
+    '.qw-priority',
+    '.qw-effort',
+    '.tc-q',
+    '.tc-value',
+    '.tc-status',
+    '.fs-label',
+    '.fs-number',
+    '.fs-note',
+    '.ns-what',
+    '.ns-who',
+    '.ns-when'
   ].join(', ');
 
   /* ── Build the admin bar ── */
