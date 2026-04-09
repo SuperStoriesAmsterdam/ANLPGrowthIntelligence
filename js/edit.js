@@ -9,9 +9,11 @@
 
   const STORAGE_KEY = 'anlp-gi-edits';
   const ORIGINALS_KEY = 'anlp-gi-originals';
+  const DELETED_KEY = 'anlp-gi-deleted';
   let editMode = false;
   let edits = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
   let originals = JSON.parse(localStorage.getItem(ORIGINALS_KEY) || '{}');
+  let deleted = JSON.parse(localStorage.getItem(DELETED_KEY) || '[]');
 
   /* ── Selectors for editable elements ── */
   const EDITABLE = [
@@ -52,6 +54,20 @@
     '.qw-tl-date'
   ].join(', ');
 
+  /* ── Selectors for deletable blocks ── */
+  const DELETABLE = [
+    '.qw-card',
+    '.insight-box',
+    '.mechanism-card',
+    '.message-card',
+    '.agenda-item',
+    '.tried-card',
+    '.evidence-row',
+    '.ns-item',
+    '.funnel-step',
+    '.stat-card'
+  ].join(', ');
+
   /* ── Build the admin bar ── */
   function createBar() {
     const bar = document.createElement('div');
@@ -71,6 +87,51 @@
 
     document.getElementById('edit-toggle').addEventListener('click', toggleEdit);
     document.getElementById('edit-reset').addEventListener('click', resetEdits);
+  }
+
+  /* ── Assign data-delete-id to deletable blocks + hide previously deleted ── */
+  function indexDeletableBlocks() {
+    document.querySelectorAll(DELETABLE).forEach(function(el, i) {
+      if (!el.dataset.deleteId) {
+        el.dataset.deleteId = 'd-' + i;
+      }
+      /* Hide previously deleted blocks */
+      if (deleted.indexOf(el.dataset.deleteId) !== -1) {
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  function addDeleteButtons() {
+    document.querySelectorAll(DELETABLE).forEach(function(el) {
+      if (el.querySelector('.block-delete-btn')) return;
+      el.style.position = 'relative';
+      var btn = document.createElement('button');
+      btn.className = 'block-delete-btn';
+      btn.innerHTML = '✕';
+      btn.title = 'Delete this block';
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        deleteBlock(el);
+      });
+      el.appendChild(btn);
+    });
+  }
+
+  function removeDeleteButtons() {
+    document.querySelectorAll('.block-delete-btn').forEach(function(btn) {
+      btn.remove();
+    });
+  }
+
+  function deleteBlock(el) {
+    var id = el.dataset.deleteId;
+    if (!id) return;
+    el.style.display = 'none';
+    deleted.push(id);
+    localStorage.setItem(DELETED_KEY, JSON.stringify(deleted));
+    flash('Deleted');
+    updateCount();
   }
 
   /* ── Assign data-edit-id to every editable element ── */
@@ -129,6 +190,7 @@
         el.classList.add('is-edited');
       }
     });
+    addDeleteButtons();
   }
 
   function disableEditing() {
@@ -136,6 +198,7 @@
       el.contentEditable = 'false';
       el.classList.remove('is-editable');
     });
+    removeDeleteButtons();
     removeContextMenu();
   }
 
@@ -157,9 +220,11 @@
   }
 
   function resetEdits() {
-    if (confirm('Reset ALL copy edits? This cannot be undone.')) {
+    if (confirm('Reset ALL edits and restore deleted blocks? This cannot be undone.')) {
       localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(DELETED_KEY);
       edits = {};
+      deleted = [];
       location.reload();
     }
   }
@@ -220,10 +285,10 @@
 
   /* ── Update edit count ── */
   function updateCount() {
-    var n = Object.keys(edits).length;
+    var n = Object.keys(edits).length + deleted.length;
     var el = document.getElementById('edit-count');
     if (el) {
-      el.textContent = n > 0 ? n + ' edit' + (n !== 1 ? 's' : '') : '';
+      el.textContent = n > 0 ? n + ' change' + (n !== 1 ? 's' : '') : '';
     }
   }
 
@@ -256,6 +321,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     createBar();
     indexElements();
+    indexDeletableBlocks();
   });
 
 })();
