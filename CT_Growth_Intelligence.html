@@ -1001,20 +1001,14 @@ footer {
   <button class="nav-tab" onclick="showSection('track2', this)">
     <span class="nav-indicator" style="background:#d4622a"></span>Track 2 — Referral from believers
   </button>
-  <button class="nav-tab" onclick="showSection('agenda', this)">
-    <span class="nav-indicator" style="background:#4a4840"></span>April 22 agenda
-  </button>
-  <button class="nav-tab" onclick="showSection('funnel', this)">
-    <span class="nav-indicator" style="background:#6B4C9A"></span>Funnel
-  </button>
-  <button class="nav-tab" onclick="showSection('tried', this)">
-    <span class="nav-indicator" style="background:#993C1D"></span>What we've tried
-  </button>
   <button class="nav-tab" onclick="showSection('quickwins', this)">
     <span class="nav-indicator" style="background:#2d5a3d"></span>Quick wins
   </button>
   <button class="nav-tab" onclick="showSection('dataneeded', this)">
     <span class="nav-indicator" style="background:#185FA5"></span>Data we all need
+  </button>
+  <button class="nav-tab" onclick="showSection('agenda', this)">
+    <span class="nav-indicator" style="background:#4a4840"></span>April 22 agenda
   </button>
 </nav>
 
@@ -1293,16 +1287,19 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<!-- FUNNEL -->
+<!-- QUICK WINS -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="funnel">
+<section class="section" id="quickwins">
 <div class="container">
 
-  <div class="section-eyebrow">The gap</div>
-  <h2 class="section-heading">Where are people dropping off?</h2>
-  <p class="section-intro">A simple view of the CT Foundation conversion path. The numbers tell us where the real problem is — reach, engagement, or conversion. Fill in what you know.</p>
+  <div class="section-eyebrow">30-day sprint</div>
+  <h2 class="section-heading">Quick wins</h2>
+  <p class="section-intro">Each card gets an owner and a deadline on April 22. Run with it, report back May 22. No micro-management in between.</p>
 
-  <div class="funnel">
+  <!-- ── FUNNEL ── -->
+  <div class="section-eyebrow" style="margin-bottom:0.75rem;margin-top:1rem">Conversion funnel — fill in what you know</div>
+
+  <div class="funnel" style="margin-bottom:1.5rem">
     <div class="funnel-step" style="--funnel-width:100%;--funnel-color:#2d5a3d">
       <div class="fs-bar"></div>
       <div class="fs-info">
@@ -1330,15 +1327,6 @@ footer {
       </div>
     </div>
     <div class="funnel-arrow">↓</div>
-    <div class="funnel-step" style="--funnel-width:12%;--funnel-color:#6B4C9A">
-      <div class="fs-bar"></div>
-      <div class="fs-info">
-        <div class="fs-label">Visited sales page</div>
-        <div class="fs-number">—</div>
-        <div class="fs-note">From Google Analytics — CT Foundation landing page visits</div>
-      </div>
-    </div>
-    <div class="funnel-arrow">↓</div>
     <div class="funnel-step" style="--funnel-width:5%;--funnel-color:#d4622a">
       <div class="fs-bar"></div>
       <div class="fs-info">
@@ -1351,168 +1339,25 @@ footer {
 
   <div class="divider"></div>
 
-  <div class="insight-box">
-    <div class="label">What the funnel reveals</div>
-    <p>We already know from the survey that the problem is activation, not opposition. The funnel shows us <em>where</em> in the journey activation fails. A big drop from list → open means the subject lines aren't landing. A big drop from click → register means the sales page isn't converting. Each drop has a different fix.</p>
-  </div>
+  <!-- ── WHAT'S BEEN TRIED ── -->
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">What's been tried — team, fill in what you know</div>
+  <p style="font-size:14px;color:var(--ink);margin-bottom:1rem;line-height:1.65">Before we propose new things, we need to know what already ran. Add to this list.</p>
+
+  <ul style="font-size:14px;color:var(--ink);line-height:2;margin-bottom:1rem;padding-left:1.25rem">
+    <li>Dedicated CT Foundation email campaign in the last 12 months? — <strong>—</strong></li>
+    <li>CT welcome/nurture email sequence running? — <strong>—</strong></li>
+    <li>Dedicated CT Foundation sales page? URL? — <strong>—</strong></li>
+    <li>Any A/B testing on sales page or checkout? — <strong>—</strong></li>
+    <li>Any paid advertising for CT Foundation? — <strong>—</strong></li>
+    <li>Any referral or affiliate program tried for CT? — <strong>—</strong></li>
+    <li>Any discounts, early bird, or payment plans offered? — <strong>—</strong></li>
+    <li>What did Duff send in the last 3 months for CT? — <strong>—</strong></li>
+  </ul>
 
   <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:1rem">Cohort comparison</div>
-  <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">If we can get numbers for the last 2–3 Foundation cohorts, the trend tells us whether this is getting worse or has always been this way.</p>
-
-  <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Cohort 1 (most recent)</div>
-      <div class="sub">Date: — / Registrations: —</div>
-    </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Cohort 2</div>
-      <div class="sub">Date: — / Registrations: —</div>
-    </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Cohort 3</div>
-      <div class="sub">Date: — / Registrations: —</div>
-    </div>
-  </div>
-
-</div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- WHAT WE'VE TRIED -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="tried">
-<div class="container">
-
-  <div class="section-eyebrow">Baseline</div>
-  <h2 class="section-heading">What we've already tried</h2>
-  <p class="section-intro">Before proposing new ideas, we need to know what's been done. This prevents the meeting from reinventing something that already ran. Team — fill in what you know.</p>
-
-  <div class="insight-box warm">
-    <div class="label">Why this matters</div>
-    <p>If an email campaign ran 6 months ago and got 2% conversion, that's a baseline. If nothing was tried, that's also information. The worst outcome on April 22 is proposing something that already failed — without knowing it failed.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section-eyebrow" style="margin-bottom:1rem">Email campaigns</div>
-
-  <div class="tried-card">
-    <div class="tc-header">
-      <div class="tc-status tc-unknown">Unknown</div>
-      <div class="tc-q">Has there been a dedicated CT Foundation email campaign in the last 12 months?</div>
-    </div>
-    <div class="tc-details">
-      <div class="tc-row"><span class="tc-label">What was sent:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">To how many:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Result:</span> <span class="tc-value">—</span></div>
-    </div>
-  </div>
-
-  <div class="tried-card">
-    <div class="tc-header">
-      <div class="tc-status tc-unknown">Unknown</div>
-      <div class="tc-q">Is there a CT welcome/nurture sequence running?</div>
-    </div>
-    <div class="tc-details">
-      <div class="tc-row"><span class="tc-label">Number of emails:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">When someone enters:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Does it end with a CTA?</span> <span class="tc-value">—</span></div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section-eyebrow" style="margin-bottom:1rem">Website / landing pages</div>
-
-  <div class="tried-card">
-    <div class="tc-header">
-      <div class="tc-status tc-unknown">Unknown</div>
-      <div class="tc-q">Is there a dedicated CT Foundation sales page?</div>
-    </div>
-    <div class="tc-details">
-      <div class="tc-row"><span class="tc-label">URL:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Last updated:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Has testimonials?</span> <span class="tc-value">—</span></div>
-    </div>
-  </div>
-
-  <div class="tried-card">
-    <div class="tc-header">
-      <div class="tc-status tc-unknown">Unknown</div>
-      <div class="tc-q">Has A/B testing been done on the sales page or checkout?</div>
-    </div>
-    <div class="tc-details">
-      <div class="tc-row"><span class="tc-label">What was tested:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Result:</span> <span class="tc-value">—</span></div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section-eyebrow" style="margin-bottom:1rem">Social / content / ads</div>
-
-  <div class="tried-card">
-    <div class="tc-header">
-      <div class="tc-status tc-unknown">Unknown</div>
-      <div class="tc-q">Any paid advertising for CT Foundation?</div>
-    </div>
-    <div class="tc-details">
-      <div class="tc-row"><span class="tc-label">Platform:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Spend:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Result:</span> <span class="tc-value">—</span></div>
-    </div>
-  </div>
-
-  <div class="tried-card">
-    <div class="tc-header">
-      <div class="tc-status tc-unknown">Unknown</div>
-      <div class="tc-q">Any referral or affiliate program tried?</div>
-    </div>
-    <div class="tc-details">
-      <div class="tc-row"><span class="tc-label">What was offered:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Who participated:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Result:</span> <span class="tc-value">—</span></div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section-eyebrow" style="margin-bottom:1rem">Pricing / offers</div>
-
-  <div class="tried-card">
-    <div class="tc-header">
-      <div class="tc-status tc-unknown">Unknown</div>
-      <div class="tc-q">Any discounts, early bird, or payment plan offers for CT Foundation?</div>
-    </div>
-    <div class="tc-details">
-      <div class="tc-row"><span class="tc-label">What was offered:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">When:</span> <span class="tc-value">—</span></div>
-      <div class="tc-row"><span class="tc-label">Impact on sign-ups:</span> <span class="tc-value">—</span></div>
-    </div>
-  </div>
-
-</div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- QUICK WINS -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="quickwins">
-<div class="container">
-
-  <div class="section-eyebrow">30-day sprint</div>
-  <h2 class="section-heading">Quick wins</h2>
-  <p class="section-intro">These come directly from the survey data. Each one gets an owner and a deadline on April 22. No micro-management — go do it, report back in 30 days.</p>
-
-  <div class="insight-box">
-    <div class="label">The deal</div>
-    <p>Every card below needs one name and one date before we leave the room. Owner takes it, runs with it, reports back May 22. No status updates in between. Trust the person, check the result.</p>
-  </div>
+  <!-- ── WORKSTREAM CARDS ── -->
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">The three workstreams</div>
 
   <div class="divider"></div>
 
