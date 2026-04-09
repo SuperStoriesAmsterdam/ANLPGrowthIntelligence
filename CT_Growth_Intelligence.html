@@ -5,14 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CT Foundation — Growth Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --ink: #1a1814;
-  --ink-2: #2a2820;
-  --ink-3: #5a5850;
   --paper: #f7f4ef;
   --paper-2: #ede9e2;
   --paper-3: #e0dbd2;
@@ -20,7 +18,6 @@
   --accent-2: #d4622a;
   --accent-light: #e8f0eb;
   --warm-light: #f5ede0;
-  --serif: 'Source Serif 4', Georgia, serif;
   --sans: 'DM Sans', system-ui, sans-serif;
   --radius: 4px;
 }
@@ -29,21 +26,17 @@ body {
   font-family: var(--sans);
   background: var(--paper);
   color: var(--ink);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   padding-bottom: 60px;
-}
-/* Force sans-serif on all non-heading elements */
-p, span, div, li, td, th, label, button, input, textarea, a {
-  font-family: var(--sans);
 }
 
 /* ── HEADER ── */
 .site-header {
   background: var(--ink);
-  color: var(--paper);
-  padding: 3rem 2.5rem 2.5rem;
+  color: white;
+  padding: 2.5rem 2rem 2rem;
   position: relative;
   overflow: hidden;
 }
@@ -55,47 +48,42 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   border-radius: 50%;
   background: rgba(255,255,255,0.03);
 }
+.header-inner { max-width: 960px; margin: 0 auto; }
 .header-label {
-  font-family: var(--sans);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: none;
-  color: rgba(247,244,239,0.45);
-  margin-bottom: 1rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 0.75rem;
 }
 .header-title {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 1.1;
-  color: var(--paper);
-  margin-bottom: 0.75rem;
-  max-width: 680px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
 }
 .header-sub {
   font-size: 14px;
-  color: rgba(247,244,239,0.55);
+  color: rgba(255,255,255,0.55);
   max-width: 560px;
   line-height: 1.6;
 }
 .header-meta {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
 }
-.header-stat { }
 .header-stat .n {
-  font-family: var(--serif);
-  font-size: 2rem;
-  color: var(--paper);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
   line-height: 1;
 }
 .header-stat .l {
-  font-size: 11px;
-  color: rgba(247,244,239,0.45);
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
   margin-top: 2px;
-  letter-spacing: 0.04em;
 }
 
 /* ── NAV TABS ── */
@@ -107,12 +95,13 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   position: sticky;
   top: 0;
   z-index: 100;
+  overflow-x: auto;
 }
 .nav-tab {
   font-family: var(--sans);
   font-size: 15px;
   font-weight: 500;
-  padding: 1rem 1.75rem;
+  padding: 0.85rem 1.5rem;
   border: none;
   background: transparent;
   color: var(--ink);
@@ -127,54 +116,41 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   border-bottom-color: var(--accent);
   background: var(--paper);
 }
-.nav-indicator {
-  display: inline-block;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  margin-right: 7px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-}
 
 /* ── SECTIONS ── */
 .section { display: none; }
 .section.active { display: block; }
 
 /* ── LAYOUT ── */
-.container { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 
 @media (max-width: 640px) {
   .two-col, .three-col { grid-template-columns: 1fr; }
-  .nav-tab { padding: 1rem 1rem; font-size: 14px; }
+  .nav-tab { padding: 0.85rem 1rem; font-size: 14px; }
+  .container { padding: 1.5rem 1rem; }
 }
 
 /* ── SECTION TITLE ── */
 .section-eyebrow {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: none;
   color: var(--ink);
   margin-bottom: 0.5rem;
 }
 .section-heading {
-  font-family: var(--serif);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--ink);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   line-height: 1.2;
-  max-width: 100%;
-  overflow-wrap: break-word;
 }
 .section-intro {
-  font-family: var(--sans);
-  font-size: 16px;
+  font-size: 15px;
   color: var(--ink);
   max-width: 660px;
-  line-height: 1.7;
+  line-height: 1.65;
   margin-bottom: 2rem;
 }
 .divider { height: 1px; background: var(--paper-3); margin: 2rem 0; }
@@ -183,55 +159,54 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 .stat-card {
   background: var(--paper-2);
   border-radius: var(--radius);
-  padding: 1.25rem;
+  padding: 1.1rem;
+  position: relative;
 }
 .stat-card .n {
-  font-family: var(--serif);
-  font-size: 2.2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--ink);
   line-height: 1;
   margin-bottom: 4px;
 }
-.stat-card .l { font-size: 12px; color: var(--ink); }
-.stat-card .sub { font-size: 13px; color: var(--ink); margin-top: 6px; }
+.stat-card .l { font-size: 13px; color: var(--ink); }
+.stat-card .sub { font-size: 13px; color: var(--ink); margin-top: 4px; }
 
 /* ── INSIGHT BOX ── */
 .insight-box {
   background: var(--accent-light);
   border-left: 3px solid var(--accent);
-  padding: 1.25rem 1.5rem;
+  padding: 1.1rem 1.25rem;
   border-radius: 0 var(--radius) var(--radius) 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
 }
 .insight-box .label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: none;
   color: var(--accent);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 .insight-box p {
   font-family: var(--sans);
   font-size: 15px;
-  color: #1a1814;
-  line-height: 1.7;
+  color: var(--ink);
+  line-height: 1.65;
 }
-
 .insight-box.warm {
   background: var(--warm-light);
   border-left-color: var(--accent-2);
 }
 .insight-box.warm .label { color: var(--accent-2); }
-.insight-box.warm p { color: #5a2810; }
+.insight-box.warm p { color: var(--ink); }
 
 /* ── CLUSTER BARS ── */
-.cluster-section { margin-bottom: 2rem; }
+.cluster-section { margin-bottom: 1.5rem; }
 .cluster-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   cursor: pointer;
   padding: 6px 8px;
   border-radius: var(--radius);
@@ -241,16 +216,16 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 .cluster-row.selected { background: var(--paper-2); }
 .cluster-name { font-size: 13px; color: var(--ink); width: 210px; flex-shrink: 0; }
 .cluster-name strong { font-weight: 500; display: block; }
-.cluster-name span { font-size: 11px; color: var(--ink); }
+.cluster-name span { font-size: 12px; color: var(--ink); }
 .bar-track { flex: 1; height: 6px; background: var(--paper-3); border-radius: 999px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
 .cluster-n { font-size: 13px; font-weight: 500; color: var(--ink); width: 24px; text-align: right; flex-shrink: 0; }
 
 /* ── FILTER PILLS ── */
-.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
 .f-pill {
-  font-size: 12px;
-  padding: 4px 14px;
+  font-size: 13px;
+  padding: 5px 14px;
   border-radius: 999px;
   border: 1px solid var(--paper-3);
   background: transparent;
@@ -259,17 +234,15 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   transition: all 0.15s;
   font-family: var(--sans);
 }
-.f-pill:hover { border-color: var(--ink-3); color: var(--ink); }
+.f-pill:hover { border-color: var(--ink); }
 .f-pill.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 /* ── QUOTE CARDS ── */
 .quotes-label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--ink);
-  letter-spacing: 0.04em;
-  text-transform: none;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .quote-card {
   background: white;
@@ -277,15 +250,16 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   border-radius: var(--radius);
   margin-bottom: 6px;
   overflow: hidden;
+  position: relative;
 }
 .quote-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1.25rem;
+  padding: 0.65rem 1.1rem;
   cursor: pointer;
   transition: background 0.15s;
-  gap: 12px;
+  gap: 10px;
 }
 .quote-header:hover { background: var(--paper-2); }
 .quote-header .qh-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
@@ -293,18 +267,18 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 .quote-header .qh-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 .quote-header .qh-arrow {
   font-size: 12px;
-  color: var(--ink-3);
+  color: var(--ink);
   transition: transform 0.2s;
   flex-shrink: 0;
 }
 .quote-card.open .qh-arrow { transform: rotate(90deg); }
 .quote-body {
   display: none;
-  padding: 0 1.25rem 1rem;
+  padding: 0 1.1rem 0.85rem;
   border-top: 1px solid var(--paper-2);
 }
-.quote-card.open .quote-body { display: block; padding-top: 0.75rem; }
-.quote-card .q { font-size: 15px; color: var(--ink); line-height: 1.65; margin-bottom: 10px; font-style: italic; }
+.quote-card.open .quote-body { display: block; padding-top: 0.65rem; }
+.quote-card .q { font-size: 15px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; font-style: italic; }
 .quote-card .q::before { content: '\201C'; }
 .quote-card .q::after { content: '\201D'; }
 .quote-card .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
@@ -316,7 +290,7 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 }
 .tag-cluster { background: #e8f0eb; color: #1e3a28; }
 .tag-role { background: var(--paper-2); color: var(--ink); }
-.tag-use { background: #f0ebe8; color: #5a2810; }
+.tag-use { background: #f0ebe8; color: var(--ink); }
 .no-results { font-size: 14px; color: var(--ink); padding: 2rem; text-align: center; }
 
 /* ── RESPONSES TOGGLE ── */
@@ -327,49 +301,42 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   cursor: pointer;
   padding: 0.5rem 0;
 }
-.responses-toggle:hover .quotes-label { color: var(--ink); }
 .responses-arrow {
   font-size: 11px;
-  color: var(--ink-3);
+  color: var(--ink);
   transition: transform 0.2s;
 }
 .responses-arrow.open { transform: rotate(90deg); }
 
-/* ── TRACK 2 SPECIFIC ── */
-.track2-intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-@media (max-width: 640px) { .track2-intro { grid-template-columns: 1fr; } }
-
+/* ── MECHANISM CARDS ── */
 .mechanism-card {
   background: white;
   border: 1px solid var(--paper-3);
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 1.25rem;
+  position: relative;
 }
 .mechanism-card .mc-num {
-  font-family: var(--serif);
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--paper-3);
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 .mechanism-card .mc-title {
-  font-family: var(--serif);
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--ink);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
-.mechanism-card .mc-body { font-size: 14px; color: var(--ink); line-height: 1.65; }
+.mechanism-card .mc-body { font-size: 15px; color: var(--ink); line-height: 1.65; }
 
+/* ── EVIDENCE ROWS ── */
 .evidence-row {
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  padding: 1rem 0;
+  padding: 0.85rem 0;
   border-bottom: 1px solid var(--paper-2);
 }
 .evidence-row:last-child { border-bottom: none; }
@@ -382,45 +349,107 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   font-size: 14px;
   color: var(--accent-2);
   font-weight: 500;
-  font-family: var(--serif);
 }
 .ev-body { flex: 1; }
-.ev-body strong { font-size: 14px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
-.ev-body span { font-size: 14px; color: var(--ink); line-height: 1.6; }
+.ev-body strong { font-size: 15px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
+.ev-body span { font-size: 15px; color: var(--ink); line-height: 1.65; }
 
+/* ── MESSAGE CARDS ── */
 .message-card {
   background: var(--ink);
-  color: var(--paper);
+  color: white;
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 1.25rem;
   margin-bottom: 1rem;
+  position: relative;
 }
 .message-card .mc-label {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: none;
-  color: rgba(247,244,239,0.4);
-  margin-bottom: 0.5rem;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.4rem;
 }
 .message-card .mc-msg {
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  color: white;
   line-height: 1.45;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
-.message-card .mc-why { font-size: 14px; color: rgba(247,244,239,0.7); line-height: 1.6; }
+.message-card .mc-why { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
 
-/* ── AGENDA SECTION ── */
+/* ── WORKSTREAM CARDS ── */
+.qw-card {
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-left: 3px solid var(--qw-color, var(--accent));
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 10px;
+  position: relative;
+}
+.qw-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.ws-tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 3px;
+  color: white;
+}
+.qw-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.qw-body { font-size: 15px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; }
+.qw-ownership {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--paper-2);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.qw-owner, .qw-timeline { font-size: 13px; display: flex; gap: 6px; align-items: center; }
+.qw-owner-label, .qw-tl-label { color: var(--ink); font-weight: 500; }
+.qw-owner-name, .qw-tl-date { color: var(--ink); }
+
+/* ── TRIED LIST ── */
+.tried-list { margin-bottom: 1.25rem; }
+.tried-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--paper-2);
+  font-size: 15px;
+}
+.tried-row:last-child { border-bottom: none; }
+.tried-q { color: var(--ink); flex: 1; }
+.tried-a {
+  color: var(--ink);
+  font-weight: 500;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* ── AGENDA ── */
 .agenda-item {
   display: flex;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
   align-items: flex-start;
 }
 .agenda-num {
-  font-family: var(--serif);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--paper-3);
   line-height: 1;
   flex-shrink: 0;
@@ -428,10 +457,10 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   text-align: right;
 }
 .agenda-body { flex: 1; }
-.agenda-body h3 { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
-.agenda-body p { font-size: 14px; color: var(--ink); line-height: 1.65; }
+.agenda-body h3 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.agenda-body p { font-size: 15px; color: var(--ink); line-height: 1.65; }
 .agenda-time {
-  font-size: 11px;
+  font-size: 12px;
   padding: 2px 8px;
   border-radius: 2px;
   background: var(--paper-2);
@@ -440,7 +469,7 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   margin-bottom: 6px;
 }
 .agenda-decide {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--accent);
   font-weight: 500;
   margin-top: 6px;
@@ -461,140 +490,15 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   background: var(--funnel-color);
   border-radius: 2px;
   opacity: 0.15;
-  transition: width 0.5s ease;
 }
 .fs-info { flex: 1; }
-.fs-label { font-size: 12px; font-weight: 500; color: var(--ink); }
-.fs-number { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); line-height: 1.2; }
-.fs-note { font-size: 11px; color: var(--ink); }
+.fs-label { font-size: 13px; font-weight: 500; color: var(--ink); }
+.fs-number { font-size: 1.5rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
 .funnel-arrow {
   font-size: 14px;
-  color: var(--ink-3);
+  color: var(--ink);
   padding: 2px 0 2px 40px;
   opacity: 0.4;
-}
-
-/* ── TRIED CARDS ── */
-.tried-card {
-  background: white;
-  border: 1px solid var(--paper-3);
-  border-radius: var(--radius);
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-.tc-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0.75rem 1.25rem;
-}
-.tc-status {
-  font-size: 10px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 2px;
-  text-transform: none;
-  letter-spacing: 0.04em;
-  flex-shrink: 0;
-}
-.tc-unknown { background: var(--paper-2); color: var(--ink); }
-.tc-done { background: #e8f0eb; color: #2d5a3d; }
-.tc-failed { background: #f5e0e0; color: #993C1D; }
-.tc-q { font-size: 15px; font-weight: 500; color: var(--ink); }
-.tc-details { padding: 0 1.25rem 0.75rem; }
-.tc-row {
-  font-size: 13px;
-  color: var(--ink);
-  padding: 3px 0;
-  display: flex;
-  gap: 8px;
-}
-.tc-label { color: var(--ink); flex-shrink: 0; }
-.tc-value { color: var(--ink); }
-
-/* ── QUICK WIN CARDS ── */
-.qw-card {
-  background: white;
-  border: 1px solid var(--paper-3);
-  border-left: 3px solid var(--qw-color, var(--accent));
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 12px;
-}
-.qw-header {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.qw-priority {
-  font-size: 10px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 2px;
-  background: var(--qw-color, var(--accent));
-  color: white;
-  text-transform: none;
-  letter-spacing: 0.04em;
-}
-.qw-effort {
-  font-size: 10px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 2px;
-  background: var(--paper-2);
-  color: var(--ink);
-  text-transform: none;
-  letter-spacing: 0.04em;
-}
-.qw-title {
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  color: var(--ink);
-  margin-bottom: 6px;
-  text-transform: none;
-  line-height: 1.3;
-}
-.qw-body { font-family: var(--sans); font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; text-transform: none; }
-.ws-tag {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 3px;
-  color: white;
-}
-.qw-data { display: flex; gap: 6px; flex-wrap: wrap; }
-
-.qw-ownership {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--paper-2);
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.qw-owner, .qw-timeline { font-size: 13px; display: flex; gap: 6px; align-items: center; }
-.qw-owner-label, .qw-tl-label { color: var(--ink); font-weight: 500; }
-.qw-owner-name, .qw-tl-date { color: var(--ink); }
-
-/* ── TRIED LIST ── */
-.tried-list { margin-bottom: 1.5rem; }
-.tried-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--paper-2);
-  font-size: 14px;
-}
-.tried-row:last-child { border-bottom: none; }
-.tried-q { color: var(--ink); flex: 1; }
-.tried-a {
-  color: var(--ink);
-  font-weight: 500;
-  min-width: 80px;
-  text-align: right;
 }
 
 /* ── NEXT STEPS ── */
@@ -602,13 +506,69 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 .ns-item {
   background: white;
   border: 1px solid var(--paper-3);
-  border-left: 3px solid var(--ink-3);
+  border-left: 3px solid var(--ink);
   border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 0.75rem 1.25rem;
+  padding: 0.65rem 1.1rem;
+  position: relative;
 }
-.ns-what { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.ns-what { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
 .ns-meta { display: flex; gap: 16px; }
-.ns-who, .ns-when { font-size: 12px; color: var(--ink); }
+.ns-who, .ns-when { font-size: 13px; color: var(--ink); }
+
+/* ── UPLOAD DROPZONE ── */
+.dropzone {
+  border: 2px dashed var(--paper-3);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 1.5rem;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropzone:hover, .dropzone.dragover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+.dropzone p { font-size: 15px; color: var(--ink); pointer-events: none; }
+.upload-list { margin-bottom: 1.5rem; }
+.upload-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--paper-2);
+  font-size: 14px;
+  color: var(--ink);
+}
+.upload-item:last-child { border-bottom: none; }
+.upload-icon { font-size: 16px; flex-shrink: 0; }
+
+/* ── TEAM GRID ── */
+.team-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.85rem;
+}
+.team-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.team-info strong { font-size: 14px; font-weight: 500; color: var(--ink); display: block; }
+.team-info span { font-size: 12px; color: var(--ink); }
 
 /* ── EDIT MODE ── */
 #edit-bar {
@@ -616,9 +576,8 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   bottom: 0; left: 0; right: 0;
   z-index: 200;
   background: var(--ink);
-  color: var(--paper);
+  color: white;
   padding: 12px 24px;
-  font-family: var(--sans);
   font-size: 14px;
 }
 #edit-bar button {
@@ -638,7 +597,7 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 #edit-reset {
   background: transparent;
   color: rgba(255,255,255,0.4);
-  font-size: 11px;
+  font-size: 12px;
 }
 #edit-reset:hover { color: rgba(255,255,255,0.7); }
 .is-editable {
@@ -655,7 +614,7 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   position: relative;
 }
 .is-edited::after {
-  content: '✎';
+  content: '\270E';
   position: absolute;
   top: -6px; right: -6px;
   font-size: 9px;
@@ -718,7 +677,6 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 #edit-ctx button:hover { background: var(--paper-2); }
 #edit-ctx button:first-child { border-bottom: 1px solid var(--paper-2); }
 
-/* ── ANNOTATION TOOL ── */
 /* ── NAME PICKER ── */
 #name-picker {
   position: fixed;
@@ -740,14 +698,14 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 .np-title {
-  font-family: var(--serif);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+  font-weight: 600;
   color: var(--ink);
   margin-bottom: 4px;
 }
 .np-subtitle {
   font-size: 13px;
-  color: var(--ink-3);
+  color: var(--ink);
   margin-bottom: 1.25rem;
 }
 .np-list { display: flex; flex-direction: column; gap: 4px; }
@@ -778,7 +736,7 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 }
 .np-info { display: flex; flex-direction: column; }
 .np-info strong { font-size: 14px; font-weight: 500; color: var(--ink); }
-.np-info span { font-size: 11px; color: var(--ink-3); }
+.np-info span { font-size: 12px; color: var(--ink); }
 
 /* ── AUTHOR CHIP ── */
 #author-chip {
@@ -789,10 +747,9 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   align-items: center;
   gap: 8px;
   background: var(--ink);
-  color: var(--paper);
+  color: white;
   padding: 6px 14px 6px 6px;
   border-radius: 24px;
-  font-family: var(--sans);
   font-size: 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   cursor: pointer;
@@ -809,9 +766,9 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   align-items: center;
   justify-content: center;
 }
-.ac-name { color: var(--paper); }
+.ac-name { color: white; }
 .ac-switch {
-  color: rgba(247,244,239,0.5);
+  color: rgba(255,255,255,0.5);
   font-size: 12px;
   padding-left: 4px;
 }
@@ -848,7 +805,6 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--sans);
 }
 
 /* ── COMMENT THREAD ── */
@@ -871,17 +827,16 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   padding: 10px 14px;
   border-bottom: 1px solid var(--paper-2);
 }
-.ct-title { font-size: 12px; font-weight: 500; color: var(--ink-3); }
+.ct-title { font-size: 12px; font-weight: 500; color: var(--ink); }
 .ct-close {
   background: none;
   border: none;
-  color: var(--ink-3);
+  color: var(--ink);
   cursor: pointer;
   font-size: 14px;
   padding: 0;
 }
 .ct-close:hover { color: var(--ink); }
-
 .ct-list {
   max-height: 240px;
   overflow-y: auto;
@@ -898,11 +853,11 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   margin-bottom: 4px;
 }
 .ct-comment-author { font-size: 12px; font-weight: 500; color: var(--ink); }
-.ct-comment-time { font-size: 10px; color: var(--ink-3); margin-left: auto; }
+.ct-comment-time { font-size: 10px; color: var(--ink); margin-left: auto; }
 .ct-comment-delete {
   background: none;
   border: none;
-  color: var(--ink-3);
+  color: var(--ink);
   cursor: pointer;
   font-size: 11px;
   padding: 0 0 0 6px;
@@ -912,7 +867,6 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 .ct-comment:hover .ct-comment-delete { opacity: 1; }
 .ct-comment-delete:hover { color: var(--accent-2); }
 .ct-comment-text { font-size: 13px; color: var(--ink); line-height: 1.5; }
-
 .ct-write {
   border-top: 1px solid var(--paper-2);
   padding: 10px 14px;
@@ -936,8 +890,8 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   line-height: 1.5;
   background: var(--paper);
 }
-.ct-input:focus { border-color: var(--ink-3); }
-.ct-input::placeholder { color: var(--ink-3); }
+.ct-input:focus { border-color: var(--ink); }
+.ct-input::placeholder { color: #999; }
 .ct-actions {
   display: flex;
   justify-content: flex-end;
@@ -954,7 +908,6 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   font-weight: 500;
 }
 .ct-save:hover { opacity: 0.9; }
-
 .aw-avatar {
   width: 22px; height: 22px;
   border-radius: 50%;
@@ -968,7 +921,7 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 }
 .aw-name { font-size: 12px; font-weight: 500; color: var(--ink); }
 
-/* ── EXPORT BAR ── */
+/* ── ANNOTATE COUNTER ── */
 #annotate-counter {
   position: fixed;
   bottom: 56px; left: 20px;
@@ -977,17 +930,16 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   align-items: center;
   gap: 8px;
   background: var(--ink);
-  color: var(--paper);
+  color: white;
   padding: 6px 12px;
   border-radius: 20px;
-  font-family: var(--sans);
   font-size: 11px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 #annotate-counter button {
   background: rgba(255,255,255,0.15);
   border: none;
-  color: var(--paper);
+  color: white;
   font-size: 11px;
   padding: 2px 8px;
   border-radius: 3px;
@@ -996,10 +948,11 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 }
 #annotate-counter button:hover { background: rgba(255,255,255,0.25); }
 
+/* ── FOOTER ── */
 footer {
   background: var(--paper-2);
   border-top: 1px solid var(--paper-3);
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 2rem;
   font-size: 12px;
   color: var(--ink);
   display: flex;
@@ -1012,96 +965,89 @@ footer {
 <body>
 
 <header class="site-header">
-  <div class="header-label">AndreasNLP × Superstories — April 2026</div>
-  <h1 class="header-title">CT Foundation Growth Intelligence</h1>
-  <p class="header-sub">Two distinct growth levers. One is about converting warm subscribers who never felt urgency. The other is about believers bringing in people who aren't on the list at all.</p>
-  <div class="header-meta">
-    <div class="header-stat">
-      <div class="n">54</div>
-      <div class="l">survey responses — warm non-converters</div>
-    </div>
-    <div class="header-stat">
-      <div class="n">2</div>
-      <div class="l">distinct growth tracks identified</div>
-    </div>
-    <div class="header-stat">
-      <div class="n">Apr 22</div>
-      <div class="l">strategy meeting — decisions needed</div>
+  <div class="header-inner">
+    <div class="header-label">AndreasNLP × Superstories — April 2026</div>
+    <h1 class="header-title">CT Foundation Growth Intelligence</h1>
+    <p class="header-sub">Two distinct growth levers. One is about converting warm subscribers who never felt urgency. The other is about believers bringing in people who aren't on the list at all.</p>
+    <div class="header-meta">
+      <div class="header-stat">
+        <div class="n">54</div>
+        <div class="l">survey responses — warm non-converters</div>
+      </div>
+      <div class="header-stat">
+        <div class="n">2</div>
+        <div class="l">distinct growth tracks identified</div>
+      </div>
+      <div class="header-stat">
+        <div class="n">Apr 22</div>
+        <div class="l">strategy meeting — decisions needed</div>
+      </div>
     </div>
   </div>
 </header>
 
 <nav class="nav-bar">
-  <button class="nav-tab" onclick="showSection('howto', this)">
-    <span class="nav-indicator" style="background:#4a4840"></span>How this works
-  </button>
-  <button class="nav-tab active" onclick="showSection('track1', this)">
-    <span class="nav-indicator" style="background:#2d5a3d"></span>Research
-  </button>
-  <button class="nav-tab" onclick="showSection('workstreams', this)">
-    <span class="nav-indicator" style="background:#d4622a"></span>Workstreams
-  </button>
-  <button class="nav-tab" onclick="showSection('dataneeded', this)">
-    <span class="nav-indicator" style="background:#185FA5"></span>Data we all need
-  </button>
-  <button class="nav-tab" onclick="showSection('agenda', this)">
-    <span class="nav-indicator" style="background:#4a4840"></span>April 22 agenda
-  </button>
+  <button class="nav-tab" onclick="showSection('start', this)">Start here</button>
+  <button class="nav-tab active" onclick="showSection('track1', this)">Why subscribers don't convert</button>
+  <button class="nav-tab" onclick="showSection('track2', this)">Referral — a new channel</button>
+  <button class="nav-tab" onclick="showSection('workstreams', this)">Workstreams</button>
+  <button class="nav-tab" onclick="showSection('sharedata', this)">Share data</button>
+  <button class="nav-tab" onclick="showSection('agenda', this)">April 22 agenda</button>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<!-- HOW THIS WORKS -->
+<!-- START HERE -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="howto">
+<section class="section" id="start">
 <div class="container">
 
   <h2 class="section-heading">How this works</h2>
-  <p class="section-intro">Pick your name below. Then go through the tabs — read the research, look at the workstreams, and leave comments on anything you have thoughts on. Hover any card and click 💬 to comment.</p>
+  <p class="section-intro">Pick your name below. Then go through the tabs — read the research, look at the workstreams, and leave comments on anything. Hover any card and click 💬 to comment.</p>
 
   <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:0.75rem">Pick your name</div>
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">The team</div>
 
-  <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#2d5a3d;width:32px;height:32px;font-size:14px;flex-shrink:0">P</span>
-      <div><strong style="font-size:14px;display:block">Peter</strong><span style="font-size:12px;color:var(--ink)">Strategy — Superstories</span></div>
+  <div class="three-col" style="margin-bottom:0.75rem">
+    <div class="team-card">
+      <span class="team-avatar" style="background:#2d5a3d">P</span>
+      <div class="team-info"><strong>Peter</strong><span>Strategy</span></div>
     </div>
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#854F0B;width:32px;height:32px;font-size:14px;flex-shrink:0">C</span>
-      <div><strong style="font-size:14px;display:block">Connirae</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#854F0B">C</span>
+      <div class="team-info"><strong>Connirae</strong><span>ANLP</span></div>
     </div>
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#993C1D;width:32px;height:32px;font-size:14px;flex-shrink:0">M</span>
-      <div><strong style="font-size:14px;display:block">Mark</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
-    </div>
-  </div>
-  <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#185FA5;width:32px;height:32px;font-size:14px;flex-shrink:0">T</span>
-      <div><strong style="font-size:14px;display:block">Tamara</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
-    </div>
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#6B4C9A;width:32px;height:32px;font-size:14px;flex-shrink:0">Z</span>
-      <div><strong style="font-size:14px;display:block">Zach</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
-    </div>
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#4a4840;width:32px;height:32px;font-size:14px;flex-shrink:0">D</span>
-      <div><strong style="font-size:14px;display:block">Duff</strong><span style="font-size:12px;color:var(--ink)">ANLP — Email</span></div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#993C1D">M</span>
+      <div class="team-info"><strong>Mark</strong><span>ANLP</span></div>
     </div>
   </div>
-  <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#8B6914;width:32px;height:32px;font-size:14px;flex-shrink:0">P</span>
-      <div><strong style="font-size:14px;display:block">Petrolene</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+  <div class="three-col" style="margin-bottom:0.75rem">
+    <div class="team-card">
+      <span class="team-avatar" style="background:#185FA5">T</span>
+      <div class="team-info"><strong>Tamara</strong><span>ANLP</span></div>
     </div>
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#9B4D6A;width:32px;height:32px;font-size:14px;flex-shrink:0">L</span>
-      <div><strong style="font-size:14px;display:block">Lavinia</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#6B4C9A">Z</span>
+      <div class="team-info"><strong>Zach</strong><span>ANLP</span></div>
     </div>
-    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
-      <span class="np-avatar" style="background:#d4622a;width:32px;height:32px;font-size:14px;flex-shrink:0">I</span>
-      <div><strong style="font-size:14px;display:block">Team I&Y</strong><span style="font-size:12px;color:var(--ink)">GHL build</span></div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#4a4840">D</span>
+      <div class="team-info"><strong>Duff</strong><span>ANLP Email</span></div>
+    </div>
+  </div>
+  <div class="three-col" style="margin-bottom:0.75rem">
+    <div class="team-card">
+      <span class="team-avatar" style="background:#8B6914">P</span>
+      <div class="team-info"><strong>Petrolene</strong><span>ANLP</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#9B4D6A">L</span>
+      <div class="team-info"><strong>Lavinia</strong><span>ANLP</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#d4622a">I</span>
+      <div class="team-info"><strong>Team I&amp;Y</strong><span>GHL build</span></div>
     </div>
   </div>
 
@@ -1115,10 +1061,10 @@ footer {
 <div class="container">
 
   <div class="section-eyebrow">Track 1</div>
-  <h2 class="section-heading">Why warm subscribers don't convert</h2>
+  <h2 class="section-heading">Why subscribers don't convert</h2>
   <p class="section-intro">In 2023, subscribers were asked: what is the #1 thing stopping you from taking CT Foundation? 54 responded. What they say — and what they don't say — reveals the real conversion problem.</p>
 
-  <div class="three-col" style="margin-bottom:2rem">
+  <div class="three-col" style="margin-bottom:1.5rem">
     <div class="stat-card">
       <div class="n">54</div>
       <div class="l">responses with a stated reason</div>
@@ -1143,14 +1089,14 @@ footer {
 
   <div class="insight-box warm">
     <div class="label">Metal fatigue — CT vs WW</div>
-    <p>If CT needs 5× the email touches that Wholeness Work needs to convert the same audience, the problem isn't the product — it's the story. WW is fresh. CT's message has been in circulation for 30 years. Same infrastructure, same list, different response. That's <strong>campaign fatigue</strong>, not a positioning problem. The CT story needs a new reason to be told — not louder, but differently.</p>
+    <p>If CT needs 5x the email touches that Wholeness Work needs to convert the same audience, the problem isn't the product — it's the story. WW is fresh. CT's message has been in circulation for 30 years. Same infrastructure, same list, different response. That's <strong>campaign fatigue</strong>, not a positioning problem. The CT story needs a new reason to be told — not louder, but differently.</p>
   </div>
 
   <div class="divider"></div>
 
   <div style="margin-bottom:1rem">
-    <div class="section-eyebrow" style="margin-bottom:0.75rem">Blocker clusters</div>
-    <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">Click a cluster to filter the responses below</p>
+    <div class="section-eyebrow" style="margin-bottom:0.5rem">Blocker clusters</div>
+    <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">Click a cluster to filter the responses below</p>
   </div>
 
   <div id="cluster-bars" class="cluster-section"></div>
@@ -1183,10 +1129,10 @@ footer {
 <div class="container">
 
   <div class="section-eyebrow">Track 2</div>
-  <h2 class="section-heading">Referral from believers</h2>
-  <p class="section-intro">A different lever entirely. CT alumni — people who have experienced the training — bringing in people who are not on the list at all. This is not about converting warm subscribers. It is about reaching a new audience through trusted voice.</p>
+  <h2 class="section-heading">Referral — a new channel</h2>
+  <p class="section-intro">A different lever entirely. CT alumni — people who have experienced the training — bringing in people who are not on the list at all.</p>
 
-  <div class="insight-box warm">
+  <div class="insight-box">
     <div class="label">Why this is a separate track</div>
     <p>Track 1 works on people who already know about CT but haven't acted. Track 2 reaches people who have never heard of CT — but trust someone who has lived it. The message, the mechanic, and the audience are all different. Building one does not build the other.</p>
   </div>
@@ -1196,7 +1142,7 @@ footer {
     <p>Parts work has gone mainstream. IFS grew 30%+ year on year and put "parts" into everyday therapeutic language. CT <em>is</em> parts work — one of only a handful of serious methods in the world — and it predates most of them. But the CT site doesn't use the word "parts" anywhere. This is a new audience waiting to discover CT: people who are already sold on parts work, already doing IFS or similar, and searching for what goes deeper. The referral message from alumni in this space writes itself: "I trained in IFS. CT goes underneath it."</p>
   </div>
 
-  <div class="track2-intro">
+  <div class="two-col" style="margin-bottom:1.5rem">
     <div class="mechanism-card">
       <div class="mc-num">01</div>
       <div class="mc-title">The mechanism</div>
@@ -1211,18 +1157,18 @@ footer {
 
   <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:1.25rem">The message that makes referral work</div>
+  <div class="section-eyebrow" style="margin-bottom:1rem">The message that makes referral work</div>
 
-  <p style="font-size:14px;color:var(--ink-2);max-width:580px;margin-bottom:1.5rem;line-height:1.7">The survey gave us the exact message. A respondent who had been through NLP training and had CT explained to him wrote this unprompted:</p>
+  <p style="font-size:15px;color:var(--ink);max-width:580px;margin-bottom:1.25rem;line-height:1.65">The survey gave us the exact message. A respondent who had been through NLP training and had CT explained to him wrote this unprompted:</p>
 
-  <div style="background:var(--paper-2);border-left:3px solid var(--accent-2);padding:1.25rem 1.5rem;border-radius:0 4px 4px 0;margin-bottom:2rem">
-    <p style="font-family:var(--serif);font-size:1.15rem;color:var(--ink);line-height:1.5;font-style:italic;margin-bottom:0.5rem">"Emphasize that you need to experience Core Transformation — the theory or a guided example is far less effective."</p>
-    <p style="font-size:12px;color:var(--ink-3)">— Ron Fiedler, survey respondent (NLP practitioner, already familiar with CT)</p>
+  <div style="background:var(--paper-2);border-left:3px solid var(--accent-2);padding:1.1rem 1.25rem;border-radius:0 4px 4px 0;margin-bottom:1.5rem">
+    <p style="font-family:var(--sans);font-size:1.1rem;color:var(--ink);line-height:1.45;font-style:italic;margin-bottom:0.4rem">"Emphasize that you need to experience Core Transformation — the theory or a guided example is far less effective."</p>
+    <p style="font-size:12px;color:var(--ink)">— Ron Fiedler, survey respondent (NLP practitioner, already familiar with CT)</p>
   </div>
 
-  <p style="font-size:14px;color:var(--ink-2);max-width:580px;margin-bottom:2rem;line-height:1.7">This is what alumni can say that no promotional email can say. They have the experience. The referral message is not "my friend is offering a discount." It is: <em>"I thought I knew this. I didn't. Here's what changed when I actually did it."</em></p>
+  <p style="font-size:15px;color:var(--ink);max-width:580px;margin-bottom:1.5rem;line-height:1.65">This is what alumni can say that no promotional email can say. They have the experience. The referral message is not "my friend is offering a discount." It is: <em>"I thought I knew this. I didn't. Here's what changed when I actually did it."</em></p>
 
-  <div class="section-eyebrow" style="margin-bottom:1.25rem">Suggested referral message frames</div>
+  <div class="section-eyebrow" style="margin-bottom:1rem">Suggested referral message frames</div>
 
   <div class="message-card">
     <div class="mc-label">For alumni who came from the book</div>
@@ -1244,7 +1190,7 @@ footer {
 
   <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:1.25rem">What needs to be decided on April 22</div>
+  <div class="section-eyebrow" style="margin-bottom:1rem">What needs to be decided on April 22</div>
 
   <div class="evidence-row">
     <div class="ev-icon">?</div>
@@ -1279,6 +1225,304 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════════════ -->
+<!-- WORKSTREAMS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="workstreams">
+<div class="container">
+
+  <h2 class="section-heading">30-day sprint</h2>
+  <p class="section-intro">Each card gets one owner and one deadline on April 22. Run with it, report back May 22.</p>
+
+  <div class="filter-row" id="ws-filters">
+    <button class="f-pill active" onclick="filterWS('all',this)">All</button>
+    <button class="f-pill" onclick="filterWS('branding',this)">Branding + positioning</button>
+    <button class="f-pill" onclick="filterWS('activation',this)">Database activation</button>
+    <button class="f-pill" onclick="filterWS('affiliate',this)">Affiliate + referral</button>
+    <button class="f-pill" onclick="filterWS('site',this)">Site + SEO</button>
+  </div>
+
+  <div id="ws-list">
+
+    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+      </div>
+      <h3 class="qw-title">Email the "almost ready" segment directly</h3>
+      <p class="qw-body">~30% of respondents have been "about to do it" for years. They need a reason to act now — not more information. A personal email from Connirae with a deadline ("next cohort starts May X, here's your spot") could move 5-10 of them.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+      </div>
+      <h3 class="qw-title">Address the "I already know CT" misconception</h3>
+      <p class="qw-body">19% think they know CT from the book or NLP training. The survey contains the rebuttal — Ron Fiedler: "you need to EXPERIENCE CT, theory is far less effective." One email quoting respondents who felt this way could crack this segment open.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+      </div>
+      <h3 class="qw-title">Ask 3 recent alumni: "What changed?"</h3>
+      <p class="qw-body">Before building any referral mechanics, send a message to 3 recent CT graduates: "In one sentence — what changed for you after CT Foundation that you didn't expect?" Those answers become the referral message. Free. Immediate.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="branding" style="--qw-color:#993C1D">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
+      </div>
+      <h3 class="qw-title">Position CT as parts work — ride the IFS wave</h3>
+      <p class="qw-body">Parts work has gone mainstream thanks to IFS — growing 30%+ YoY. CT is parts work, but the site doesn't say so. The word "parts" appears nowhere. One sentence on the homepage, FAQ schema for "what is parts work," and a comparison page (CT vs IFS) puts CT in the conversation that's already happening.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="affiliate" style="--qw-color:#d4622a">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#d4622a">Affiliate</span>
+      </div>
+      <h3 class="qw-title">Clone the WW affiliate funnel for CT — find one partner</h3>
+      <p class="qw-body">The WW affiliate infrastructure already exists. Duplicate it for CT Foundation and test with one affiliate partner. Connirae, Tamara, or Zach identify one entity (training institute, IFS community, coaching school). One partner, one test, real data.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Connirae/Tamara + Team I&amp;Y</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1-2</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+      </div>
+      <h3 class="qw-title">LLM SEO — make CT findable by AI</h3>
+      <p class="qw-body">Live audit found: no meta descriptions, no Course/FAQ/Review schema, no visible pricing, hero doesn't explain what CT is. When someone asks ChatGPT "what is Core Transformation?" — the answer comes from everywhere except your site. Fix: schema markup, hero rewrite, visible pricing, structured testimonials.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Peter/Superstories</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2-3</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+      </div>
+      <h3 class="qw-title">Fix the website pop-up blocker</h3>
+      <p class="qw-body">Survey respondent Hannah: "the website had a blocking pop-up — that was the biggest stumbling block." If there's an aggressive pop-up on the CT page, it's actively blocking conversions. Check and remove or delay it. 5 minutes.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+      </div>
+      <h3 class="qw-title">Add "What CT Foundation is NOT" to the sales page</h3>
+      <p class="qw-body">15% of survey respondents are uncertain what CT delivers. They're not cold — they're confused warm leads. A short "This is for you if..." block on the sales page addresses this directly.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">What's been tried — team, fill in what you know</div>
+
+  <div class="tried-list">
+    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation email campaign in the last 12 months?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">CT welcome/nurture email sequence running?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation sales page? URL?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any A/B testing on sales page or checkout?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any paid advertising for CT Foundation?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any referral or affiliate program tried for CT?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any discounts, early bird, or payment plans offered?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">What did Duff send in the last 3 months for CT?</span><span class="tried-a">—</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SHARE DATA -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="sharedata">
+<div class="container">
+
+  <h2 class="section-heading">Data we all need</h2>
+  <p class="section-intro">To make real decisions on April 22, we need these numbers in the room.</p>
+
+  <!-- UPLOAD DROPZONE -->
+  <div class="dropzone" id="dropzone">
+    <p>Drop a PDF, screenshot, or any file here — or click to upload</p>
+  </div>
+  <input type="file" id="file-input" multiple style="display:none">
+  <div class="upload-list" id="upload-list"></div>
+
+  <div class="divider"></div>
+
+  <!-- CONVERSION FUNNEL -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">Conversion funnel</div>
+
+  <div class="funnel" style="margin-bottom:1.5rem">
+    <div class="funnel-step" style="--funnel-width:100%;--funnel-color:var(--accent)">
+      <div class="fs-bar"></div>
+      <div class="fs-info">
+        <div class="fs-label">Email list</div>
+        <div class="fs-number">—</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">&#8595;</div>
+    <div class="funnel-step" style="--funnel-width:60%;--funnel-color:var(--accent)">
+      <div class="fs-bar"></div>
+      <div class="fs-info">
+        <div class="fs-label">Opened</div>
+        <div class="fs-number">—</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">&#8595;</div>
+    <div class="funnel-step" style="--funnel-width:30%;--funnel-color:var(--accent)">
+      <div class="fs-bar"></div>
+      <div class="fs-info">
+        <div class="fs-label">Clicked</div>
+        <div class="fs-number">—</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">&#8595;</div>
+    <div class="funnel-step" style="--funnel-width:10%;--funnel-color:var(--accent-2)">
+      <div class="fs-bar"></div>
+      <div class="fs-info">
+        <div class="fs-label">Registered</div>
+        <div class="fs-number">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WEBSITE TRAFFIC -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">1. Website traffic</div>
+  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From Google Analytics — whoever has access.</p>
+
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Monthly visitors (CT website)</div>
+      <div class="sub">Last 3 months average</div>
+    </div>
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Top traffic source</div>
+      <div class="sub">Organic / email / social / direct?</div>
+    </div>
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Bounce rate on landing page</div>
+      <div class="sub">Are people staying or leaving?</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- REGISTRATION NUMBERS -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">2. Registration numbers</div>
+  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From GHL, Stripe, or whoever processes enrollment.</p>
+
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Registrations per cohort</div>
+      <div class="sub">Last 2-3 Foundation rounds</div>
+    </div>
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Email list size at promo time</div>
+      <div class="sub">How large was the list when each promo went out?</div>
+    </div>
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Conversion rate</div>
+      <div class="sub">List to registered (even rough %)</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- EMAIL PERFORMANCE -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">3. Email performance</div>
+  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From GHL or the email platform — Duff likely has this.</p>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Open rate on CT promo emails</div>
+      <div class="sub">Last campaign or last 3 sends</div>
+    </div>
+    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Click-through rate</div>
+      <div class="sub">Opened to clicked the CTA</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- JASON'S SURVEY -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">4. Jason's "Why did you sign up?" survey</div>
+  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">~80 responses from people who DID convert. The counterpart to the Track 1 data above.</p>
+
+  <div class="insight-box warm">
+    <div class="label">Why this matters</div>
+    <p>Track 1 tells us why people don't convert. This survey tells us why people do. The gap between the two is where the strategy lives. We need both in the same room.</p>
+  </div>
+
+  <div class="evidence-row">
+    <div class="ev-icon" style="background:#f5ede0;color:#993C1D">J</div>
+    <div class="ev-body">
+      <strong>Jason — can you share the raw results or a summary?</strong>
+      <span>PDF, spreadsheet, or even a screenshot of the top-line findings. Peter will integrate it into this dashboard.</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TEAM ROLES -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">5. Team — who does what</div>
+  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">So everyone knows who owns which piece after April 22.</p>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="mechanism-card" style="border:1px dashed var(--paper-3)">
+      <div class="mc-num">—</div>
+      <div class="mc-title">ANLP side</div>
+      <div class="mc-body">Who manages email / GHL? Who has GA access? Who approves copy and messaging? Who is the decision maker on pricing and offers?</div>
+    </div>
+    <div class="mechanism-card" style="border:1px dashed var(--paper-3)">
+      <div class="mc-num">—</div>
+      <div class="mc-title">Superstories side</div>
+      <div class="mc-body">Peter — strategy + dashboard. Ivan &amp; Yssa — GHL build (referral mechanics, landing pages, automations). Who else needs to be in the loop?</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
 <!-- AGENDA -->
 <!-- ══════════════════════════════════════════════════════ -->
 <section class="section" id="agenda">
@@ -1286,7 +1530,7 @@ footer {
 
   <div class="section-eyebrow">April 22 — Strategy meeting</div>
   <h2 class="section-heading">What we're deciding</h2>
-  <p class="section-intro">Two decisions. Not a discussion about everything — two decisions we can implement immediately after the meeting. Everything else is preparation for a future meeting.</p>
+  <p class="section-intro">Two decisions. Not a discussion about everything — two decisions we can implement immediately after the meeting.</p>
 
   <div class="insight-box">
     <div class="label">The framing question</div>
@@ -1333,7 +1577,7 @@ footer {
     <div class="ev-icon">1</div>
     <div class="ev-body">
       <strong>Historical CT registration data</strong>
-      <span>Last 2–3 Foundation cohorts. List size at promo time, registrations, conversion if available. Even rough numbers.</span>
+      <span>Last 2-3 Foundation cohorts. List size at promo time, registrations, conversion if available. Even rough numbers.</span>
     </div>
   </div>
   <div class="evidence-row">
@@ -1354,7 +1598,7 @@ footer {
   <div class="divider"></div>
 
   <div class="section-eyebrow" style="margin-bottom:1rem">After April 22 — next steps</div>
-  <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">This section gets filled in during the meeting. Who does what, by when.</p>
+  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">This section gets filled in during the meeting. Who does what, by when.</p>
 
   <div class="next-steps-list" id="next-steps">
     <div class="ns-item" style="border-left-color:#2d5a3d">
@@ -1382,366 +1626,78 @@ footer {
 </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- WORKSTREAMS -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="workstreams">
-<div class="container">
-
-  <h2 class="section-heading">Workstreams — 30-day sprint</h2>
-  <p class="section-intro">Each card gets one owner and one deadline on April 22. Run with it, report back May 22. No status updates in between.</p>
-
-  <div class="filter-row" id="ws-filters">
-    <button class="f-pill active" onclick="filterWS('all',this)">All</button>
-    <button class="f-pill" onclick="filterWS('branding',this)" style="--pill-active-bg:#993C1D">Branding + positioning</button>
-    <button class="f-pill" onclick="filterWS('activation',this)" style="--pill-active-bg:#2d5a3d">Database activation</button>
-    <button class="f-pill" onclick="filterWS('affiliate',this)" style="--pill-active-bg:#d4622a">Affiliate + referral</button>
-    <button class="f-pill" onclick="filterWS('site',this)" style="--pill-active-bg:#185FA5">Site + SEO</button>
-  </div>
-
-  <div id="ws-list">
-
-    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
-      </div>
-      <h3 class="qw-title">Email the "almost ready" segment directly</h3>
-      <p class="qw-body">~30% of respondents have been "about to do it" for years. They need a reason to act now — not more information. A personal email from Connirae with a deadline ("next cohort starts May X, here's your spot") could move 5-10 of them.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
-      </div>
-    </div>
-
-    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
-      </div>
-      <h3 class="qw-title">Address the "I already know CT" misconception</h3>
-      <p class="qw-body">19% think they know CT from the book or NLP training. The survey contains the rebuttal — Ron Fiedler: "you need to EXPERIENCE CT, theory is far less effective." One email quoting respondents who felt this way could crack this segment open.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
-      </div>
-    </div>
-
-    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
-      </div>
-      <h3 class="qw-title">Ask 3 recent alumni: "What changed?"</h3>
-      <p class="qw-body">Before building any referral mechanics, send a message to 3 recent CT graduates: "In one sentence — what changed for you after CT Foundation that you didn't expect?" Those answers become the referral message. Free. Immediate.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
-      </div>
-    </div>
-
-    <div class="qw-card" data-ws="branding" style="--qw-color:#993C1D">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#993C1D">Branding</span>
-      </div>
-      <h3 class="qw-title">Position CT as parts work — ride the IFS wave</h3>
-      <p class="qw-body">Parts work has gone mainstream thanks to IFS — growing 30%+ YoY. CT is parts work, but the site doesn't say so. The word "parts" appears nowhere. One sentence on the homepage, FAQ schema for "what is parts work," and a comparison page (CT vs IFS) puts CT in the conversation that's already happening.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2</span></div>
-      </div>
-    </div>
-
-    <div class="qw-card" data-ws="affiliate" style="--qw-color:#d4622a">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#d4622a">Affiliate</span>
-      </div>
-      <h3 class="qw-title">Clone the WW affiliate funnel for CT — find one partner</h3>
-      <p class="qw-body">The WW affiliate infrastructure already exists. Duplicate it for CT Foundation and test with one affiliate partner. Connirae, Tamara, or Zach identify one entity (training institute, IFS community, coaching school). One partner, one test, real data.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Connirae / Tamara + Team I&Y</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1–2</span></div>
-      </div>
-    </div>
-
-    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
-      </div>
-      <h3 class="qw-title">LLM SEO — make CT findable by AI</h3>
-      <p class="qw-body">Live audit found: no meta descriptions, no Course/FAQ/Review schema, no visible pricing, hero doesn't explain what CT is. When someone asks ChatGPT "what is Core Transformation?" — the answer comes from everywhere except your site. Fix: schema markup, hero rewrite, visible pricing, structured testimonials.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Peter / Superstories</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2–3</span></div>
-      </div>
-    </div>
-
-    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
-      </div>
-      <h3 class="qw-title">Fix the website pop-up blocker</h3>
-      <p class="qw-body">Survey respondent Hannah: "the website had a blocking pop-up — that was the biggest stumbling block." If there's an aggressive pop-up on the CT page, it's actively blocking conversions. Check and remove or delay it. 5 minutes.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
-      </div>
-    </div>
-
-    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
-      <div class="qw-header">
-        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
-      </div>
-      <h3 class="qw-title">Add "What CT Foundation is NOT" to the sales page</h3>
-      <p class="qw-body">15% of survey respondents are uncertain what CT delivers. They're not cold — they're confused warm leads. A short "This is for you if…" block on the sales page addresses this directly.</p>
-      <div class="qw-ownership">
-        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section-eyebrow" style="margin-bottom:0.75rem">What's been tried — team, fill in what you know</div>
-
-  <div class="tried-list">
-    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation email campaign in the last 12 months?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">CT welcome/nurture email sequence running?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation sales page? URL?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">Any A/B testing on sales page or checkout?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">Any paid advertising for CT Foundation?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">Any referral or affiliate program tried for CT?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">Any discounts, early bird, or payment plans offered?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">What did Duff send in the last 3 months for CT?</span><span class="tried-a">—</span></div>
-  </div>
-
-</div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- DATA WE ALL NEED -->
-<!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="dataneeded">
-<div class="container">
-
-  <div class="section-eyebrow">Before April 22</div>
-  <h2 class="section-heading">Data we all need</h2>
-  <p class="section-intro">To make real decisions on April 22, we need these numbers in the room. If you have access to any of this, upload a PDF or share the numbers directly — Peter will add them to this dashboard.</p>
-
-  <div class="insight-box" style="background:#e8eef5;border-left-color:#185FA5">
-    <div class="label" style="color:#185FA5">How to contribute</div>
-    <p style="color:#0f2d4a">Send a PDF, a screenshot, or even rough numbers to Peter. Anything is better than nothing. Use the comment tool (pencil icon, bottom right) to leave notes directly on this page.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ── WEBSITE TRAFFIC ── -->
-  <div class="section-eyebrow" style="margin-bottom:1rem">1. Website traffic</div>
-  <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">From Google Analytics — whoever has access.</p>
-
-  <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Monthly visitors (CT website)</div>
-      <div class="sub">Last 3 months average</div>
-    </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Top traffic source</div>
-      <div class="sub">Organic / email / social / direct?</div>
-    </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Bounce rate on landing page</div>
-      <div class="sub">Are people staying or leaving?</div>
-    </div>
-  </div>
-
-  <div class="evidence-row">
-    <div class="ev-icon" style="background:#e8eef5;color:#185FA5">GA</div>
-    <div class="ev-body">
-      <strong>Who has Google Analytics access?</strong>
-      <span>We need view access to pull traffic, source, and behaviour data. A PDF export of the last 3 months from GA would also work.</span>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ── REGISTRATION / CONVERSION ── -->
-  <div class="section-eyebrow" style="margin-bottom:1rem">2. CT Foundation registration numbers</div>
-  <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">From GHL, Stripe, or whoever processes enrollment.</p>
-
-  <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Registrations per cohort</div>
-      <div class="sub">Last 2–3 Foundation rounds</div>
-    </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Email list size at promo time</div>
-      <div class="sub">How large was the list when each promo went out?</div>
-    </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Conversion rate</div>
-      <div class="sub">List → registered (even rough %)</div>
-    </div>
-  </div>
-
-  <div class="evidence-row">
-    <div class="ev-icon" style="background:#f5ede0;color:#854F0B">$</div>
-    <div class="ev-body">
-      <strong>Revenue per cohort (if shareable)</strong>
-      <span>Not required, but helps us understand whether the growth problem is volume (not enough people) or value (not enough revenue per person).</span>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ── EMAIL PERFORMANCE ── -->
-  <div class="section-eyebrow" style="margin-bottom:1rem">3. Email performance</div>
-  <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">From GHL or the email platform — Duff likely has this.</p>
-
-  <div class="two-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Open rate on CT promo emails</div>
-      <div class="sub">Last campaign or last 3 sends</div>
-    </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
-      <div class="n" style="color:var(--ink-3)">—</div>
-      <div class="l">Click-through rate</div>
-      <div class="sub">Opened → clicked the CTA</div>
-    </div>
-  </div>
-
-  <div class="evidence-row">
-    <div class="ev-icon" style="background:#e8f0eb;color:#2d5a3d">✉</div>
-    <div class="ev-body">
-      <strong>How many email sequences exist for CT?</strong>
-      <span>Welcome sequence, promo sequence, re-engagement? A list of what's active helps us see what's already been tried.</span>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ── JASON'S SURVEY ── -->
-  <div class="section-eyebrow" style="margin-bottom:1rem">4. Jason's "Why did you sign up?" survey</div>
-  <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">~80 responses from people who DID convert. The counterpart to the Track 1 data above.</p>
-
-  <div class="insight-box warm">
-    <div class="label">Why this matters</div>
-    <p>Track 1 tells us why people don't convert. This survey tells us why people do. The gap between the two is where the strategy lives. We need both in the same room.</p>
-  </div>
-
-  <div class="evidence-row">
-    <div class="ev-icon" style="background:#f5ede0;color:#993C1D">J</div>
-    <div class="ev-body">
-      <strong>Jason — can you share the raw results or a summary?</strong>
-      <span>PDF, spreadsheet, or even a screenshot of the top-line findings. Peter will integrate it into this dashboard.</span>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ── TEAM ── -->
-  <div class="section-eyebrow" style="margin-bottom:1rem">5. Team — who does what</div>
-  <p style="font-size:13px;color:var(--ink-2);margin-bottom:1.25rem">So everyone knows who owns which piece after April 22.</p>
-
-  <div class="two-col" style="margin-bottom:1.5rem">
-    <div class="mechanism-card" style="border:1px dashed var(--paper-3)">
-      <div class="mc-num">—</div>
-      <div class="mc-title">ANLP side</div>
-      <div class="mc-body">Who manages email / GHL? Who has GA access? Who approves copy and messaging? Who is the decision maker on pricing and offers?</div>
-    </div>
-    <div class="mechanism-card" style="border:1px dashed var(--paper-3)">
-      <div class="mc-num">—</div>
-      <div class="mc-title">Superstories side</div>
-      <div class="mc-body">Peter — strategy + dashboard. Ivan &amp; Yssa — GHL build (referral mechanics, landing pages, automations). Who else needs to be in the loop?</div>
-    </div>
-  </div>
-
-  <div class="evidence-row">
-    <div class="ev-icon" style="background:#e8eef5;color:#185FA5">?</div>
-    <div class="ev-body">
-      <strong>Is there anyone else who should have access to this dashboard?</strong>
-      <span>Share the link with anyone who needs to contribute data or review the strategy before April 22.</span>
-    </div>
-  </div>
-
-</div>
-</section>
-
 <footer>
   <span>CT Foundation Growth Intelligence — Superstories BV × AndreasNLP</span>
   <span>Prepared for April 22, 2026 strategy meeting</span>
 </footer>
 
 <script>
+/* ── SURVEY DATA ── */
 const data = [
   { name: "Michelle Baldwin", role: "Individual", use: "personal", stop: "Not sure I can do it self-guided", cluster: "uncertainty" },
   { name: "Reba", role: "Coach", use: "both", stop: "I need time to go through material I already have before making an informed decision", cluster: "low-urgency" },
   { name: "Kana Koinuma", role: "Coach", use: "both", stop: "Financial. And not certain I need the training.", cluster: "cost" },
   { name: "Lorri Espinosa", role: "Therapist", use: "both", stop: "I have taken so many trainings and my practice is already very diverse", cluster: "training-overload" },
   { name: "Marci", role: "Individual", use: "personal", stop: "Finances and want to be sure it is the right investment for me", cluster: "cost" },
-  { name: "Ron Fiedler", role: "Coach", use: "both", stop: "Too many seminars lately. Wanted to focus elsewhere. Note: you need to emphasize you must EXPERIENCE CT — theory is far less effective", cluster: "training-overload" },
+  { name: "Ron Fiedler", role: "Coach", use: "both", stop: "Too many seminars lately. Wanted to focus elsewhere. Note: you need to emphasize you must EXPERIENCE CT \u2014 theory is far less effective", cluster: "training-overload" },
   { name: "Lucie Brissaud", role: "Coach", use: "both", stop: "The price", cluster: "cost" },
-  { name: "Sivakumar Kumaresan", role: "Coach / NLP Trainer", use: "both", stop: "Lack of time — had a full time job alongside coaching. Read the book 20 years ago. Just went full-time as trainer.", cluster: "low-urgency" },
-  { name: "Michele Drivon", role: "Coach", use: "both", stop: "Reluctance to take yet one more course. Also concern about excessive trauma focus — didn't want to be disappointed.", cluster: "training-overload" },
-  { name: "Adrian Frandes", role: "Therapist", use: "both", stop: "Money — just started practice, no clients yet", cluster: "cost" },
-  { name: "Ruth Gougian", role: "Individual", use: "personal", stop: "Not knowing what CT is or does for you. I signed up for the emails but don't really understand what CT is about.", cluster: "uncertainty" },
-  { name: "Stephen Hedt", role: "Coach / Therapist", use: "both", stop: "Cost and time. Too much commitment elsewhere. This hasn't yet risen to the top.", cluster: "low-urgency" },
+  { name: "Sivakumar Kumaresan", role: "Coach / NLP Trainer", use: "both", stop: "Lack of time \u2014 had a full time job alongside coaching. Read the book 20 years ago. Just went full-time as trainer.", cluster: "low-urgency" },
+  { name: "Michele Drivon", role: "Coach", use: "both", stop: "Reluctance to take yet one more course. Also concern about excessive trauma focus \u2014 didn\u2019t want to be disappointed.", cluster: "training-overload" },
+  { name: "Adrian Frandes", role: "Therapist", use: "both", stop: "Money \u2014 just started practice, no clients yet", cluster: "cost" },
+  { name: "Ruth Gougian", role: "Individual", use: "personal", stop: "Not knowing what CT is or does for you. I signed up for the emails but don\u2019t really understand what CT is about.", cluster: "uncertainty" },
+  { name: "Stephen Hedt", role: "Coach / Therapist", use: "both", stop: "Cost and time. Too much commitment elsewhere. This hasn\u2019t yet risen to the top.", cluster: "low-urgency" },
   { name: "Jim", role: "Coach (starting)", use: "both", stop: "Schedule", cluster: "low-urgency" },
   { name: "Tatiana", role: "Coach", use: "both", stop: "Wondering if it is anything different than what I already know", cluster: "already-know" },
   { name: "Bryan Van Donslear", role: "Teacher", use: "personal", stop: "Unable to get a feel for how it works from reading. Need to feel it, not just read about it.", cluster: "already-know" },
   { name: "Ender Tanrikut", role: "Hypnotherapist", use: "both", stop: "Time and money. Actually bought the online course but never finished it.", cluster: "low-urgency" },
-  { name: "Christine Flynn", role: "Coach", use: "both", stop: "Time constraints. Wonder if it's too much to add one more thing.", cluster: "training-overload" },
+  { name: "Christine Flynn", role: "Coach", use: "both", stop: "Time constraints. Wonder if it\u2019s too much to add one more thing.", cluster: "training-overload" },
   { name: "Margaret Rutherford", role: "Individual", use: "personal", stop: "Skeptic", cluster: "uncertainty" },
   { name: "Fred Goldstein", role: "Therapist", use: "both", stop: "Money and time", cluster: "low-urgency" },
   { name: "Amy Geschwell", role: "Individual", use: "personal", stop: "Time constraints", cluster: "low-urgency" },
-  { name: "Paola", role: "Sales agent", use: "personal", stop: "Time — currently studying NLP Master", cluster: "low-urgency" },
+  { name: "Paola", role: "Sales agent", use: "personal", stop: "Time \u2014 currently studying NLP Master", cluster: "low-urgency" },
   { name: "Dennis Lawson", role: "Coach", use: "both", stop: "Completing Trainer certification for NATH first", cluster: "low-urgency" },
-  { name: "Shaun Davis", role: "Coach", use: "both", stop: "Read the book, use the process with clients alongside TLT. Haven't taken formal course.", cluster: "already-know" },
-  { name: "Bob Cantoni", role: "Software developer", use: "personal", stop: "Haven't been sure it'll be helpful for me personally", cluster: "uncertainty" },
+  { name: "Shaun Davis", role: "Coach", use: "both", stop: "Read the book, use the process with clients alongside TLT. Haven\u2019t taken formal course.", cluster: "already-know" },
+  { name: "Bob Cantoni", role: "Software developer", use: "personal", stop: "Haven\u2019t been sure it\u2019ll be helpful for me personally", cluster: "uncertainty" },
   { name: "Shmuel Goldstein", role: "Coach / Rabbi", use: "both", stop: "Timing with life", cluster: "low-urgency" },
   { name: "Karen Sutherland", role: "Coach (internal)", use: "both", stop: "Still studying coach supervision diploma until later this year. Want to use CT in my coaching but timing is off.", cluster: "low-urgency" },
-  { name: "Douglas Rutherford", role: "Therapist", use: "both", stop: "I don't think it will work for me", cluster: "uncertainty" },
-  { name: "Tom O'Connor", role: "Coach", use: "both", stop: "Scheduling and the fact that I have used the technique for years", cluster: "already-know" },
+  { name: "Douglas Rutherford", role: "Therapist", use: "both", stop: "I don\u2019t think it will work for me", cluster: "uncertainty" },
+  { name: "Tom O\u2019Connor", role: "Coach", use: "both", stop: "Scheduling and the fact that I have used the technique for years", cluster: "already-know" },
   { name: "Hugh Comerford", role: "Coach / NLP Trainer", use: "both", stop: "Travel to the US is potentially problematic due to a past bookkeeping issue", cluster: "logistical" },
-  { name: "Marion Rae", role: "Therapist / NLP Trainer", use: "personal", stop: "Time difference — I'm in Sydney where it's 3–6am when you offer trainings", cluster: "logistical" },
+  { name: "Marion Rae", role: "Therapist / NLP Trainer", use: "personal", stop: "Time difference \u2014 I\u2019m in Sydney where it\u2019s 3\u20136am when you offer trainings", cluster: "logistical" },
   { name: "Christina Lynn-Craig", role: "Voice teacher", use: "both", stop: "Time commitment", cluster: "low-urgency" },
-  { name: "Jonathan Kaplan", role: "Coach / Therapist", use: "both", stop: "Unsure how it differs practically from other work I do. Watched intro videos — not sure what the training adds for the time and money investment. I love Wholeness Work.", cluster: "already-know" },
-  { name: "Denn Stewart", role: "Coach / Speaker", use: "both", stop: "Prioritizing time and focus. It's on my list. Just started Wholeness Work I and II.", cluster: "low-urgency" },
+  { name: "Jonathan Kaplan", role: "Coach / Therapist", use: "both", stop: "Unsure how it differs practically from other work I do. Watched intro videos \u2014 not sure what the training adds for the time and money investment. I love Wholeness Work.", cluster: "already-know" },
+  { name: "Denn Stewart", role: "Coach / Speaker", use: "both", stop: "Prioritizing time and focus. It\u2019s on my list. Just started Wholeness Work I and II.", cluster: "low-urgency" },
   { name: "Lucie (Therapist)", role: "Therapist", use: "both", stop: "Time mostly, and not understanding the difference between Wholeness Work vs Core Transformation", cluster: "already-know" },
-  { name: "Hannah", role: "Individual (long COVID)", use: "personal", stop: "Not 100% sure what I'm getting. Also the website had a blocking pop-up — that was the biggest stumbling block.", cluster: "uncertainty" },
-  { name: "Rose Sowa", role: "Healthcare", use: "both", stop: "Joined 2 weeks ago but can't get past session 2. Trouble grasping the core concepts in the videos. I tune out.", cluster: "uncertainty" },
+  { name: "Hannah", role: "Individual (long COVID)", use: "personal", stop: "Not 100% sure what I\u2019m getting. Also the website had a blocking pop-up \u2014 that was the biggest stumbling block.", cluster: "uncertainty" },
+  { name: "Rose Sowa", role: "Healthcare", use: "both", stop: "Joined 2 weeks ago but can\u2019t get past session 2. Trouble grasping the core concepts in the videos. I tune out.", cluster: "uncertainty" },
   { name: "Jamie Aylward", role: "Therapist", use: "both", stop: "Time", cluster: "low-urgency" },
   { name: "Denise", role: "Coach", use: "both", stop: "I have read the book and am using CT in my coaching", cluster: "already-know" },
   { name: "Linda te Wierike", role: "Coach", use: "both", stop: "The timing and location", cluster: "logistical" },
   { name: "Nunzia De Gaetano", role: "NLP Trainer", use: "personal", stop: "Too many other NLP commitments this year", cluster: "training-overload" },
   { name: "Karen (Therapist)", role: "Therapist", use: "both", stop: "Finances", cluster: "cost" },
-  { name: "Lynda White", role: "Admin", use: "both", stop: "Timing — back to work full time", cluster: "low-urgency" },
+  { name: "Lynda White", role: "Admin", use: "both", stop: "Timing \u2014 back to work full time", cluster: "low-urgency" },
   { name: "Elaine", role: "Coach", use: "both", stop: "Time", cluster: "low-urgency" },
   { name: "Peter Bacon", role: "Coach", use: "both", stop: "Doubts about parts work", cluster: "uncertainty" },
   { name: "Sedgwick Heskett", role: "Retired teacher", use: "personal", stop: "The cost", cluster: "cost" },
   { name: "Krishna Madhusudan", role: "Business Analyst", use: "both", stop: "Finished half the course but not the rest. Unsure how to go deeper in Core State.", cluster: "uncertainty" },
-  { name: "Marjolijn", role: "Individual", use: "personal", stop: "I feel a longing to dive in for quite some time now — years — but keep standing on the side. I don't know exactly why.", cluster: "low-urgency" },
+  { name: "Marjolijn", role: "Individual", use: "personal", stop: "I feel a longing to dive in for quite some time now \u2014 years \u2014 but keep standing on the side. I don\u2019t know exactly why.", cluster: "low-urgency" },
   { name: "Brenda Cacy", role: "Individual", use: "personal", stop: "Hesitancy to do the core transformation work", cluster: "low-urgency" },
   { name: "Peter (UK)", role: "Coach", use: "both", stop: "Teetering on the edge a few times, but not jumping in", cluster: "low-urgency" },
-  { name: "Kanu Kogod", role: "Coach", use: "both", stop: "Something stops me from getting more involved — not sure what exactly", cluster: "low-urgency" },
-  { name: "Kelley M", role: "Individual", use: "personal", stop: "Hesitant. Multiple family members could benefit. Not sure why I haven't jumped in.", cluster: "low-urgency" },
-  { name: "David Bird (UK)", role: "Individual", use: "personal", stop: "Interested for a long time. Haven't taken the step.", cluster: "low-urgency" },
+  { name: "Kanu Kogod", role: "Coach", use: "both", stop: "Something stops me from getting more involved \u2014 not sure what exactly", cluster: "low-urgency" },
+  { name: "Kelley M", role: "Individual", use: "personal", stop: "Hesitant. Multiple family members could benefit. Not sure why I haven\u2019t jumped in.", cluster: "low-urgency" },
+  { name: "David Bird (UK)", role: "Individual", use: "personal", stop: "Interested for a long time. Haven\u2019t taken the step.", cluster: "low-urgency" },
   { name: "Ron (IT Trainer)", role: "Coach", use: "both", stop: "Wanted to focus on own YouTube channel. Already guided through CT once in NLP training.", cluster: "already-know" },
   { name: "Charles Cean", role: "Therapist (retired PTSD)", use: "personal", stop: "Busy providing CBT counseling", cluster: "low-urgency" },
 ];
 
+/* ── CLUSTER DEFINITIONS ── */
 const clusters = [
   { id: "low-urgency",     label: "Low urgency / timing",          sub: "warm, but the cost of waiting never arrives",  color: "#2d5a3d" },
-  { id: "already-know",   label: "Already know CT",               sub: "book readers, NLP practitioners using it",     color: "#854F0B" },
-  { id: "uncertainty",    label: "Uncertain what they'd get",     sub: "unclear on what the training actually delivers", color: "#185FA5" },
-  { id: "training-overload", label: "Training overload",          sub: "full plates, one more thing",                  color: "#993C1D" },
-  { id: "cost",           label: "Cost / price",                   sub: "price named, but rarely the only reason",      color: "#444441" },
-  { id: "logistical",     label: "Logistical barriers",           sub: "timezone, travel restrictions",                color: "#888780" },
+  { id: "already-know",    label: "Already know CT",               sub: "book readers, NLP practitioners using it",     color: "#854F0B" },
+  { id: "uncertainty",     label: "Uncertain what they'd get",     sub: "unclear on what the training actually delivers", color: "#185FA5" },
+  { id: "training-overload", label: "Training overload",           sub: "full plates, one more thing",                  color: "#993C1D" },
+  { id: "cost",            label: "Cost / price",                   sub: "price named, but rarely the only reason",      color: "#444441" },
+  { id: "logistical",      label: "Logistical barriers",           sub: "timezone, travel restrictions",                color: "#888780" },
 ];
 
 let activeCluster = null;
@@ -1775,7 +1731,7 @@ function renderBars() {
     return `<div class="cluster-row ${sel ? 'selected' : ''}" onclick="selectCluster('${c.id}')">
       <div class="cluster-name"><strong style="color:${sel ? c.color : 'var(--ink)'}">${c.label}</strong><span>${c.sub}</span></div>
       <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${sel ? c.color : 'var(--paper-3)'}"></div></div>
-      <div class="cluster-n" style="color:${sel ? c.color : 'var(--ink-2)'}">${n}</div>
+      <div class="cluster-n" style="color:${sel ? c.color : 'var(--ink)'}">${n}</div>
     </div>`;
   }).join('');
 }
@@ -1783,7 +1739,7 @@ function renderBars() {
 function renderQuotes() {
   const filtered = getFiltered();
   const cl = activeCluster ? clusters.find(c => c.id === activeCluster) : null;
-  document.getElementById('q-label').textContent = cl ? `${cl.label} — ${filtered.length} responses` : `All responses — ${filtered.length}`;
+  document.getElementById('q-label').textContent = cl ? `${cl.label} \u2014 ${filtered.length} responses` : `All responses \u2014 ${filtered.length}`;
 
   if (!filtered.length) {
     document.getElementById('quotes-list').innerHTML = '<div class="no-results">No responses match this combination.</div>';
@@ -1834,7 +1790,7 @@ window.selectCluster = function(id) {
 
 window.applyFilter = function(key, btn) {
   activeFilter = key;
-  document.querySelectorAll('.f-pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#responses-panel .f-pill').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   renderBars();
   renderQuotes();
@@ -1859,6 +1815,60 @@ window.filterWS = function(ws, btn) {
   });
 };
 
+/* ── FILE UPLOAD ── */
+(function() {
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file-input');
+  const uploadList = document.getElementById('upload-list');
+
+  /* Click to upload */
+  dropzone.addEventListener('click', () => fileInput.click());
+
+  /* Drag events */
+  dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
+  });
+
+  /* File input change */
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length) uploadFiles(fileInput.files);
+    fileInput.value = '';
+  });
+
+  function uploadFiles(files) {
+    Array.from(files).forEach(file => {
+      const fd = new FormData();
+      fd.append('file', file);
+      fetch('/api/upload', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(result => {
+          if (result.ok) addFileToList(result.filename || file.name);
+        })
+        .catch(() => addFileToList(file.name + ' (upload failed)'));
+    });
+  }
+
+  function addFileToList(name) {
+    const item = document.createElement('div');
+    item.className = 'upload-item';
+    item.innerHTML = `<span class="upload-icon">&#128206;</span><span>${name}</span>`;
+    uploadList.appendChild(item);
+  }
+
+  /* Load previously uploaded files */
+  fetch('/api/uploads')
+    .then(r => r.json())
+    .then(files => {
+      if (Array.isArray(files)) files.forEach(f => addFileToList(f));
+    })
+    .catch(() => {});
+})();
+
+/* ── INIT ── */
 renderBars();
 renderQuotes();
 </script>

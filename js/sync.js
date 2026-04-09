@@ -6,7 +6,7 @@
 (function() {
   'use strict';
 
-  const STATE_VERSION = 'v2';
+  const STATE_VERSION = 'v3';
   const EDITS_KEY = 'anlp-gi-edits-' + STATE_VERSION;
   const ANNOTATIONS_KEY = 'anlp-gi-annotations';
   const DELETED_KEY = 'anlp-gi-deleted-' + STATE_VERSION;

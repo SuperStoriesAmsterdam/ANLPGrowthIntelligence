@@ -8,7 +8,7 @@
   'use strict';
 
   /* Version bump clears stale edits when page structure changes */
-  const STATE_VERSION = 'v2';
+  const STATE_VERSION = 'v3';
   const STORAGE_KEY = 'anlp-gi-edits-' + STATE_VERSION;
   const ORIGINALS_KEY = 'anlp-gi-originals-' + STATE_VERSION;
   const DELETED_KEY = 'anlp-gi-deleted-' + STATE_VERSION;
@@ -87,10 +87,19 @@
         </div>
       </div>
     `;
+    bar.style.display = 'none'; /* Hidden by default — Cmd+E to show */
     document.body.appendChild(bar);
 
     document.getElementById('edit-toggle').addEventListener('click', toggleEdit);
     document.getElementById('edit-reset').addEventListener('click', resetEdits);
+
+    /* Cmd+E / Ctrl+E toggles the admin bar */
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'e') {
+        e.preventDefault();
+        bar.style.display = bar.style.display === 'none' ? '' : 'none';
+      }
+    });
   }
 
   /* ── Assign data-delete-id to deletable blocks + hide previously deleted ── */

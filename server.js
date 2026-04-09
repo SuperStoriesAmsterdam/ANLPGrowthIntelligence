@@ -6,6 +6,8 @@
 const express = require('express');
 const Database = require('better-sqlite3');
 const path = require('path');
+const fs = require('fs');
+const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,6 +34,11 @@ if (!row) {
 }
 
 console.log('SQLite database initialized at', DB_PATH);
+
+/* ── File uploads ── */
+const UPLOAD_DIR = process.env.UPLOAD_DIR || '/data/uploads';
+if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+const upload = multer({ dest: UPLOAD_DIR });
 
 /* ── Middleware ── */
 app.use(express.json({ limit: '5mb' }));
@@ -74,6 +81,32 @@ app.put('/api/state', (req, res) => {
   } catch (err) {
     console.error('PUT /api/state error:', err);
     res.status(500).json({ error: 'Failed to save state' });
+  }
+});
+
+/* ── POST /api/upload ── */
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: 'No file provided' });
+    const ext = path.extname(req.file.originalname);
+    const safeName = req.file.filename + ext;
+    const finalPath = path.join(UPLOAD_DIR, safeName);
+    fs.renameSync(req.file.path, finalPath);
+    console.log('Upload saved:', safeName);
+    res.json({ ok: true, filename: req.file.originalname });
+  } catch (err) {
+    console.error('POST /api/upload error:', err);
+    res.status(500).json({ error: 'Upload failed' });
+  }
+});
+
+/* ── GET /api/uploads ── */
+app.get('/api/uploads', (req, res) => {
+  try {
+    const files = fs.readdirSync(UPLOAD_DIR).filter(f => !f.startsWith('.'));
+    res.json(files);
+  } catch (err) {
+    res.json([]);
   }
 });
 
