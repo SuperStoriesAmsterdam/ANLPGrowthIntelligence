@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CT Foundation — Growth Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a1814;
+  --paper: #f7f4ef;
+  --paper-2: #ede9e2;
+  --paper-3: #e0dbd2;
+  --accent: #2d5a3d;
+  --accent-2: #d4622a;
+  --accent-light: #e8f0eb;
+  --warm-light: #f5ede0;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --radius: 4px;
+
+  /* ── TYPE SCALE ── change sizes here, applies everywhere */
+  --text-2xs: 10px;    /* badges, edited indicators */
+  --text-xs: 11px;     /* tags, status pills, small labels */
+  --text-sm: 12px;     /* eyebrows, time labels, meta info */
+  --text-base: 13px;   /* default body, pills, cluster names */
+  --text-md: 14px;     /* nav tabs, sub-headings, team names */
+  --text-body: 14px;   /* main body copy, descriptions */
+  --text-lg: 15px;     /* card titles */
+  --text-xl: 16px;     /* message card titles */
+  --text-2xl: 20px;    /* section headings, big numbers */
+  --text-3xl: 22px;    /* name picker title */
+}
+
+body, body * {
+  font-family: var(--sans);
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 60px;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--ink);
+  color: white;
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+.header-inner { max-width: 960px; margin: 0 auto; }
+.header-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+.header-title {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.header-sub {
+  font-size: var(--text-md);
+  color: white;
+  max-width: 560px;
+  line-height: 1.6;
+}
+.header-meta {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.header-stat .n {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: white;
+  line-height: 1;
+}
+.header-stat .l {
+  font-size: var(--text-base);
+  color: white;
+  margin-top: 2px;
+}
+
+/* ── NAV TABS ── */
+.nav-bar {
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--paper-3);
+  display: flex;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  mask-image: linear-gradient(to right, black calc(100% - 40px), transparent);
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 40px), transparent);
+}
+.nav-bar::-webkit-scrollbar { display: none; }
+.nav-bar.scrolled-end {
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+.nav-tab {
+  font-family: var(--sans);
+  font-size: var(--text-body);
+  font-weight: 500;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: var(--paper);
+}
+
+/* ── SECTIONS ── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── LAYOUT ── */
+.container { max-width: 960px; margin: 0 auto; padding: 2rem; background: white; border-radius: var(--radius); margin-top: 1rem; margin-bottom: 1rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+@media (max-width: 640px) {
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .nav-tab { padding: 0.85rem 1rem; font-size: var(--text-md); }
+  .container { padding: 1.5rem 1rem; }
+  .cluster-row { flex-wrap: wrap; gap: 6px; }
+  .cluster-name { width: 100%; }
+  .bar-track { flex: 1; min-width: 60px; }
+  .funnel-step { gap: 12px; }
+  .fs-bar { min-width: 16px; }
+  #author-chip { bottom: 48px; right: 12px; padding: 4px 10px 4px 4px; font-size: var(--text-base); }
+  .ac-avatar { width: 20px; height: 20px; font-size: var(--text-2xs); }
+}
+
+/* ── SECTION TITLE ── */
+.section-eyebrow {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.section-heading {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.section-intro {
+  font-size: var(--text-body);
+  color: var(--ink);
+  max-width: 660px;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+.divider { height: 1px; background: var(--paper-3); margin: 2rem 0; }
+
+/* ── STAT CARDS ── */
+.stat-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  position: relative;
+}
+.stat-card .n {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-card .l { font-size: var(--text-base); color: var(--ink); }
+.stat-card .sub { font-size: var(--text-base); color: var(--ink); margin-top: 4px; }
+.stat-card.awaiting .n { color: var(--ink); }
+.stat-card.awaiting::after {
+  content: 'awaiting data';
+  position: absolute;
+  top: 6px; right: 8px;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+}
+
+/* ── INSIGHT BOX ── */
+.insight-box {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  padding: 1.1rem 1.25rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.insight-box .label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+.insight-box p {
+  font-family: var(--sans);
+  font-size: var(--text-body);
+  color: var(--ink);
+  line-height: 1.65;
+}
+.insight-box.warm {
+  background: var(--warm-light);
+  border-left-color: var(--accent-2);
+}
+.insight-box.warm .label { color: var(--accent-2); }
+.insight-box.warm p { color: var(--ink); }
+
+/* ── CLUSTER BARS ── */
+.cluster-section { margin-bottom: 1.5rem; }
+.cluster-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+.cluster-row:hover { background: var(--paper-2); }
+.cluster-row.selected { background: var(--paper-2); }
+.cluster-name { font-size: var(--text-base); color: var(--ink); width: 210px; flex-shrink: 0; min-width: 0; }
+.cluster-name strong { font-weight: 500; display: block; }
+.cluster-name span { font-size: var(--text-sm); color: var(--ink); }
+.bar-track { flex: 1; height: 6px; background: var(--paper-3); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+.cluster-n { font-size: var(--text-base); font-weight: 500; color: var(--ink); width: 24px; text-align: right; flex-shrink: 0; }
+
+/* ── FILTER PILLS ── */
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.f-pill {
+  font-size: var(--text-base);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--paper-3);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--sans);
+}
+.f-pill:hover { border-color: var(--ink); }
+.f-pill.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ── QUOTE CARDS ── */
+.quotes-label {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.quote-card {
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  gap: 10px;
+}
+.quote-header:hover { background: var(--paper-2); }
+.quote-header .qh-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+.quote-header .qh-name { font-size: var(--text-base); font-weight: 500; color: var(--ink); white-space: nowrap; }
+.quote-header .qh-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.quote-header .qh-arrow {
+  font-size: var(--text-sm);
+  color: var(--ink);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.quote-card.open .qh-arrow { transform: rotate(90deg); }
+.quote-body {
+  display: none;
+  padding: 0 1.1rem 0.85rem;
+  border-top: 1px solid var(--paper-2);
+}
+.quote-card.open .quote-body { display: block; padding-top: 0.65rem; }
+.quote-card .q { font-size: var(--text-body); color: var(--ink); line-height: 1.65; margin-bottom: 8px; font-style: italic; }
+.quote-card .q::before { content: '\201C'; }
+.quote-card .q::after { content: '\201D'; }
+.quote-card .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.tag {
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-weight: 400;
+}
+.tag-cluster { background: #e8f0eb; color: #1e3a28; }
+.tag-role { background: var(--paper-2); color: var(--ink); }
+.tag-use { background: #f0ebe8; color: var(--ink); }
+.no-results { font-size: var(--text-md); color: var(--ink); padding: 2rem; text-align: center; }
+
+/* ── RESPONSES TOGGLE ── */
+.responses-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--paper-3);
+  transition: background 0.15s;
+}
+.responses-toggle:hover { background: var(--paper-3); }
+.responses-arrow {
+  font-size: var(--text-xs);
+  color: var(--ink);
+  transition: transform 0.2s;
+}
+.responses-arrow.open { transform: rotate(90deg); }
+.responses-hint {
+  font-size: var(--text-sm);
+  color: var(--ink);
+  margin-left: auto;
+}
+
+/* ── MECHANISM CARDS ── */
+.mechanism-card {
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  position: relative;
+}
+.mechanism-card .mc-num {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.mechanism-card .mc-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.mechanism-card .mc-body { font-size: var(--text-body); color: var(--ink); line-height: 1.65; }
+
+/* ── EVIDENCE ROWS ── */
+.evidence-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--paper-2);
+}
+.evidence-row:last-child { border-bottom: none; }
+.ev-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--warm-light);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: var(--text-md);
+  color: var(--accent-2);
+  font-weight: 500;
+}
+.ev-body { flex: 1; }
+.ev-body strong { font-size: var(--text-body); font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
+.ev-body span { font-size: var(--text-body); color: var(--ink); line-height: 1.65; }
+
+/* ── MESSAGE CARDS ── */
+.message-card {
+  background: var(--ink);
+  color: white;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.message-card .mc-label {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.message-card .mc-msg {
+  font-family: var(--sans);
+  font-size: var(--text-xl);
+  color: white;
+  line-height: 1.45;
+  margin-bottom: 0.6rem;
+}
+.message-card .mc-why { font-size: var(--text-body); color: white; line-height: 1.6; }
+
+/* ── WORKSTREAM CARDS ── */
+.qw-card {
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-left: 3px solid var(--qw-color, var(--accent));
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 10px;
+  position: relative;
+}
+.qw-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.ws-tag {
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 3px;
+  color: white;
+}
+.qw-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.qw-body { font-size: var(--text-body); color: var(--ink); line-height: 1.65; margin-bottom: 8px; }
+.qw-ownership {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--paper-2);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.qw-owner, .qw-timeline { font-size: var(--text-base); display: flex; gap: 6px; align-items: center; }
+.qw-owner-label, .qw-tl-label { color: var(--ink); font-weight: 500; }
+.qw-owner-name, .qw-tl-date { color: var(--ink); }
+.qw-status {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-left: auto;
+}
+.qw-status.not-started { background: var(--paper-2); color: var(--ink); }
+.qw-status.in-progress { background: #e8f0eb; color: #1e3a28; }
+.qw-status.done { background: #2d5a3d; color: white; }
+
+/* ── TRIED LIST ── */
+.tried-list { margin-bottom: 1.25rem; }
+.tried-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--paper-2);
+  font-size: var(--text-body);
+}
+.tried-row:last-child { border-bottom: none; }
+.tried-q { color: var(--ink); flex: 1; }
+.tried-a {
+  color: var(--ink);
+  font-weight: 500;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* ── AGENDA ── */
+.agenda-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  align-items: flex-start;
+}
+.agenda-num {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: right;
+}
+.agenda-body { flex: 1; }
+.agenda-body h3 { font-size: var(--text-body); font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.agenda-body p { font-size: var(--text-body); color: var(--ink); line-height: 1.65; }
+.agenda-time {
+  font-size: var(--text-sm);
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: var(--paper-2);
+  color: var(--ink);
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.agenda-decide {
+  font-size: var(--text-base);
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+/* ── FUNNEL ── */
+.funnel { max-width: 600px; }
+.funnel-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+.fs-info { width: 120px; flex-shrink: 0; }
+.fs-bar {
+  flex: 1;
+  max-width: var(--funnel-width);
+  min-width: 20px;
+  height: 28px;
+  background: var(--funnel-color);
+  border-radius: 2px;
+  opacity: 0.15;
+}
+.fs-label { font-size: var(--text-base); font-weight: 500; color: var(--ink); }
+.fs-number { font-size: var(--text-2xl); font-weight: 600; color: var(--ink); line-height: 1.2; }
+.funnel-arrow {
+  font-size: var(--text-md);
+  color: var(--ink);
+  padding: 2px 0 2px 136px;
+}
+
+/* ── NEXT STEPS ── */
+.next-steps-list { display: flex; flex-direction: column; gap: 8px; }
+.ns-item {
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-left: 3px solid var(--ink);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.65rem 1.1rem;
+  position: relative;
+}
+.ns-what { font-size: var(--text-body); font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.ns-meta { display: flex; gap: 16px; }
+.ns-who, .ns-when { font-size: var(--text-base); color: var(--ink); }
+
+/* ── UPLOAD DROPZONE ── */
+.dropzone {
+  border: 2px dashed var(--paper-3);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 1.5rem;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropzone:hover, .dropzone.dragover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+.dropzone p { font-size: var(--text-body); color: var(--ink); pointer-events: none; }
+.upload-list { margin-bottom: 1.5rem; }
+.upload-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--paper-2);
+  font-size: var(--text-md);
+  color: var(--ink);
+}
+.upload-item:last-child { border-bottom: none; }
+.upload-icon { font-size: var(--text-lg); flex-shrink: 0; }
+
+/* ── TEAM GRID ── */
+.team-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border-radius: var(--radius);
+  padding: 0.65rem 0.85rem;
+}
+.team-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-size: var(--text-md);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.team-info strong { font-size: var(--text-md); font-weight: 500; color: var(--ink); display: block; }
+.team-info span { font-size: var(--text-sm); color: var(--ink); }
+
+/* ── EDIT MODE ── */
+#edit-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: var(--ink);
+  color: white;
+  padding: 12px 24px;
+  font-size: var(--text-md);
+}
+#edit-bar button {
+  font-family: var(--sans);
+  font-size: var(--text-md);
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+#edit-toggle {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+#edit-toggle:hover { background: rgba(255,255,255,0.25); }
+#edit-reset {
+  background: transparent;
+  color: white;
+  font-size: var(--text-sm);
+}
+#edit-reset:hover { color: white; }
+.is-editable {
+  outline: none;
+  cursor: text;
+  border-radius: 2px;
+  transition: box-shadow 0.15s;
+}
+.is-editable:hover { box-shadow: 0 0 0 2px rgba(45,90,61,0.25); }
+.is-editable:focus { box-shadow: 0 0 0 2px rgba(45,90,61,0.5); }
+.is-edited {
+  background: rgba(45,90,61,0.06);
+  border-radius: 2px;
+  position: relative;
+}
+.is-edited::after {
+  content: '\270E';
+  position: absolute;
+  top: -6px; right: -6px;
+  font-size: var(--text-2xs);
+  background: var(--accent);
+  color: white;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ── BLOCK DELETE BUTTON ── */
+.block-delete-btn {
+  position: absolute;
+  top: 6px; left: 6px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: #dc2626;
+  color: white;
+  font-size: var(--text-xs);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+  font-family: var(--sans);
+}
+*:hover > .block-delete-btn { opacity: 0.6; }
+.block-delete-btn:hover { opacity: 1 !important; }
+
+/* ── EDIT CONTEXT MENU ── */
+#edit-ctx {
+  position: absolute;
+  z-index: 300;
+  background: white;
+  border: 1px solid var(--paper-3);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  overflow: hidden;
+  font-family: var(--sans);
+}
+#edit-ctx button {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  font-size: var(--text-base);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--sans);
+  white-space: nowrap;
+}
+#edit-ctx button:hover { background: var(--paper-2); }
+#edit-ctx button:first-child { border-bottom: 1px solid var(--paper-2); }
+
+/* ── NAME PICKER ── */
+#name-picker {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(26,24,20,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans);
+}
+.np-box {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 340px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.np-title {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.np-subtitle {
+  font-size: var(--text-base);
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+.np-list { display: flex; flex-direction: column; gap: 4px; }
+.np-member {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.1s;
+  text-align: left;
+  font-family: var(--sans);
+}
+.np-member:hover { background: var(--paper-2); }
+.np-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-size: var(--text-md);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.np-info { display: flex; flex-direction: column; }
+.np-info strong { font-size: var(--text-md); font-weight: 500; color: var(--ink); }
+.np-info span { font-size: var(--text-sm); color: var(--ink); }
+
+/* ── AUTHOR CHIP ── */
+#author-chip {
+  position: fixed;
+  bottom: 56px; right: 20px;
+  z-index: 201;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: var(--ink);
+  color: white;
+  padding: 4px 10px 4px 4px;
+  border-radius: 20px;
+  font-size: var(--text-sm);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.3s;
+  opacity: 0.7;
+}
+#author-chip:hover { opacity: 1; }
+.ac-avatar {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ac-name { color: white; }
+.ac-switch {
+  color: white;
+  font-size: var(--text-sm);
+  padding-left: 4px;
+}
+
+/* ── BLOCK COMMENT BUTTON ── */
+.block-comment-btn {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  font-size: var(--text-md);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+*:hover > .block-comment-btn { opacity: 0.5; }
+.block-comment-btn:hover { opacity: 1 !important; background: var(--paper-2); }
+
+.block-comment-badge {
+  position: absolute;
+  top: -4px; right: -4px;
+  background: var(--accent-2);
+  color: white;
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── COMMENT THREAD ── */
+.comment-thread {
+  position: absolute;
+  top: 100%; right: 0;
+  z-index: 250;
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.08);
+  font-family: var(--sans);
+  overflow: hidden;
+  margin-top: 4px;
+}
+.ct-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--paper-2);
+}
+.ct-title { font-size: var(--text-sm); font-weight: 500; color: var(--ink); }
+.ct-close {
+  background: none;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: var(--text-md);
+  padding: 0;
+}
+.ct-close:hover { color: var(--ink); }
+.ct-list {
+  max-height: 240px;
+  overflow-y: auto;
+}
+.ct-comment {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--paper-2);
+}
+.ct-comment:last-child { border-bottom: none; }
+.ct-comment-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.ct-comment-author { font-size: var(--text-sm); font-weight: 500; color: var(--ink); }
+.ct-comment-time { font-size: var(--text-2xs); color: var(--ink); margin-left: auto; }
+.ct-comment-delete {
+  background: none;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  padding: 0 0 0 6px;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.ct-comment:hover .ct-comment-delete { opacity: 1; }
+.ct-comment-delete:hover { color: var(--accent-2); }
+.ct-comment-text { font-size: var(--text-base); color: var(--ink); line-height: 1.5; }
+.ct-write {
+  border-top: 1px solid var(--paper-2);
+  padding: 10px 14px;
+}
+.ct-write-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.ct-input {
+  width: 100%;
+  border: 1px solid var(--paper-3);
+  border-radius: 4px;
+  outline: none;
+  resize: none;
+  padding: 8px 10px;
+  font-family: var(--sans);
+  font-size: var(--text-base);
+  color: var(--ink);
+  line-height: 1.5;
+  background: var(--paper);
+}
+.ct-input:focus { border-color: var(--ink); }
+.ct-input::placeholder { color: #999; }
+.ct-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+.ct-save {
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+}
+.ct-save:hover { opacity: 0.9; }
+.aw-avatar {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.aw-name { font-size: var(--text-sm); font-weight: 500; color: var(--ink); }
+
+/* ── ANNOTATE COUNTER ── */
+#annotate-counter {
+  position: fixed;
+  bottom: 56px; left: 20px;
+  z-index: 201;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: var(--text-xs);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+#annotate-counter button {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: var(--sans);
+}
+#annotate-counter button:hover { background: rgba(255,255,255,0.25); }
+
+/* ── REVIEW MODE ── */
+#review-btn {
+  position: fixed;
+  bottom: 56px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.4);
+}
+#review-btn:hover { background: #6d28d9; }
+#review-btn.active { background: #dc2626; }
+body.review-mode *:not(#review-btn):not(#review-popup):not(#review-popup *):not(.review-dot):not(nav):not(nav *):not(header):not(header *):not(footer):not(footer *):not(#edit-bar):not(#edit-bar *) {
+  cursor: crosshair !important;
+}
+.review-dot {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #7c3aed;
+  z-index: 10;
+  pointer-events: none;
+}
+#review-popup {
+  position: fixed;
+  z-index: 600;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  padding: 14px;
+  width: 300px;
+  font-family: var(--sans);
+  display: none;
+}
+#review-popup textarea {
+  width: 100%;
+  border: 1px solid var(--paper-3);
+  border-radius: 4px;
+  padding: 8px;
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  resize: vertical;
+  min-height: 60px;
+  color: var(--ink);
+}
+#review-popup .rp-context {
+  font-size: var(--text-xs);
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+#review-popup .rp-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+#review-popup button {
+  font-family: var(--sans);
+  font-size: var(--text-xs);
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+#review-popup .rp-save { background: #7c3aed; color: white; }
+#review-popup .rp-cancel { background: var(--paper-2); color: var(--ink); }
+#review-export {
+  position: fixed;
+  bottom: 56px; right: 20px;
+  z-index: 500;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-family: var(--sans);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.4);
+}
+#review-export:hover { background: #6d28d9; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--paper-2);
+  border-top: 1px solid var(--paper-3);
+  padding: 1.25rem 2rem;
+  font-size: var(--text-sm);
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-label">AndreasNLP × Superstories — April 2026</div>
+    <h1 class="header-title">CT Foundation Growth Intelligence</h1>
+    <p class="header-sub">Two distinct growth levers. One is about converting warm subscribers who never felt urgency. The other is about believers bringing in people who aren't on the list at all.</p>
+    <div class="header-meta">
+      <div class="header-stat">
+        <div class="n">54</div>
+        <div class="l">survey responses — warm non-converters</div>
+      </div>
+      <div class="header-stat">
+        <div class="n">2</div>
+        <div class="l">distinct growth tracks identified</div>
+      </div>
+      <div class="header-stat">
+        <div class="n">Apr 22</div>
+        <div class="l">strategy meeting — decisions needed</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-bar">
+  <button class="nav-tab" onclick="showSection('start', this)">Start here</button>
+  <button class="nav-tab active" onclick="showSection('agenda', this)">Agenda</button>
+  <button class="nav-tab" onclick="showSection('survey', this)">Survey</button>
+  <button class="nav-tab" onclick="showSection('referral', this)">Referral</button>
+  <button class="nav-tab" onclick="showSection('done', this)">Done</button>
+  <button class="nav-tab" onclick="showSection('actions', this)">Actions</button>
+  <button class="nav-tab" onclick="showSection('missinginfo', this)">Missing info</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- START HERE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="start">
+<div class="container">
+
+  <h2 class="section-heading">How this dashboard works</h2>
+  <p class="section-intro">This is a shared workspace for the April 22 strategy meeting. Everyone on the team can contribute before, during, and after the meeting.</p>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">What you can do</div>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="mechanism-card">
+      <div class="mc-num">1</div>
+      <div class="mc-title">Read the research</div>
+      <div class="mc-body"><strong>Why subscribers don't convert</strong> — 54 survey responses clustered by blocker type. Click a cluster to filter. <strong>Referral</strong> — a second growth channel through CT alumni.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">2</div>
+      <div class="mc-title">Comment on anything</div>
+      <div class="mc-body">Hover any card and click the 💬 icon. Your name is attached to your comment. Add corrections, context, or disagreements — this is the pre-meeting discussion.</div>
+    </div>
+  </div>
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="mechanism-card">
+      <div class="mc-num">3</div>
+      <div class="mc-title">Share data we're missing</div>
+      <div class="mc-body">The <strong>Share data</strong> tab has empty cards for email performance, registration numbers, and website traffic. Drop a PDF, screenshot, or fill in numbers — whatever you have.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">4</div>
+      <div class="mc-title">Review the workstreams</div>
+      <div class="mc-body">The <strong>Workstreams</strong> tab has 8 action cards. Each one needs an owner and a deadline — that's what we're deciding on April 22.</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="label">Before the meeting</div>
+    <p>Read the research tabs. Leave comments where you disagree or have context. Upload any data you have. Come to April 22 with a view on which workstreams should go first.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">The team</div>
+
+  <div class="three-col" style="margin-bottom:0.75rem">
+    <div class="team-card">
+      <span class="team-avatar" style="background:#2d5a3d">P</span>
+      <div class="team-info"><strong>Peter</strong><span>Strategy</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#854F0B">C</span>
+      <div class="team-info"><strong>Connirae</strong><span>ANLP</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#993C1D">M</span>
+      <div class="team-info"><strong>Mark</strong><span>ANLP</span></div>
+    </div>
+  </div>
+  <div class="three-col" style="margin-bottom:0.75rem">
+    <div class="team-card">
+      <span class="team-avatar" style="background:#185FA5">T</span>
+      <div class="team-info"><strong>Tamara</strong><span>ANLP</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#6B4C9A">Z</span>
+      <div class="team-info"><strong>Zach</strong><span>ANLP</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#4a4840">D</span>
+      <div class="team-info"><strong>Duff</strong><span>ANLP Email</span></div>
+    </div>
+  </div>
+  <div class="three-col" style="margin-bottom:0.75rem">
+    <div class="team-card">
+      <span class="team-avatar" style="background:#8B6914">P</span>
+      <div class="team-info"><strong>Petrolene</strong><span>ANLP</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#9B4D6A">L</span>
+      <div class="team-info"><strong>Lavinia</strong><span>ANLP</span></div>
+    </div>
+    <div class="team-card">
+      <span class="team-avatar" style="background:#d4622a">I</span>
+      <div class="team-info"><strong>Team I&amp;Y</strong><span>GHL build</span></div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TRACK 1 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="survey">
+<div class="container">
+
+  <h2 class="section-heading">Survey (subscribers / mailing list)</h2>
+  <p class="section-intro">In 2023, subscribers were asked: what is the #1 thing stopping you from taking CT Foundation? 54 responded. What they say — and what they don't say — reveals the real conversion problem.</p>
+
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card">
+      <div class="n">54</div>
+      <div class="l">responses with a stated reason</div>
+      <div class="sub">All are email subscribers who have not taken CT Foundation</div>
+    </div>
+    <div class="stat-card">
+      <div class="n">0</div>
+      <div class="l">are opposed to CT</div>
+      <div class="sub">Not one respondent says CT is the wrong choice for them</div>
+    </div>
+    <div class="stat-card">
+      <div class="n">~30%</div>
+      <div class="l">have been "about to do it" for years</div>
+      <div class="sub">Warm leads frozen in amber — the urgency never arrived</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="label">The core finding</div>
+    <p>The dominant blocker is not opposition, confusion, or price. It is the absence of a felt cost to waiting. Nobody in this dataset experiences a consequence for deferring. This is an <strong>activation problem</strong>, not a positioning or pricing problem.</p>
+  </div>
+
+  <div class="insight-box warm">
+    <div class="label">Metal fatigue — CT vs WW</div>
+    <p>If CT needs 5x the email touches that Wholeness Work needs to convert the same audience, the problem isn't the product — it's the story. WW is fresh. CT's message has been in circulation for 30 years. Same infrastructure, same list, different response. That's <strong>campaign fatigue</strong>, not a positioning problem. The CT story needs a new reason to be told — not louder, but differently.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div style="margin-bottom:1rem">
+    <div class="section-eyebrow" style="margin-bottom:0.5rem">Blocker clusters</div>
+    <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">Click a cluster to filter the responses below</p>
+  </div>
+
+  <div id="cluster-bars" class="cluster-section"></div>
+
+  <div class="divider"></div>
+
+  <div class="responses-toggle" onclick="toggleResponses()">
+    <span class="responses-arrow" id="responses-arrow">&#9654;</span>
+    <span class="quotes-label" id="q-label" style="margin-bottom:0;cursor:pointer">All responses — 54</span>
+    <span class="responses-hint">click to read individual answers</span>
+  </div>
+
+  <div id="responses-panel" style="display:none">
+    <div class="filter-row" style="margin-top:1rem">
+      <button class="f-pill active" onclick="applyFilter('all',this)">All (54)</button>
+      <button class="f-pill" onclick="applyFilter('coach',this)">Coaches</button>
+      <button class="f-pill" onclick="applyFilter('therapist',this)">Therapists</button>
+      <button class="f-pill" onclick="applyFilter('personal',this)">Personal use only</button>
+      <button class="f-pill" onclick="applyFilter('both',this)">Personal + client use</button>
+    </div>
+    <div id="quotes-list"></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TRACK 2 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="referral">
+<div class="container">
+
+  <h2 class="section-heading">Referral — the alumni channel</h2>
+  <p class="section-intro">CT alumni — people who have experienced the training — bringing in people who are not on the list at all. How do we set up a referral structure?</p>
+
+  <div class="insight-box">
+    <div class="label">Why this is a separate track</div>
+    <p>Track 1 works on people who already know about CT but haven't acted. Track 2 reaches people who have never heard of CT — but trust someone who has lived it. The message, the mechanic, and the audience are all different. Building one does not build the other.</p>
+  </div>
+
+  <div class="insight-box">
+    <div class="label">The parts work lever</div>
+    <p>Parts work has gone mainstream. IFS grew 30%+ year on year and put "parts" into everyday therapeutic language. CT <em>is</em> parts work — one of only a handful of serious methods in the world — and it predates most of them. But the CT site doesn't use the word "parts" anywhere. This is a new audience waiting to discover CT: people who are already sold on parts work, already doing IFS or similar, and searching for what goes deeper. The referral message from alumni in this space writes itself: "I trained in IFS. CT goes underneath it."</p>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="mechanism-card">
+      <div class="mc-num">01</div>
+      <div class="mc-title">The mechanism</div>
+      <div class="mc-body">CT alumni receive a personal referral link. A friend who registers through it gets a discount on CT Foundation. The alumni get a meaningful reward in return — a mini-course, a Q&amp;A session, something of genuine value. The transaction is tracked in GHL with minimal new infrastructure.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">02</div>
+      <div class="mc-title">Why alumni can do what email can't</div>
+      <div class="mc-body">The survey shows the #1 blocker for database subscribers is low urgency. Alumni referrals bypass that entirely — they bring in a new person who hasn't been in the CT orbit at all. The conversion dynamic is different: it runs on trust and personal testimony, not on another email from the list.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:1rem">The message that makes referral work</div>
+
+  <p style="font-size:var(--text-body);color:var(--ink);max-width:580px;margin-bottom:1.25rem;line-height:1.65">The survey gave us the exact message. A respondent who had been through NLP training and had CT explained to him wrote this unprompted:</p>
+
+  <div style="background:var(--paper-2);border-left:3px solid var(--accent-2);padding:1.1rem 1.25rem;border-radius:0 4px 4px 0;margin-bottom:1.5rem">
+    <p style="font-family:var(--sans);font-size:var(--text-xl);color:var(--ink);line-height:1.45;font-style:italic;margin-bottom:0.4rem">"Emphasize that you need to experience Core Transformation — the theory or a guided example is far less effective."</p>
+    <p style="font-size:var(--text-sm);color:var(--ink)">— Ron Fiedler, survey respondent (NLP practitioner, already familiar with CT)</p>
+  </div>
+
+  <p style="font-size:var(--text-body);color:var(--ink);max-width:580px;margin-bottom:1.5rem;line-height:1.65">This is what alumni can say that no promotional email can say. They have the experience. The referral message is not "my friend is offering a discount." It is: <em>"I thought I knew this. I didn't. Here's what changed when I actually did it."</em></p>
+
+  <div class="section-eyebrow" style="margin-bottom:1rem">Suggested referral message frames</div>
+
+  <div class="message-card">
+    <div class="mc-label">For alumni who came from the book</div>
+    <div class="mc-msg">"I read the CT book years ago. I thought I had it. The training showed me I had the map — not the territory."</div>
+    <div class="mc-why">Speaks directly to the largest blocker segment in the survey (19% "already know CT"). Alumni who came from the book can speak to this with authority.</div>
+  </div>
+
+  <div class="message-card">
+    <div class="mc-label">For alumni who came from other modalities</div>
+    <div class="mc-msg">"I've trained in IFS, NLP, somatic work. CT doesn't replace any of it. It goes underneath all of it."</div>
+    <div class="mc-why">Addresses the training overload cluster — practitioners who feel their practice is already full. Positions CT as depth, not addition.</div>
+  </div>
+
+  <div class="message-card">
+    <div class="mc-label">Universal frame</div>
+    <div class="mc-msg">"I kept thinking I'd get to it. I finally did. I wish I hadn't waited."</div>
+    <div class="mc-why">Speaks to the low-urgency cluster directly — the people who have been "about to do it" for years. Works for almost any alumni profile.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:1rem">What needs to be decided on April 22</div>
+
+  <div class="evidence-row">
+    <div class="ev-icon">?</div>
+    <div class="ev-body">
+      <strong>What is the reward for the alumni referrer?</strong>
+      <span>Free mini-course access, a Q&amp;A session, or something else. This needs to be something an alumni would genuinely value — not a discount on a product they already bought.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">?</div>
+    <div class="ev-body">
+      <strong>Does the friend discount apply to Foundation only, or other trainings too?</strong>
+      <span>Starting with Foundation makes sense — cleaner mechanic, easier to track. Expand later if it works.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">?</div>
+    <div class="ev-body">
+      <strong>Campaign vs permanent journey step?</strong>
+      <span>Run it as a one-time campaign first to test response. If alumni engage, build it into the CT alumni onboarding sequence permanently.</span>
+    </div>
+  </div>
+  <div class="evidence-row">
+    <div class="ev-icon">~</div>
+    <div class="ev-body">
+      <strong>GHL build estimate</strong>
+      <span>One landing page, one referral code field per contact, one automation trigger, two emails. Ivan and Yssa have confirmed this is a contained build. Exact hours to be confirmed before April 22.</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- WORKSTREAMS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="actions">
+<div class="container">
+
+  <h2 class="section-heading">30-day sprint</h2>
+  <p class="section-intro">Each card gets one owner and one deadline on April 22. Run with it, report back May 22.</p>
+
+  <div class="filter-row" id="ws-filters">
+    <button class="f-pill active" onclick="filterWS('all',this)">All</button>
+    <button class="f-pill" onclick="filterWS('branding',this)">Branding + positioning</button>
+    <button class="f-pill" onclick="filterWS('sales',this)">Sales activation</button>
+  </div>
+
+  <div id="ws-list">
+
+    <div class="qw-card" data-ws="sales" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
+      </div>
+      <h3 class="qw-title">Email the "almost ready" segment directly</h3>
+      <p class="qw-body">~30% of respondents have been "about to do it" for years. They need a reason to act now — not more information. A personal email from Connirae with a deadline ("next cohort starts May X, here's your spot") could move 5-10 of them.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+        <span class="qw-status not-started">Not started</span>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="sales" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
+      </div>
+      <h3 class="qw-title">Address the "I already know CT" misconception</h3>
+      <p class="qw-body">19% think they know CT from the book or NLP training. The survey contains the rebuttal — Ron Fiedler: "you need to EXPERIENCE CT, theory is far less effective." One email quoting respondents who felt this way could crack this segment open.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+        <span class="qw-status not-started">Not started</span>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="sales" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
+      </div>
+      <h3 class="qw-title">Ask 3 recent alumni: "What changed?"</h3>
+      <p class="qw-body">Before building any referral mechanics, send a message to 3 recent CT graduates: "In one sentence — what changed for you after CT Foundation that you didn't expect?" Those answers become the referral message. Free. Immediate.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="branding" style="--qw-color:#993C1D">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
+      </div>
+      <h3 class="qw-title">Position CT as parts work — ride the IFS wave</h3>
+      <p class="qw-body">Parts work has gone mainstream thanks to IFS — growing 30%+ YoY. CT is parts work, but the site doesn't say so. The word "parts" appears nowhere. One sentence on the homepage, FAQ schema for "what is parts work," and a comparison page (CT vs IFS) puts CT in the conversation that's already happening.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="sales" style="--qw-color:#d4622a">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
+      </div>
+      <h3 class="qw-title">Clone the WW affiliate funnel for CT — find one partner</h3>
+      <p class="qw-body">The WW affiliate infrastructure already exists. Duplicate it for CT Foundation and test with one affiliate partner. Connirae, Tamara, or Zach identify one entity (training institute, IFS community, coaching school). One partner, one test, real data.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Connirae/Tamara + Team I&amp;Y</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1-2</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="branding" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
+      </div>
+      <h3 class="qw-title">LLM SEO — make CT findable by AI</h3>
+      <p class="qw-body">Live audit found: no meta descriptions, no Course/FAQ/Review schema, no visible pricing, hero doesn't explain what CT is. When someone asks ChatGPT "what is Core Transformation?" — the answer comes from everywhere except your site. Fix: schema markup, hero rewrite, visible pricing, structured testimonials.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Peter/Superstories</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2-3</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="branding" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
+      </div>
+      <h3 class="qw-title">Fix the website pop-up blocker</h3>
+      <p class="qw-body">Survey respondent Hannah: "the website had a blocking pop-up — that was the biggest stumbling block." If there's an aggressive pop-up on the CT page, it's actively blocking conversions. Check and remove or delay it. 5 minutes.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="branding" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
+      </div>
+      <h3 class="qw-title">Add "What CT Foundation is NOT" to the sales page</h3>
+      <p class="qw-body">15% of survey respondents are uncertain what CT delivers. They're not cold — they're confused warm leads. A short "This is for you if..." block on the sales page addresses this directly.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+        <span class="qw-status not-started">Not started</span>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- DONE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="done">
+<div class="container">
+
+  <h2 class="section-heading">What's been done</h2>
+  <p class="section-intro">Everything that's already been done for CT Foundation growth — so we don't repeat, and so we can see what produced data and what didn't.</p>
+
+  <div class="tried-list">
+    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation email campaign in the last 12 months?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">CT welcome/nurture email sequence running?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation sales page? URL?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any A/B testing on sales page or checkout?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any paid advertising for CT Foundation?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any referral or affiliate program for CT?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any discounts, early bird, or payment plans offered?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">What did Duff send in the last 3 months for CT?</span><span class="tried-a">—</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MISSING INFO -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="missinginfo">
+<div class="container">
+
+  <h2 class="section-heading">Missing info</h2>
+  <p class="section-intro">Data we still need before April 22. Fill in what you have — numbers, screenshots, PDFs.</p>
+
+  <!-- UPLOAD DROPZONE -->
+  <div class="dropzone" id="dropzone">
+    <p>Drop a PDF, screenshot, or any file here — or click to upload</p>
+  </div>
+  <input type="file" id="file-input" multiple style="display:none">
+  <div class="upload-list" id="upload-list"></div>
+
+  <div class="divider"></div>
+
+  <!-- CONVERSION FUNNEL -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">Conversion funnel</div>
+
+  <div class="funnel" style="margin-bottom:1.5rem">
+    <div class="funnel-step" style="--funnel-width:100%;--funnel-color:var(--accent)">
+      <div class="fs-info">
+        <div class="fs-label">Email list</div>
+        <div class="fs-number">—</div>
+      </div>
+      <div class="fs-bar"></div>
+    </div>
+    <div class="funnel-arrow">&#8595;</div>
+    <div class="funnel-step" style="--funnel-width:60%;--funnel-color:var(--accent)">
+      <div class="fs-info">
+        <div class="fs-label">Opened</div>
+        <div class="fs-number">—</div>
+      </div>
+      <div class="fs-bar"></div>
+    </div>
+    <div class="funnel-arrow">&#8595;</div>
+    <div class="funnel-step" style="--funnel-width:30%;--funnel-color:var(--accent)">
+      <div class="fs-info">
+        <div class="fs-label">Clicked</div>
+        <div class="fs-number">—</div>
+      </div>
+      <div class="fs-bar"></div>
+    </div>
+    <div class="funnel-arrow">&#8595;</div>
+    <div class="funnel-step" style="--funnel-width:10%;--funnel-color:var(--accent-2)">
+      <div class="fs-info">
+        <div class="fs-label">Registered</div>
+        <div class="fs-number">—</div>
+      </div>
+      <div class="fs-bar"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WEBSITE TRAFFIC -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">1. Website traffic</div>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">From Google Analytics — whoever has access.</p>
+
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Monthly visitors (CT website)</div>
+      <div class="sub">Last 3 months average</div>
+    </div>
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Top traffic source</div>
+      <div class="sub">Organic / email / social / direct?</div>
+    </div>
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Bounce rate on landing page</div>
+      <div class="sub">Are people staying or leaving?</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- REGISTRATION NUMBERS -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">2. Registration numbers</div>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">From GHL, Stripe, or whoever processes enrollment.</p>
+
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Registrations per cohort</div>
+      <div class="sub">Last 2-3 Foundation rounds</div>
+    </div>
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Email list size at promo time</div>
+      <div class="sub">How large was the list when each promo went out?</div>
+    </div>
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Conversion rate</div>
+      <div class="sub">List to registered (even rough %)</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- EMAIL PERFORMANCE -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">3. Email performance</div>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">From GHL or the email platform — Duff likely has this.</p>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Open rate on CT promo emails</div>
+      <div class="sub">Last campaign or last 3 sends</div>
+    </div>
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
+      <div class="n" style="color:var(--ink)">—</div>
+      <div class="l">Click-through rate</div>
+      <div class="sub">Opened to clicked the CTA</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TEAM ROLES -->
+  <div class="section-eyebrow" style="margin-bottom:1rem">4. Team — who does what</div>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">So everyone knows who owns which piece after April 22.</p>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="mechanism-card" style="border:1px dashed var(--paper-3)">
+      <div class="mc-num">—</div>
+      <div class="mc-title">ANLP side</div>
+      <div class="mc-body">Who manages email / GHL? Who has GA access? Who approves copy and messaging? Who is the decision maker on pricing and offers?</div>
+    </div>
+    <div class="mechanism-card" style="border:1px dashed var(--paper-3)">
+      <div class="mc-num">—</div>
+      <div class="mc-title">Superstories side</div>
+      <div class="mc-body">Peter — strategy + dashboard. Ivan &amp; Yssa — GHL build (referral mechanics, landing pages, automations). Who else needs to be in the loop?</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- AGENDA -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section active" id="agenda">
+<div class="container">
+
+  <h2 class="section-heading">April 22 — Strategy meeting</h2>
+  <p class="section-intro">Two decisions we can implement immediately after the meeting.</p>
+
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>Framing question:</strong> Who are we actually talking to — and what would make them act this month rather than next year?</p>
+
+  <div class="divider"></div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">1</div>
+    <div class="agenda-body">
+      <h3>Align on the actual blocker</h3>
+      <p>20 minutes — diagnosis</p>
+      <p>The survey says the problem is activation, not positioning or price. Does the team agree? This shapes everything that follows.</p>
+      <p><strong>Decision:</strong> Is this an activation problem or a reach problem?</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">2</div>
+    <div class="agenda-body">
+      <h3>One positioning experiment for the existing list</h3>
+      <p>25 minutes — subscriber activation</p>
+      <p>The most promising angle is the "you think you know CT" segment. Define the message, the audience, and how we measure success. One test, not a full campaign.</p>
+      <p><strong>Decision:</strong> Which segment, which message, which channel, what does success look like?</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">3</div>
+    <div class="agenda-body">
+      <h3>Green-light the referral build</h3>
+      <p>20 minutes — alumni referral</p>
+      <p>Decide on the reward structure so Ivan and Yssa can start building immediately after the meeting.</p>
+      <p><strong>Decision:</strong> What is the reward? Foundation only or all trainings? Campaign or permanent?</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-size:var(--text-body);font-weight:600;color:var(--ink);margin-bottom:1rem">What ANLP should bring</h3>
+
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>1.</strong> Historical CT registration data — last 2-3 Foundation cohorts, list size, registrations, conversion</p>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>2.</strong> Jason's "Why did you sign up?" survey results — ~80 responses from people who DID convert</p>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>3.</strong> Duff on the call — his ground-level read on what's working in the email sends</p>
+
+  <div class="divider"></div>
+
+  <h3 style="font-size:var(--text-body);font-weight:600;color:var(--ink);margin-bottom:1rem">After April 22 — next steps</h3>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:1rem">This section gets filled in during the meeting. Who does what, by when.</p>
+
+  <div class="next-steps-list" id="next-steps">
+    <div class="ns-item">
+      <div class="ns-what">—</div>
+      <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
+    </div>
+    <div class="ns-item">
+      <div class="ns-what">—</div>
+      <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
+    </div>
+    <div class="ns-item">
+      <div class="ns-what">—</div>
+      <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <span>CT Foundation Growth Intelligence — Superstories BV × AndreasNLP</span>
+  <span>Prepared for April 22, 2026 strategy meeting</span>
+</footer>
+
+<script>
+/* ── SURVEY DATA ── */
+const data = [
+  { name: "Michelle Baldwin", role: "Individual", use: "personal", stop: "Not sure I can do it self-guided", cluster: "uncertainty" },
+  { name: "Reba", role: "Coach", use: "both", stop: "I need time to go through material I already have before making an informed decision", cluster: "low-urgency" },
+  { name: "Kana Koinuma", role: "Coach", use: "both", stop: "Financial. And not certain I need the training.", cluster: "cost" },
+  { name: "Lorri Espinosa", role: "Therapist", use: "both", stop: "I have taken so many trainings and my practice is already very diverse", cluster: "training-overload" },
+  { name: "Marci", role: "Individual", use: "personal", stop: "Finances and want to be sure it is the right investment for me", cluster: "cost" },
+  { name: "Ron Fiedler", role: "Coach", use: "both", stop: "Too many seminars lately. Wanted to focus elsewhere. Note: you need to emphasize you must EXPERIENCE CT \u2014 theory is far less effective", cluster: "training-overload" },
+  { name: "Lucie Brissaud", role: "Coach", use: "both", stop: "The price", cluster: "cost" },
+  { name: "Sivakumar Kumaresan", role: "Coach / NLP Trainer", use: "both", stop: "Lack of time \u2014 had a full time job alongside coaching. Read the book 20 years ago. Just went full-time as trainer.", cluster: "low-urgency" },
+  { name: "Michele Drivon", role: "Coach", use: "both", stop: "Reluctance to take yet one more course. Also concern about excessive trauma focus \u2014 didn\u2019t want to be disappointed.", cluster: "training-overload" },
+  { name: "Adrian Frandes", role: "Therapist", use: "both", stop: "Money \u2014 just started practice, no clients yet", cluster: "cost" },
+  { name: "Ruth Gougian", role: "Individual", use: "personal", stop: "Not knowing what CT is or does for you. I signed up for the emails but don\u2019t really understand what CT is about.", cluster: "uncertainty" },
+  { name: "Stephen Hedt", role: "Coach / Therapist", use: "both", stop: "Cost and time. Too much commitment elsewhere. This hasn\u2019t yet risen to the top.", cluster: "low-urgency" },
+  { name: "Jim", role: "Coach (starting)", use: "both", stop: "Schedule", cluster: "low-urgency" },
+  { name: "Tatiana", role: "Coach", use: "both", stop: "Wondering if it is anything different than what I already know", cluster: "already-know" },
+  { name: "Bryan Van Donslear", role: "Teacher", use: "personal", stop: "Unable to get a feel for how it works from reading. Need to feel it, not just read about it.", cluster: "already-know" },
+  { name: "Ender Tanrikut", role: "Hypnotherapist", use: "both", stop: "Time and money. Actually bought the online course but never finished it.", cluster: "low-urgency" },
+  { name: "Christine Flynn", role: "Coach", use: "both", stop: "Time constraints. Wonder if it\u2019s too much to add one more thing.", cluster: "training-overload" },
+  { name: "Margaret Rutherford", role: "Individual", use: "personal", stop: "Skeptic", cluster: "uncertainty" },
+  { name: "Fred Goldstein", role: "Therapist", use: "both", stop: "Money and time", cluster: "low-urgency" },
+  { name: "Amy Geschwell", role: "Individual", use: "personal", stop: "Time constraints", cluster: "low-urgency" },
+  { name: "Paola", role: "Sales agent", use: "personal", stop: "Time \u2014 currently studying NLP Master", cluster: "low-urgency" },
+  { name: "Dennis Lawson", role: "Coach", use: "both", stop: "Completing Trainer certification for NATH first", cluster: "low-urgency" },
+  { name: "Shaun Davis", role: "Coach", use: "both", stop: "Read the book, use the process with clients alongside TLT. Haven\u2019t taken formal course.", cluster: "already-know" },
+  { name: "Bob Cantoni", role: "Software developer", use: "personal", stop: "Haven\u2019t been sure it\u2019ll be helpful for me personally", cluster: "uncertainty" },
+  { name: "Shmuel Goldstein", role: "Coach / Rabbi", use: "both", stop: "Timing with life", cluster: "low-urgency" },
+  { name: "Karen Sutherland", role: "Coach (internal)", use: "both", stop: "Still studying coach supervision diploma until later this year. Want to use CT in my coaching but timing is off.", cluster: "low-urgency" },
+  { name: "Douglas Rutherford", role: "Therapist", use: "both", stop: "I don\u2019t think it will work for me", cluster: "uncertainty" },
+  { name: "Tom O\u2019Connor", role: "Coach", use: "both", stop: "Scheduling and the fact that I have used the technique for years", cluster: "already-know" },
+  { name: "Hugh Comerford", role: "Coach / NLP Trainer", use: "both", stop: "Travel to the US is potentially problematic due to a past bookkeeping issue", cluster: "logistical" },
+  { name: "Marion Rae", role: "Therapist / NLP Trainer", use: "personal", stop: "Time difference \u2014 I\u2019m in Sydney where it\u2019s 3\u20136am when you offer trainings", cluster: "logistical" },
+  { name: "Christina Lynn-Craig", role: "Voice teacher", use: "both", stop: "Time commitment", cluster: "low-urgency" },
+  { name: "Jonathan Kaplan", role: "Coach / Therapist", use: "both", stop: "Unsure how it differs practically from other work I do. Watched intro videos \u2014 not sure what the training adds for the time and money investment. I love Wholeness Work.", cluster: "already-know" },
+  { name: "Denn Stewart", role: "Coach / Speaker", use: "both", stop: "Prioritizing time and focus. It\u2019s on my list. Just started Wholeness Work I and II.", cluster: "low-urgency" },
+  { name: "Lucie (Therapist)", role: "Therapist", use: "both", stop: "Time mostly, and not understanding the difference between Wholeness Work vs Core Transformation", cluster: "already-know" },
+  { name: "Hannah", role: "Individual (long COVID)", use: "personal", stop: "Not 100% sure what I\u2019m getting. Also the website had a blocking pop-up \u2014 that was the biggest stumbling block.", cluster: "uncertainty" },
+  { name: "Rose Sowa", role: "Healthcare", use: "both", stop: "Joined 2 weeks ago but can\u2019t get past session 2. Trouble grasping the core concepts in the videos. I tune out.", cluster: "uncertainty" },
+  { name: "Jamie Aylward", role: "Therapist", use: "both", stop: "Time", cluster: "low-urgency" },
+  { name: "Denise", role: "Coach", use: "both", stop: "I have read the book and am using CT in my coaching", cluster: "already-know" },
+  { name: "Linda te Wierike", role: "Coach", use: "both", stop: "The timing and location", cluster: "logistical" },
+  { name: "Nunzia De Gaetano", role: "NLP Trainer", use: "personal", stop: "Too many other NLP commitments this year", cluster: "training-overload" },
+  { name: "Karen (Therapist)", role: "Therapist", use: "both", stop: "Finances", cluster: "cost" },
+  { name: "Lynda White", role: "Admin", use: "both", stop: "Timing \u2014 back to work full time", cluster: "low-urgency" },
+  { name: "Elaine", role: "Coach", use: "both", stop: "Time", cluster: "low-urgency" },
+  { name: "Peter Bacon", role: "Coach", use: "both", stop: "Doubts about parts work", cluster: "uncertainty" },
+  { name: "Sedgwick Heskett", role: "Retired teacher", use: "personal", stop: "The cost", cluster: "cost" },
+  { name: "Krishna Madhusudan", role: "Business Analyst", use: "both", stop: "Finished half the course but not the rest. Unsure how to go deeper in Core State.", cluster: "uncertainty" },
+  { name: "Marjolijn", role: "Individual", use: "personal", stop: "I feel a longing to dive in for quite some time now \u2014 years \u2014 but keep standing on the side. I don\u2019t know exactly why.", cluster: "low-urgency" },
+  { name: "Brenda Cacy", role: "Individual", use: "personal", stop: "Hesitancy to do the core transformation work", cluster: "low-urgency" },
+  { name: "Peter (UK)", role: "Coach", use: "both", stop: "Teetering on the edge a few times, but not jumping in", cluster: "low-urgency" },
+  { name: "Kanu Kogod", role: "Coach", use: "both", stop: "Something stops me from getting more involved \u2014 not sure what exactly", cluster: "low-urgency" },
+  { name: "Kelley M", role: "Individual", use: "personal", stop: "Hesitant. Multiple family members could benefit. Not sure why I haven\u2019t jumped in.", cluster: "low-urgency" },
+  { name: "David Bird (UK)", role: "Individual", use: "personal", stop: "Interested for a long time. Haven\u2019t taken the step.", cluster: "low-urgency" },
+  { name: "Ron (IT Trainer)", role: "Coach", use: "both", stop: "Wanted to focus on own YouTube channel. Already guided through CT once in NLP training.", cluster: "already-know" },
+  { name: "Charles Cean", role: "Therapist (retired PTSD)", use: "personal", stop: "Busy providing CBT counseling", cluster: "low-urgency" },
+];
+
+/* ── CLUSTER DEFINITIONS ── */
+const clusters = [
+  { id: "low-urgency",     label: "Low urgency / timing",          sub: "warm, but the cost of waiting never arrives",  color: "#2d5a3d" },
+  { id: "already-know",    label: "Already know CT",               sub: "book readers, NLP practitioners using it",     color: "#854F0B" },
+  { id: "uncertainty",     label: "Uncertain what they'd get",     sub: "unclear on what the training actually delivers", color: "#185FA5" },
+  { id: "training-overload", label: "Training overload",           sub: "full plates, one more thing",                  color: "#993C1D" },
+  { id: "cost",            label: "Cost / price",                   sub: "price named, but rarely the only reason",      color: "#444441" },
+  { id: "logistical",      label: "Logistical barriers",           sub: "timezone, travel restrictions",                color: "#888780" },
+];
+
+let activeCluster = null;
+let activeFilter = 'all';
+
+function getFiltered() {
+  return data.filter(d => {
+    const cm = !activeCluster || d.cluster === activeCluster;
+    let rm = true;
+    if (activeFilter === 'coach') rm = d.role.toLowerCase().includes('coach');
+    else if (activeFilter === 'therapist') rm = d.role.toLowerCase().includes('therapist');
+    else if (activeFilter === 'personal') rm = d.use === 'personal';
+    else if (activeFilter === 'both') rm = d.use === 'both';
+    return cm && rm;
+  });
+}
+
+function renderBars() {
+  const filtered = getFiltered();
+  const counts = {};
+  filtered.forEach(d => { counts[d.cluster] = (counts[d.cluster] || 0) + 1; });
+  const all = data.filter(d => !activeFilter || activeFilter === 'all' || (activeFilter === 'coach' && d.role.toLowerCase().includes('coach')) || (activeFilter === 'therapist' && d.role.toLowerCase().includes('therapist')) || (activeFilter === 'personal' && d.use === 'personal') || (activeFilter === 'both' && d.use === 'both'));
+  const allCounts = {};
+  all.forEach(d => { allCounts[d.cluster] = (allCounts[d.cluster] || 0) + 1; });
+  const max = Math.max(...Object.values(allCounts), 1);
+
+  document.getElementById('cluster-bars').innerHTML = clusters.map(c => {
+    const n = counts[c.id] || 0;
+    const pct = Math.round((n / max) * 100);
+    const sel = activeCluster === c.id;
+    return `<div class="cluster-row ${sel ? 'selected' : ''}" onclick="selectCluster('${c.id}')">
+      <div class="cluster-name"><strong style="color:${sel ? c.color : 'var(--ink)'}">${c.label}</strong><span>${c.sub}</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${sel ? c.color : 'var(--paper-3)'}"></div></div>
+      <div class="cluster-n" style="color:${sel ? c.color : 'var(--ink)'}">${n}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderQuotes() {
+  const filtered = getFiltered();
+  const cl = activeCluster ? clusters.find(c => c.id === activeCluster) : null;
+  document.getElementById('q-label').textContent = cl ? `${cl.label} \u2014 ${filtered.length} responses` : `All responses \u2014 ${filtered.length}`;
+
+  if (!filtered.length) {
+    document.getElementById('quotes-list').innerHTML = '<div class="no-results">No responses match this combination.</div>';
+    return;
+  }
+  document.getElementById('quotes-list').innerHTML = filtered.map((d, i) => {
+    const c = clusters.find(c => c.id === d.cluster);
+    return `<div class="quote-card" id="qc-${i}">
+      <div class="quote-header" onclick="toggleQuote('qc-${i}')">
+        <div class="qh-left">
+          <span class="qh-name">${d.name}</span>
+          <div class="qh-tags">
+            ${d.role !== 'Individual' ? `<span class="tag tag-role">${d.role}</span>` : ''}
+            <span class="tag tag-cluster" style="background:${c ? c.color + '18' : '#eee'};color:${c ? c.color : '#666'}">${c ? c.label : d.cluster}</span>
+          </div>
+        </div>
+        <span class="qh-arrow">&#9654;</span>
+      </div>
+      <div class="quote-body">
+        <div class="q">${d.stop}</div>
+        <div class="meta">
+          ${d.role !== 'Individual' ? `<span class="tag tag-role">${d.role}</span>` : ''}
+          <span class="tag tag-use">${d.use === 'both' ? 'personal + client' : 'personal use'}</span>
+          <span class="tag tag-cluster" style="background:${c ? c.color + '18' : '#eee'};color:${c ? c.color : '#666'}">${c ? c.label : d.cluster}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.toggleQuote = function(id) {
+  document.getElementById(id).classList.toggle('open');
+};
+
+window.toggleResponses = function() {
+  const panel = document.getElementById('responses-panel');
+  const arrow = document.getElementById('responses-arrow');
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  arrow.classList.toggle('open', !isOpen);
+};
+
+window.selectCluster = function(id) {
+  activeCluster = activeCluster === id ? null : id;
+  renderBars();
+  renderQuotes();
+};
+
+window.applyFilter = function(key, btn) {
+  activeFilter = key;
+  document.querySelectorAll('#responses-panel .f-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderBars();
+  renderQuotes();
+};
+
+window.showSection = function(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+};
+
+window.filterWS = function(ws, btn) {
+  document.querySelectorAll('#ws-filters .f-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#ws-list .qw-card').forEach(card => {
+    if (ws === 'all' || card.dataset.ws === ws) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+};
+
+/* ── FILE UPLOAD ── */
+(function() {
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file-input');
+  const uploadList = document.getElementById('upload-list');
+
+  /* Click to upload */
+  dropzone.addEventListener('click', () => fileInput.click());
+
+  /* Drag events */
+  dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
+  });
+
+  /* File input change */
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length) uploadFiles(fileInput.files);
+    fileInput.value = '';
+  });
+
+  function uploadFiles(files) {
+    Array.from(files).forEach(file => {
+      const fd = new FormData();
+      fd.append('file', file);
+      fetch('/api/upload', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(result => {
+          if (result.ok) addFileToList(result.filename || file.name);
+        })
+        .catch(() => addFileToList(file.name + ' (upload failed)'));
+    });
+  }
+
+  function addFileToList(name) {
+    const item = document.createElement('div');
+    item.className = 'upload-item';
+    item.innerHTML = `<span class="upload-icon">&#128206;</span><span>${name}</span>`;
+    uploadList.appendChild(item);
+  }
+
+  /* Load previously uploaded files */
+  fetch('/api/uploads')
+    .then(r => r.json())
+    .then(files => {
+      if (Array.isArray(files)) files.forEach(f => addFileToList(f));
+    })
+    .catch(() => {});
+})();
+
+/* ── NAV SCROLL FADE ── */
+(function() {
+  const nav = document.querySelector('.nav-bar');
+  if (nav) {
+    nav.addEventListener('scroll', function() {
+      const atEnd = nav.scrollLeft + nav.offsetWidth >= nav.scrollWidth - 10;
+      nav.classList.toggle('scrolled-end', atEnd);
+    });
+  }
+})();
+
+/* ── INIT ── */
+renderBars();
+renderQuotes();
+</script>
+<button id="review-btn" onclick="toggleReviewMode()">Review for Claude</button>
+<button id="review-export" onclick="exportReview()">Export fixes</button>
+<div id="review-popup">
+  <div class="rp-context" id="rp-context"></div>
+  <textarea id="rp-note" placeholder="Wat moet hier anders?"></textarea>
+  <div class="rp-actions">
+    <button class="rp-cancel" onclick="cancelReview()">Annuleer</button>
+    <button class="rp-save" onclick="saveReview()">Opslaan</button>
+  </div>
+</div>
+
+<script>
+/* ── REVIEW MODE FOR CLAUDE CODE ── */
+(function() {
+  let reviewMode = false;
+  let reviewNotes = JSON.parse(localStorage.getItem('claude-review') || '[]');
+  let currentTarget = null;
+
+  function getActiveTab() {
+    const active = document.querySelector('.section.active');
+    if (!active) return '?';
+    const btn = document.querySelector('.nav-tab.active');
+    return btn ? btn.textContent.trim() : active.id;
+  }
+
+  function getContext(el) {
+    /* Walk up to find nearest heading or card title */
+    let node = el;
+    let heading = '';
+    while (node && node !== document.body) {
+      const h = node.querySelector('h2, h3, .qw-title, .mc-title, .section-heading');
+      if (h && h !== el) { heading = h.textContent.trim().slice(0, 80); break; }
+      node = node.parentElement;
+    }
+    const text = el.textContent.trim().slice(0, 120);
+    return { heading, text };
+  }
+
+  function getSelector(el) {
+    if (el.id) return '#' + el.id;
+    const parts = [];
+    while (el && el !== document.body) {
+      let s = el.tagName.toLowerCase();
+      if (el.className && typeof el.className === 'string') {
+        const cls = el.className.split(' ').filter(c => c && !c.startsWith('review') && !c.startsWith('is-')).slice(0, 2).join('.');
+        if (cls) s += '.' + cls;
+      }
+      parts.unshift(s);
+      el = el.parentElement;
+      if (parts.length > 3) break;
+    }
+    return parts.join(' > ');
+  }
+
+  function showDots() {
+    document.querySelectorAll('.review-dot').forEach(d => d.remove());
+    reviewNotes.forEach(note => {
+      try {
+        const el = document.querySelector(note.selector);
+        if (el && el.style.position !== 'fixed') {
+          if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+          const dot = document.createElement('span');
+          dot.className = 'review-dot';
+          dot.title = note.note;
+          el.appendChild(dot);
+        }
+      } catch(e) {}
+    });
+    const exp = document.getElementById('review-export');
+    if (exp) exp.style.display = reviewNotes.length > 0 ? 'block' : 'none';
+  }
+
+  window.toggleReviewMode = function() {
+    reviewMode = !reviewMode;
+    document.body.classList.toggle('review-mode', reviewMode);
+    const btn = document.getElementById('review-btn');
+    btn.textContent = reviewMode ? 'Stop review' : 'Review for Claude';
+    btn.classList.toggle('active', reviewMode);
+    if (reviewMode) showDots();
+  };
+
+  document.addEventListener('click', function(e) {
+    if (!reviewMode) return;
+    const ignore = e.target.closest('#review-btn, #review-popup, #review-export, .nav-bar, .nav-tab, header, footer, #edit-bar');
+    if (ignore) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    currentTarget = e.target;
+    const ctx = getContext(currentTarget);
+    const tab = getActiveTab();
+    const popup = document.getElementById('review-popup');
+    const ctxDiv = document.getElementById('rp-context');
+
+    ctxDiv.innerHTML = '<strong>Tab:</strong> ' + tab + '<br>' +
+      (ctx.heading ? '<strong>Sectie:</strong> ' + ctx.heading + '<br>' : '') +
+      '<strong>Element:</strong> ' + ctx.text.slice(0, 80) + (ctx.text.length > 80 ? '...' : '');
+
+    document.getElementById('rp-note').value = '';
+    popup.style.display = 'block';
+
+    /* Position near click */
+    const x = Math.min(e.clientX, window.innerWidth - 320);
+    const y = Math.min(e.clientY, window.innerHeight - 200);
+    popup.style.left = x + 'px';
+    popup.style.top = y + 'px';
+
+    setTimeout(() => document.getElementById('rp-note').focus(), 50);
+  }, true);
+
+  window.saveReview = function() {
+    const note = document.getElementById('rp-note').value.trim();
+    if (!note || !currentTarget) { cancelReview(); return; }
+
+    const ctx = getContext(currentTarget);
+    const tab = getActiveTab();
+
+    reviewNotes.push({
+      tab: tab,
+      heading: ctx.heading,
+      elementText: ctx.text.slice(0, 120),
+      selector: getSelector(currentTarget),
+      note: note,
+      time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
+    });
+
+    localStorage.setItem('claude-review', JSON.stringify(reviewNotes));
+    cancelReview();
+    showDots();
+  };
+
+  window.cancelReview = function() {
+    document.getElementById('review-popup').style.display = 'none';
+    currentTarget = null;
+  };
+
+  window.exportReview = function() {
+    if (reviewNotes.length === 0) return;
+
+    let md = '# Review fixes voor Claude Code\\n\\n';
+    md += 'Gegenereerd: ' + new Date().toLocaleString('nl-NL') + '\\n';
+    md += 'Aantal opmerkingen: ' + reviewNotes.length + '\\n\\n---\\n\\n';
+
+    reviewNotes.forEach((n, i) => {
+      md += '## ' + (i + 1) + '. ' + n.tab + (n.heading ? ' — ' + n.heading : '') + '\\n';
+      md += '**Element:** ' + n.elementText + '\\n\\n';
+      md += '**Fix:** ' + n.note + '\\n\\n';
+      md += '**Selector:** `' + n.selector + '`\\n\\n---\\n\\n';
+    });
+
+    const blob = new Blob([md.replace(/\\n/g, '\\n')], { type: 'text/markdown' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'fixes.md';
+    a.click();
+
+    /* Also copy to clipboard */
+    navigator.clipboard.writeText(md.replace(/\\n/g, '\\n')).catch(() => {});
+  };
+
+  /* Show dots on load if there are saved notes */
+  showDots();
+})();
+</script>
+
+<script src="js/sync.js" defer></script>
+<script src="js/edit.js" defer></script>
+<script src="js/annotate.js" defer></script>
+</body>
+</html>
