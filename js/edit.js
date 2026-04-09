@@ -47,7 +47,9 @@
     '.fs-note',
     '.ns-what',
     '.ns-who',
-    '.ns-when'
+    '.ns-when',
+    '.qw-owner-name',
+    '.qw-tl-date'
   ].join(', ');
 
   /* ── Build the admin bar ── */

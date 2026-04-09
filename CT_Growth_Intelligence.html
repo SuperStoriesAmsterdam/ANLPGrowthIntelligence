@@ -547,6 +547,18 @@ body {
 .qw-body { font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; }
 .qw-data { display: flex; gap: 6px; flex-wrap: wrap; }
 
+.qw-ownership {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--paper-2);
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.qw-owner, .qw-timeline { font-size: 13px; display: flex; gap: 6px; align-items: center; }
+.qw-owner-label, .qw-tl-label { color: var(--ink-3); font-weight: 500; }
+.qw-owner-name, .qw-tl-date { color: var(--ink); }
+
 /* ── NEXT STEPS ── */
 .next-steps-list { display: flex; flex-direction: column; gap: 8px; }
 .ns-item {
@@ -1444,13 +1456,13 @@ footer {
 <section class="section" id="quickwins">
 <div class="container">
 
-  <div class="section-eyebrow">Before the meeting</div>
+  <div class="section-eyebrow">30-day sprint</div>
   <h2 class="section-heading">Quick wins</h2>
-  <p class="section-intro">These come directly from the survey data. Things that could be started this week, without waiting for April 22. Low effort, high signal.</p>
+  <p class="section-intro">These come directly from the survey data. Each one gets an owner and a deadline on April 22. No micro-management — go do it, report back in 30 days.</p>
 
   <div class="insight-box">
-    <div class="label">The principle</div>
-    <p>Don't wait for a perfect strategy to do the obvious thing. These are small moves that test an assumption or unblock a segment — each one tells us something even if it doesn't convert.</p>
+    <div class="label">The deal</div>
+    <p>Every card below needs one name and one date before we leave the room. Owner takes it, runs with it, reports back May 22. No status updates in between. Trust the person, check the result.</p>
   </div>
 
   <div class="divider"></div>
@@ -1465,6 +1477,10 @@ footer {
     <div class="qw-data">
       <span class="tag tag-cluster" style="background:#2d5a3d18;color:#2d5a3d">Low urgency cluster — 22 people</span>
     </div>
+    <div class="qw-ownership">
+      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+    </div>
   </div>
 
   <div class="qw-card" style="--qw-color:#854F0B">
@@ -1476,6 +1492,10 @@ footer {
     <p class="qw-body">19% think they already know CT from the book or an NLP training. The survey itself contains the rebuttal — Ron Fiedler wrote it: "you need to EXPERIENCE CT, theory is far less effective." One email that quotes actual respondents who felt this way could crack this segment open.</p>
     <div class="qw-data">
       <span class="tag tag-cluster" style="background:#854F0B18;color:#854F0B">Already know CT cluster — 10 people</span>
+    </div>
+    <div class="qw-ownership">
+      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
     </div>
   </div>
 
@@ -1489,6 +1509,10 @@ footer {
     <div class="qw-data">
       <span class="tag tag-cluster" style="background:#993C1D18;color:#993C1D">Directly from survey — 1 mention but likely affects many</span>
     </div>
+    <div class="qw-ownership">
+      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
+    </div>
   </div>
 
   <div class="qw-card" style="--qw-color:#185FA5">
@@ -1501,6 +1525,10 @@ footer {
     <div class="qw-data">
       <span class="tag tag-cluster" style="background:#185FA518;color:#185FA5">Uncertainty cluster — 8 people</span>
     </div>
+    <div class="qw-ownership">
+      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+    </div>
   </div>
 
   <div class="qw-card" style="--qw-color:#6B4C9A">
@@ -1512,6 +1540,26 @@ footer {
     <p class="qw-body">Track 2 (referral) needs alumni voice. Before building any referral mechanics, send a quick message to 3 recent CT graduates: "In one sentence — what changed for you after CT Foundation that you didn't expect?" Those answers become the referral message. Free. Immediate.</p>
     <div class="qw-data">
       <span class="tag tag-cluster" style="background:#6B4C9A18;color:#6B4C9A">Feeds Track 2 — referral from believers</span>
+    </div>
+    <div class="qw-ownership">
+      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
+    </div>
+  </div>
+
+  <div class="qw-card" style="--qw-color:#d4622a">
+    <div class="qw-header">
+      <div class="qw-priority">High impact</div>
+      <div class="qw-effort">Medium effort</div>
+    </div>
+    <h3 class="qw-title">LLM SEO — make the CT site readable by AI</h3>
+    <p class="qw-body">When someone asks ChatGPT, Gemini, or Perplexity "what is Core Transformation?" — the answer should come from <em>your</em> site, not a Wikipedia summary or a random blog. Right now the CT site has no structured data. Adding schema markup (Course, Organization, FAQ, Review) and rewriting key copy for how LLMs extract information makes CT findable in the channel that's replacing Google for your audience.</p>
+    <div class="qw-data">
+      <span class="tag tag-cluster" style="background:#d4622a18;color:#d4622a">New channel — LLM search is growing 40%+ YoY</span>
+    </div>
+    <div class="qw-ownership">
+      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Peter / Superstories</span></div>
+      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2–3</span></div>
     </div>
   </div>
 
