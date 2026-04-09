@@ -80,14 +80,24 @@ app.put('/api/state', async (req, res) => {
   }
 });
 
-/* ── Start ── */
-initDB()
-  .then(() => {
-    app.listen(PORT, '0.0.0.0', () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
-  .catch(err => {
-    console.error('Failed to initialize database:', err);
-    process.exit(1);
-  });
+/* ── Start with retry ── */
+async function startWithRetry(maxRetries = 15, delay = 3000) {
+  for (let i = 1; i <= maxRetries; i++) {
+    try {
+      await initDB();
+      app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+      return;
+    } catch (err) {
+      console.log(`Database not ready (attempt ${i}/${maxRetries}), retrying in ${delay/1000}s...`);
+      if (i === maxRetries) {
+        console.error('Failed to connect to database after all retries:', err);
+        process.exit(1);
+      }
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+}
+
+startWithRetry();
