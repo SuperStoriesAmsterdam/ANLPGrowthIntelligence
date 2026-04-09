@@ -132,6 +132,7 @@
     el.style.display = 'none';
     deleted.push(id);
     localStorage.setItem(DELETED_KEY, JSON.stringify(deleted));
+    if (window.anlpSync) window.anlpSync.save();
     flash('Deleted');
     updateCount();
   }
@@ -217,6 +218,7 @@
       }
     });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+    if (window.anlpSync) window.anlpSync.save();
     updateCount();
     flash('Saved');
   }
@@ -227,6 +229,7 @@
       localStorage.removeItem(DELETED_KEY);
       edits = {};
       deleted = [];
+      if (window.anlpSync) window.anlpSync.save();
       location.reload();
     }
   }
@@ -239,6 +242,7 @@
       delete edits[editId];
       el.classList.remove('is-edited');
       localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+    if (window.anlpSync) window.anlpSync.save();
       updateCount();
       flash('Reverted');
     }
@@ -314,6 +318,7 @@
         e.target.classList.remove('is-edited');
       }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+    if (window.anlpSync) window.anlpSync.save();
       updateCount();
       flash('Saved');
     }
@@ -322,6 +327,14 @@
   /* ── Init ── */
   document.addEventListener('DOMContentLoaded', function() {
     createBar();
+    indexElements();
+    indexDeletableBlocks();
+  });
+
+  /* Re-apply state when server data arrives */
+  window.addEventListener('anlp-sync-loaded', function() {
+    edits = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    deleted = JSON.parse(localStorage.getItem(DELETED_KEY) || '[]');
     indexElements();
     indexDeletableBlocks();
   });

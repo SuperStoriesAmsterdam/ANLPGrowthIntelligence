@@ -276,6 +276,7 @@
 
   function save() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+    if (window.anlpSync) window.anlpSync.save();
     updateExportBar();
   }
 
