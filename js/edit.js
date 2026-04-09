@@ -7,9 +7,11 @@
 (function() {
   'use strict';
 
-  const STORAGE_KEY = 'anlp-gi-edits';
-  const ORIGINALS_KEY = 'anlp-gi-originals';
-  const DELETED_KEY = 'anlp-gi-deleted';
+  /* Version bump clears stale edits when page structure changes */
+  const STATE_VERSION = 'v2';
+  const STORAGE_KEY = 'anlp-gi-edits-' + STATE_VERSION;
+  const ORIGINALS_KEY = 'anlp-gi-originals-' + STATE_VERSION;
+  const DELETED_KEY = 'anlp-gi-deleted-' + STATE_VERSION;
   let editMode = false;
   let edits = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
   let originals = JSON.parse(localStorage.getItem(ORIGINALS_KEY) || '{}');

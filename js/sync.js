@@ -6,23 +6,26 @@
 (function() {
   'use strict';
 
+  const STATE_VERSION = 'v2';
+  const EDITS_KEY = 'anlp-gi-edits-' + STATE_VERSION;
+  const ANNOTATIONS_KEY = 'anlp-gi-annotations';
+  const DELETED_KEY = 'anlp-gi-deleted-' + STATE_VERSION;
+
   const SYNC_DEBOUNCE = 500;
   let syncTimer = null;
-  let serverState = null;
 
   /* ── Load state from server ── */
   async function loadFromServer() {
     try {
       const res = await fetch('/api/state');
       if (!res.ok) throw new Error('Server error');
-      serverState = await res.json();
+      var state = await res.json();
 
-      /* Update localStorage from server (server wins) */
-      localStorage.setItem('anlp-gi-edits', JSON.stringify(serverState.edits || {}));
-      localStorage.setItem('anlp-gi-annotations', JSON.stringify(serverState.annotations || {}));
-      localStorage.setItem('anlp-gi-deleted', JSON.stringify(serverState.deleted || []));
+      localStorage.setItem(EDITS_KEY, JSON.stringify(state.edits || {}));
+      localStorage.setItem(ANNOTATIONS_KEY, JSON.stringify(state.annotations || {}));
+      localStorage.setItem(DELETED_KEY, JSON.stringify(state.deleted || []));
 
-      return serverState;
+      return state;
     } catch (err) {
       console.warn('Failed to load from server, using localStorage:', err);
       return null;
@@ -34,30 +37,29 @@
     clearTimeout(syncTimer);
     syncTimer = setTimeout(async function() {
       try {
-        const payload = {
-          edits: JSON.parse(localStorage.getItem('anlp-gi-edits') || '{}'),
-          annotations: JSON.parse(localStorage.getItem('anlp-gi-annotations') || '{}'),
-          deleted: JSON.parse(localStorage.getItem('anlp-gi-deleted') || '[]')
+        var payload = {
+          edits: JSON.parse(localStorage.getItem(EDITS_KEY) || '{}'),
+          annotations: JSON.parse(localStorage.getItem(ANNOTATIONS_KEY) || '{}'),
+          deleted: JSON.parse(localStorage.getItem(DELETED_KEY) || '[]')
         };
-        const res = await fetch('/api/state', {
+        await fetch('/api/state', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        if (!res.ok) throw new Error('Save failed');
       } catch (err) {
         console.warn('Failed to save to server:', err);
       }
     }, SYNC_DEBOUNCE);
   }
 
-  /* ── Save on page unload (synchronous fallback) ── */
+  /* ── Save on page unload ── */
   window.addEventListener('beforeunload', function() {
     try {
-      const payload = {
-        edits: JSON.parse(localStorage.getItem('anlp-gi-edits') || '{}'),
-        annotations: JSON.parse(localStorage.getItem('anlp-gi-annotations') || '{}'),
-        deleted: JSON.parse(localStorage.getItem('anlp-gi-deleted') || '[]')
+      var payload = {
+        edits: JSON.parse(localStorage.getItem(EDITS_KEY) || '{}'),
+        annotations: JSON.parse(localStorage.getItem(ANNOTATIONS_KEY) || '{}'),
+        deleted: JSON.parse(localStorage.getItem(DELETED_KEY) || '[]')
       };
       navigator.sendBeacon('/api/state', new Blob(
         [JSON.stringify(payload)],
@@ -66,17 +68,14 @@
     } catch (err) { /* best effort */ }
   });
 
-  /* ── Expose globally ── */
   window.anlpSync = {
     load: loadFromServer,
     save: saveToServer
   };
 
-  /* ── Auto-load on startup ── */
   document.addEventListener('DOMContentLoaded', function() {
     loadFromServer().then(function(state) {
       if (state) {
-        /* Trigger a re-render if edit.js and annotate.js are already initialized */
         window.dispatchEvent(new Event('anlp-sync-loaded'));
       }
     });
