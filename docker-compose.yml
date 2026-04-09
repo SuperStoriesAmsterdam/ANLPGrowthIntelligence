@@ -8,11 +8,6 @@ services:
       POSTGRES_PASSWORD: anlp_secret_2026
     volumes:
       - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
 
   app:
     build: .
@@ -23,8 +18,7 @@ services:
       - DATABASE_URL=postgresql://postgres:anlp_secret_2026@db:5432/postgres
       - PORT=3000
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
 volumes:
   pgdata:
