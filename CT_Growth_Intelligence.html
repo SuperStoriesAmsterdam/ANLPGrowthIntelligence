@@ -20,6 +20,18 @@
   --warm-light: #f5ede0;
   --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --radius: 4px;
+
+  /* ── TYPE SCALE ── change sizes here, applies everywhere */
+  --text-2xs: 12px;    /* badges, edited indicators */
+  --text-xs: 13px;     /* tags, status pills, small labels */
+  --text-sm: 14px;     /* eyebrows, time labels, meta info */
+  --text-base: 15px;   /* default body, pills, cluster names */
+  --text-md: 15px;     /* nav tabs, sub-headings, team names */
+  --text-body: 16px;   /* main body copy, descriptions */
+  --text-lg: 17px;     /* card titles, upload icons */
+  --text-xl: 19px;     /* message card titles */
+  --text-2xl: 24px;    /* section headings, big numbers */
+  --text-3xl: 26px;    /* name picker title */
 }
 
 body, body * {
@@ -28,7 +40,7 @@ body, body * {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-size: 15px;
+  font-size: var(--text-body);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   padding-bottom: 60px;
@@ -52,20 +64,20 @@ body {
 }
 .header-inner { max-width: 960px; margin: 0 auto; }
 .header-label {
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: white;
   margin-bottom: 0.75rem;
 }
 .header-title {
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 600;
   color: white;
   margin-bottom: 0.5rem;
   line-height: 1.2;
 }
 .header-sub {
-  font-size: 14px;
+  font-size: var(--text-md);
   color: white;
   max-width: 560px;
   line-height: 1.6;
@@ -77,13 +89,13 @@ body {
   flex-wrap: wrap;
 }
 .header-stat .n {
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 600;
   color: white;
   line-height: 1;
 }
 .header-stat .l {
-  font-size: 13px;
+  font-size: var(--text-base);
   color: white;
   margin-top: 2px;
 }
@@ -111,7 +123,7 @@ body {
 }
 .nav-tab {
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: var(--text-body);
   font-weight: 500;
   padding: 0.85rem 1.5rem;
   border: none;
@@ -134,39 +146,39 @@ body {
 .section.active { display: block; }
 
 /* ── LAYOUT ── */
-.container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+.container { max-width: 960px; margin: 0 auto; padding: 2rem; background: white; border-radius: var(--radius); margin-top: 1rem; margin-bottom: 1rem; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 
 @media (max-width: 640px) {
   .two-col, .three-col { grid-template-columns: 1fr; }
-  .nav-tab { padding: 0.85rem 1rem; font-size: 14px; }
+  .nav-tab { padding: 0.85rem 1rem; font-size: var(--text-md); }
   .container { padding: 1.5rem 1rem; }
   .cluster-row { flex-wrap: wrap; gap: 6px; }
   .cluster-name { width: 100%; }
   .bar-track { flex: 1; min-width: 60px; }
   .funnel-step { gap: 12px; }
   .fs-bar { min-width: 16px; }
-  #author-chip { bottom: 48px; right: 12px; padding: 4px 10px 4px 4px; font-size: 13px; }
-  .ac-avatar { width: 20px; height: 20px; font-size: 10px; }
+  #author-chip { bottom: 48px; right: 12px; padding: 4px 10px 4px 4px; font-size: var(--text-base); }
+  .ac-avatar { width: 20px; height: 20px; font-size: var(--text-2xs); }
 }
 
 /* ── SECTION TITLE ── */
 .section-eyebrow {
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--ink);
   margin-bottom: 0.5rem;
 }
 .section-heading {
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 0.5rem;
   line-height: 1.2;
 }
 .section-intro {
-  font-size: 15px;
+  font-size: var(--text-body);
   color: var(--ink);
   max-width: 660px;
   line-height: 1.65;
@@ -176,29 +188,28 @@ body {
 
 /* ── STAT CARDS ── */
 .stat-card {
-  background: var(--paper-2);
+  background: white;
   border-radius: var(--radius);
   padding: 1.1rem;
   position: relative;
 }
 .stat-card .n {
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 600;
   color: var(--ink);
   line-height: 1;
   margin-bottom: 4px;
 }
-.stat-card .l { font-size: 13px; color: var(--ink); }
-.stat-card .sub { font-size: 13px; color: var(--ink); margin-top: 4px; }
-.stat-card.awaiting .n { color: var(--paper-3) !important; }
+.stat-card .l { font-size: var(--text-base); color: var(--ink); }
+.stat-card .sub { font-size: var(--text-base); color: var(--ink); margin-top: 4px; }
+.stat-card.awaiting .n { color: var(--ink); }
 .stat-card.awaiting::after {
   content: 'awaiting data';
   position: absolute;
   top: 6px; right: 8px;
-  font-size: 10px;
+  font-size: var(--text-xs);
   font-weight: 500;
-  color: var(--paper-3);
-  text-transform: uppercase;
+  color: var(--ink);
   letter-spacing: 0.5px;
 }
 
@@ -212,14 +223,14 @@ body {
   position: relative;
 }
 .insight-box .label {
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--accent);
   margin-bottom: 0.35rem;
 }
 .insight-box p {
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: var(--text-body);
   color: var(--ink);
   line-height: 1.65;
 }
@@ -244,17 +255,17 @@ body {
 }
 .cluster-row:hover { background: var(--paper-2); }
 .cluster-row.selected { background: var(--paper-2); }
-.cluster-name { font-size: 13px; color: var(--ink); width: 210px; flex-shrink: 0; min-width: 0; }
+.cluster-name { font-size: var(--text-base); color: var(--ink); width: 210px; flex-shrink: 0; min-width: 0; }
 .cluster-name strong { font-weight: 500; display: block; }
-.cluster-name span { font-size: 12px; color: var(--ink); }
+.cluster-name span { font-size: var(--text-sm); color: var(--ink); }
 .bar-track { flex: 1; height: 6px; background: var(--paper-3); border-radius: 999px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
-.cluster-n { font-size: 13px; font-weight: 500; color: var(--ink); width: 24px; text-align: right; flex-shrink: 0; }
+.cluster-n { font-size: var(--text-base); font-weight: 500; color: var(--ink); width: 24px; text-align: right; flex-shrink: 0; }
 
 /* ── FILTER PILLS ── */
 .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
 .f-pill {
-  font-size: 13px;
+  font-size: var(--text-base);
   padding: 5px 14px;
   border-radius: 999px;
   border: 1px solid var(--paper-3);
@@ -269,7 +280,7 @@ body {
 
 /* ── QUOTE CARDS ── */
 .quotes-label {
-  font-size: 13px;
+  font-size: var(--text-base);
   font-weight: 500;
   color: var(--ink);
   margin-bottom: 10px;
@@ -293,10 +304,10 @@ body {
 }
 .quote-header:hover { background: var(--paper-2); }
 .quote-header .qh-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.quote-header .qh-name { font-size: 13px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.quote-header .qh-name { font-size: var(--text-base); font-weight: 500; color: var(--ink); white-space: nowrap; }
 .quote-header .qh-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 .quote-header .qh-arrow {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--ink);
   transition: transform 0.2s;
   flex-shrink: 0;
@@ -308,12 +319,12 @@ body {
   border-top: 1px solid var(--paper-2);
 }
 .quote-card.open .quote-body { display: block; padding-top: 0.65rem; }
-.quote-card .q { font-size: 15px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; font-style: italic; }
+.quote-card .q { font-size: var(--text-body); color: var(--ink); line-height: 1.65; margin-bottom: 8px; font-style: italic; }
 .quote-card .q::before { content: '\201C'; }
 .quote-card .q::after { content: '\201D'; }
 .quote-card .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .tag {
-  font-size: 11px;
+  font-size: var(--text-xs);
   padding: 2px 8px;
   border-radius: 2px;
   font-weight: 400;
@@ -321,7 +332,7 @@ body {
 .tag-cluster { background: #e8f0eb; color: #1e3a28; }
 .tag-role { background: var(--paper-2); color: var(--ink); }
 .tag-use { background: #f0ebe8; color: var(--ink); }
-.no-results { font-size: 14px; color: var(--ink); padding: 2rem; text-align: center; }
+.no-results { font-size: var(--text-md); color: var(--ink); padding: 2rem; text-align: center; }
 
 /* ── RESPONSES TOGGLE ── */
 .responses-toggle {
@@ -337,15 +348,14 @@ body {
 }
 .responses-toggle:hover { background: var(--paper-3); }
 .responses-arrow {
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--ink);
   transition: transform 0.2s;
 }
 .responses-arrow.open { transform: rotate(90deg); }
 .responses-hint {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--ink);
-  opacity: 0.5;
   margin-left: auto;
 }
 
@@ -358,19 +368,19 @@ body {
   position: relative;
 }
 .mechanism-card .mc-num {
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 600;
-  color: var(--paper-3);
+  color: var(--ink);
   line-height: 1;
   margin-bottom: 0.4rem;
 }
 .mechanism-card .mc-title {
-  font-size: 1rem;
+  font-size: var(--text-lg);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 0.4rem;
 }
-.mechanism-card .mc-body { font-size: 15px; color: var(--ink); line-height: 1.65; }
+.mechanism-card .mc-body { font-size: var(--text-body); color: var(--ink); line-height: 1.65; }
 
 /* ── EVIDENCE ROWS ── */
 .evidence-row {
@@ -387,13 +397,13 @@ body {
   background: var(--warm-light);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--accent-2);
   font-weight: 500;
 }
 .ev-body { flex: 1; }
-.ev-body strong { font-size: 15px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
-.ev-body span { font-size: 15px; color: var(--ink); line-height: 1.65; }
+.ev-body strong { font-size: var(--text-body); font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
+.ev-body span { font-size: var(--text-body); color: var(--ink); line-height: 1.65; }
 
 /* ── MESSAGE CARDS ── */
 .message-card {
@@ -405,7 +415,7 @@ body {
   position: relative;
 }
 .message-card .mc-label {
-  font-size: 13px;
+  font-size: var(--text-base);
   font-weight: 500;
   color: white;
   margin-bottom: 0.5rem;
@@ -414,12 +424,12 @@ body {
 }
 .message-card .mc-msg {
   font-family: var(--sans);
-  font-size: 1.15rem;
+  font-size: var(--text-xl);
   color: white;
   line-height: 1.45;
   margin-bottom: 0.6rem;
 }
-.message-card .mc-why { font-size: 15px; color: white; line-height: 1.6; }
+.message-card .mc-why { font-size: var(--text-body); color: white; line-height: 1.6; }
 
 /* ── WORKSTREAM CARDS ── */
 .qw-card {
@@ -438,20 +448,20 @@ body {
 }
 .ws-tag {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 500;
   padding: 2px 10px;
   border-radius: 3px;
   color: white;
 }
 .qw-title {
-  font-size: 1rem;
+  font-size: var(--text-lg);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 4px;
   line-height: 1.3;
 }
-.qw-body { font-size: 15px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; }
+.qw-body { font-size: var(--text-body); color: var(--ink); line-height: 1.65; margin-bottom: 8px; }
 .qw-ownership {
   margin-top: 8px;
   padding-top: 8px;
@@ -460,11 +470,11 @@ body {
   gap: 20px;
   flex-wrap: wrap;
 }
-.qw-owner, .qw-timeline { font-size: 13px; display: flex; gap: 6px; align-items: center; }
+.qw-owner, .qw-timeline { font-size: var(--text-base); display: flex; gap: 6px; align-items: center; }
 .qw-owner-label, .qw-tl-label { color: var(--ink); font-weight: 500; }
 .qw-owner-name, .qw-tl-date { color: var(--ink); }
 .qw-status {
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
   padding: 2px 8px;
   border-radius: 2px;
@@ -483,7 +493,7 @@ body {
   gap: 16px;
   padding: 8px 0;
   border-bottom: 1px solid var(--paper-2);
-  font-size: 15px;
+  font-size: var(--text-body);
 }
 .tried-row:last-child { border-bottom: none; }
 .tried-q { color: var(--ink); flex: 1; }
@@ -502,19 +512,19 @@ body {
   align-items: flex-start;
 }
 .agenda-num {
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   font-weight: 600;
-  color: var(--paper-3);
+  color: var(--ink);
   line-height: 1;
   flex-shrink: 0;
   width: 36px;
   text-align: right;
 }
 .agenda-body { flex: 1; }
-.agenda-body h3 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
-.agenda-body p { font-size: 15px; color: var(--ink); line-height: 1.65; }
+.agenda-body h3 { font-size: var(--text-body); font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.agenda-body p { font-size: var(--text-body); color: var(--ink); line-height: 1.65; }
 .agenda-time {
-  font-size: 12px;
+  font-size: var(--text-sm);
   padding: 2px 8px;
   border-radius: 2px;
   background: var(--paper-2);
@@ -523,7 +533,7 @@ body {
   margin-bottom: 6px;
 }
 .agenda-decide {
-  font-size: 13px;
+  font-size: var(--text-base);
   color: var(--accent);
   font-weight: 500;
   margin-top: 6px;
@@ -547,13 +557,12 @@ body {
   border-radius: 2px;
   opacity: 0.15;
 }
-.fs-label { font-size: 13px; font-weight: 500; color: var(--ink); }
-.fs-number { font-size: 1.5rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.fs-label { font-size: var(--text-base); font-weight: 500; color: var(--ink); }
+.fs-number { font-size: var(--text-2xl); font-weight: 600; color: var(--ink); line-height: 1.2; }
 .funnel-arrow {
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--ink);
   padding: 2px 0 2px 136px;
-  opacity: 0.4;
 }
 
 /* ── NEXT STEPS ── */
@@ -566,9 +575,9 @@ body {
   padding: 0.65rem 1.1rem;
   position: relative;
 }
-.ns-what { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.ns-what { font-size: var(--text-body); font-weight: 500; color: var(--ink); margin-bottom: 4px; }
 .ns-meta { display: flex; gap: 16px; }
-.ns-who, .ns-when { font-size: 13px; color: var(--ink); }
+.ns-who, .ns-when { font-size: var(--text-base); color: var(--ink); }
 
 /* ── UPLOAD DROPZONE ── */
 .dropzone {
@@ -588,7 +597,7 @@ body {
   border-color: var(--accent);
   background: var(--accent-light);
 }
-.dropzone p { font-size: 15px; color: var(--ink); pointer-events: none; }
+.dropzone p { font-size: var(--text-body); color: var(--ink); pointer-events: none; }
 .upload-list { margin-bottom: 1.5rem; }
 .upload-item {
   display: flex;
@@ -596,18 +605,18 @@ body {
   gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid var(--paper-2);
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--ink);
 }
 .upload-item:last-child { border-bottom: none; }
-.upload-icon { font-size: 16px; flex-shrink: 0; }
+.upload-icon { font-size: var(--text-lg); flex-shrink: 0; }
 
 /* ── TEAM GRID ── */
 .team-card {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--paper-2);
+  background: white;
   border-radius: var(--radius);
   padding: 0.65rem 0.85rem;
 }
@@ -615,15 +624,15 @@ body {
   width: 32px; height: 32px;
   border-radius: 50%;
   color: white;
-  font-size: 14px;
+  font-size: var(--text-md);
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.team-info strong { font-size: 14px; font-weight: 500; color: var(--ink); display: block; }
-.team-info span { font-size: 12px; color: var(--ink); }
+.team-info strong { font-size: var(--text-md); font-weight: 500; color: var(--ink); display: block; }
+.team-info span { font-size: var(--text-sm); color: var(--ink); }
 
 /* ── EDIT MODE ── */
 #edit-bar {
@@ -633,11 +642,11 @@ body {
   background: var(--ink);
   color: white;
   padding: 12px 24px;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 #edit-bar button {
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-md);
   padding: 5px 14px;
   border-radius: 4px;
   border: none;
@@ -652,7 +661,7 @@ body {
 #edit-reset {
   background: transparent;
   color: white;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 #edit-reset:hover { color: white; }
 .is-editable {
@@ -672,7 +681,7 @@ body {
   content: '\270E';
   position: absolute;
   top: -6px; right: -6px;
-  font-size: 9px;
+  font-size: var(--text-2xs);
   background: var(--accent);
   color: white;
   width: 14px; height: 14px;
@@ -692,7 +701,7 @@ body {
   border: none;
   background: #dc2626;
   color: white;
-  font-size: 11px;
+  font-size: var(--text-xs);
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.15s;
@@ -722,7 +731,7 @@ body {
   padding: 8px 16px;
   border: none;
   background: transparent;
-  font-size: 13px;
+  font-size: var(--text-base);
   color: var(--ink);
   cursor: pointer;
   text-align: left;
@@ -753,13 +762,13 @@ body {
   box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 .np-title {
-  font-size: 1.3rem;
+  font-size: var(--text-3xl);
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 4px;
 }
 .np-subtitle {
-  font-size: 13px;
+  font-size: var(--text-base);
   color: var(--ink);
   margin-bottom: 1.25rem;
 }
@@ -782,7 +791,7 @@ body {
   width: 32px; height: 32px;
   border-radius: 50%;
   color: white;
-  font-size: 14px;
+  font-size: var(--text-md);
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -790,8 +799,8 @@ body {
   flex-shrink: 0;
 }
 .np-info { display: flex; flex-direction: column; }
-.np-info strong { font-size: 14px; font-weight: 500; color: var(--ink); }
-.np-info span { font-size: 12px; color: var(--ink); }
+.np-info strong { font-size: var(--text-md); font-weight: 500; color: var(--ink); }
+.np-info span { font-size: var(--text-sm); color: var(--ink); }
 
 /* ── AUTHOR CHIP ── */
 #author-chip {
@@ -805,7 +814,7 @@ body {
   color: white;
   padding: 4px 10px 4px 4px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: var(--text-sm);
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   cursor: pointer;
   transition: background 0.15s, opacity 0.3s;
@@ -816,7 +825,7 @@ body {
   width: 20px; height: 20px;
   border-radius: 50%;
   color: white;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -825,7 +834,7 @@ body {
 .ac-name { color: white; }
 .ac-switch {
   color: white;
-  font-size: 12px;
+  font-size: var(--text-sm);
   padding-left: 4px;
 }
 
@@ -837,7 +846,7 @@ body {
   border-radius: 50%;
   border: none;
   background: transparent;
-  font-size: 14px;
+  font-size: var(--text-md);
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.15s;
@@ -854,7 +863,7 @@ body {
   top: -4px; right: -4px;
   background: var(--accent-2);
   color: white;
-  font-size: 9px;
+  font-size: var(--text-2xs);
   font-weight: 600;
   width: 16px; height: 16px;
   border-radius: 50%;
@@ -883,13 +892,13 @@ body {
   padding: 10px 14px;
   border-bottom: 1px solid var(--paper-2);
 }
-.ct-title { font-size: 12px; font-weight: 500; color: var(--ink); }
+.ct-title { font-size: var(--text-sm); font-weight: 500; color: var(--ink); }
 .ct-close {
   background: none;
   border: none;
   color: var(--ink);
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--text-md);
   padding: 0;
 }
 .ct-close:hover { color: var(--ink); }
@@ -908,21 +917,21 @@ body {
   gap: 6px;
   margin-bottom: 4px;
 }
-.ct-comment-author { font-size: 12px; font-weight: 500; color: var(--ink); }
-.ct-comment-time { font-size: 10px; color: var(--ink); margin-left: auto; }
+.ct-comment-author { font-size: var(--text-sm); font-weight: 500; color: var(--ink); }
+.ct-comment-time { font-size: var(--text-2xs); color: var(--ink); margin-left: auto; }
 .ct-comment-delete {
   background: none;
   border: none;
   color: var(--ink);
   cursor: pointer;
-  font-size: 11px;
+  font-size: var(--text-xs);
   padding: 0 0 0 6px;
   opacity: 0;
   transition: opacity 0.1s;
 }
 .ct-comment:hover .ct-comment-delete { opacity: 1; }
 .ct-comment-delete:hover { color: var(--accent-2); }
-.ct-comment-text { font-size: 13px; color: var(--ink); line-height: 1.5; }
+.ct-comment-text { font-size: var(--text-base); color: var(--ink); line-height: 1.5; }
 .ct-write {
   border-top: 1px solid var(--paper-2);
   padding: 10px 14px;
@@ -941,7 +950,7 @@ body {
   resize: none;
   padding: 8px 10px;
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-base);
   color: var(--ink);
   line-height: 1.5;
   background: var(--paper);
@@ -955,7 +964,7 @@ body {
 }
 .ct-save {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: var(--text-sm);
   padding: 5px 14px;
   border-radius: 4px;
   border: none;
@@ -968,14 +977,14 @@ body {
   width: 22px; height: 22px;
   border-radius: 50%;
   color: white;
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.aw-name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.aw-name { font-size: var(--text-sm); font-weight: 500; color: var(--ink); }
 
 /* ── ANNOTATE COUNTER ── */
 #annotate-counter {
@@ -989,14 +998,14 @@ body {
   color: white;
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 #annotate-counter button {
   background: rgba(255,255,255,0.15);
   border: none;
   color: white;
-  font-size: 11px;
+  font-size: var(--text-xs);
   padding: 2px 8px;
   border-radius: 3px;
   cursor: pointer;
@@ -1009,7 +1018,7 @@ footer {
   background: var(--paper-2);
   border-top: 1px solid var(--paper-3);
   padding: 1.25rem 2rem;
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--ink);
   display: flex;
   justify-content: space-between;
@@ -1044,11 +1053,12 @@ footer {
 
 <nav class="nav-bar">
   <button class="nav-tab" onclick="showSection('start', this)">Start here</button>
-  <button class="nav-tab active" onclick="showSection('track1', this)">Why subscribers don't convert</button>
-  <button class="nav-tab" onclick="showSection('track2', this)">Referral — a new channel</button>
-  <button class="nav-tab" onclick="showSection('workstreams', this)">Workstreams</button>
-  <button class="nav-tab" onclick="showSection('sharedata', this)">Share data</button>
-  <button class="nav-tab" onclick="showSection('agenda', this)">April 22 agenda</button>
+  <button class="nav-tab active" onclick="showSection('agenda', this)">Agenda</button>
+  <button class="nav-tab" onclick="showSection('survey', this)">Survey</button>
+  <button class="nav-tab" onclick="showSection('referral', this)">Referral</button>
+  <button class="nav-tab" onclick="showSection('done', this)">Done</button>
+  <button class="nav-tab" onclick="showSection('actions', this)">Actions</button>
+  <button class="nav-tab" onclick="showSection('missinginfo', this)">Missing info</button>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════ -->
@@ -1057,8 +1067,42 @@ footer {
 <section class="section" id="start">
 <div class="container">
 
-  <h2 class="section-heading">How this works</h2>
-  <p class="section-intro">Pick your name below. Then go through the tabs — read the research, look at the workstreams, and leave comments on anything. Hover any card and click 💬 to comment.</p>
+  <h2 class="section-heading">How this dashboard works</h2>
+  <p class="section-intro">This is a shared workspace for the April 22 strategy meeting. Everyone on the team can contribute before, during, and after the meeting.</p>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">What you can do</div>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="mechanism-card">
+      <div class="mc-num">1</div>
+      <div class="mc-title">Read the research</div>
+      <div class="mc-body"><strong>Why subscribers don't convert</strong> — 54 survey responses clustered by blocker type. Click a cluster to filter. <strong>Referral</strong> — a second growth channel through CT alumni.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">2</div>
+      <div class="mc-title">Comment on anything</div>
+      <div class="mc-body">Hover any card and click the 💬 icon. Your name is attached to your comment. Add corrections, context, or disagreements — this is the pre-meeting discussion.</div>
+    </div>
+  </div>
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="mechanism-card">
+      <div class="mc-num">3</div>
+      <div class="mc-title">Share data we're missing</div>
+      <div class="mc-body">The <strong>Share data</strong> tab has empty cards for email performance, registration numbers, and website traffic. Drop a PDF, screenshot, or fill in numbers — whatever you have.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">4</div>
+      <div class="mc-title">Review the workstreams</div>
+      <div class="mc-body">The <strong>Workstreams</strong> tab has 8 action cards. Each one needs an owner and a deadline — that's what we're deciding on April 22.</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="label">Before the meeting</div>
+    <p>Read the research tabs. Leave comments where you disagree or have context. Upload any data you have. Come to April 22 with a view on which workstreams should go first.</p>
+  </div>
 
   <div class="divider"></div>
 
@@ -1113,11 +1157,10 @@ footer {
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- TRACK 1 -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section active" id="track1">
+<section class="section" id="survey">
 <div class="container">
 
-  <div class="section-eyebrow">Track 1</div>
-  <h2 class="section-heading">Why subscribers don't convert</h2>
+  <h2 class="section-heading">Survey (subscribers / mailing list)</h2>
   <p class="section-intro">In 2023, subscribers were asked: what is the #1 thing stopping you from taking CT Foundation? 54 responded. What they say — and what they don't say — reveals the real conversion problem.</p>
 
   <div class="three-col" style="margin-bottom:1.5rem">
@@ -1152,7 +1195,7 @@ footer {
 
   <div style="margin-bottom:1rem">
     <div class="section-eyebrow" style="margin-bottom:0.5rem">Blocker clusters</div>
-    <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">Click a cluster to filter the responses below</p>
+    <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">Click a cluster to filter the responses below</p>
   </div>
 
   <div id="cluster-bars" class="cluster-section"></div>
@@ -1182,12 +1225,11 @@ footer {
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- TRACK 2 -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="track2">
+<section class="section" id="referral">
 <div class="container">
 
-  <div class="section-eyebrow">Track 2</div>
-  <h2 class="section-heading">Referral — a new channel</h2>
-  <p class="section-intro">A different lever entirely. CT alumni — people who have experienced the training — bringing in people who are not on the list at all.</p>
+  <h2 class="section-heading">Referral — the alumni channel</h2>
+  <p class="section-intro">CT alumni — people who have experienced the training — bringing in people who are not on the list at all. How do we set up a referral structure?</p>
 
   <div class="insight-box">
     <div class="label">Why this is a separate track</div>
@@ -1216,14 +1258,14 @@ footer {
 
   <div class="section-eyebrow" style="margin-bottom:1rem">The message that makes referral work</div>
 
-  <p style="font-size:15px;color:var(--ink);max-width:580px;margin-bottom:1.25rem;line-height:1.65">The survey gave us the exact message. A respondent who had been through NLP training and had CT explained to him wrote this unprompted:</p>
+  <p style="font-size:var(--text-body);color:var(--ink);max-width:580px;margin-bottom:1.25rem;line-height:1.65">The survey gave us the exact message. A respondent who had been through NLP training and had CT explained to him wrote this unprompted:</p>
 
   <div style="background:var(--paper-2);border-left:3px solid var(--accent-2);padding:1.1rem 1.25rem;border-radius:0 4px 4px 0;margin-bottom:1.5rem">
-    <p style="font-family:var(--sans);font-size:1.1rem;color:var(--ink);line-height:1.45;font-style:italic;margin-bottom:0.4rem">"Emphasize that you need to experience Core Transformation — the theory or a guided example is far less effective."</p>
-    <p style="font-size:12px;color:var(--ink)">— Ron Fiedler, survey respondent (NLP practitioner, already familiar with CT)</p>
+    <p style="font-family:var(--sans);font-size:var(--text-xl);color:var(--ink);line-height:1.45;font-style:italic;margin-bottom:0.4rem">"Emphasize that you need to experience Core Transformation — the theory or a guided example is far less effective."</p>
+    <p style="font-size:var(--text-sm);color:var(--ink)">— Ron Fiedler, survey respondent (NLP practitioner, already familiar with CT)</p>
   </div>
 
-  <p style="font-size:15px;color:var(--ink);max-width:580px;margin-bottom:1.5rem;line-height:1.65">This is what alumni can say that no promotional email can say. They have the experience. The referral message is not "my friend is offering a discount." It is: <em>"I thought I knew this. I didn't. Here's what changed when I actually did it."</em></p>
+  <p style="font-size:var(--text-body);color:var(--ink);max-width:580px;margin-bottom:1.5rem;line-height:1.65">This is what alumni can say that no promotional email can say. They have the experience. The referral message is not "my friend is offering a discount." It is: <em>"I thought I knew this. I didn't. Here's what changed when I actually did it."</em></p>
 
   <div class="section-eyebrow" style="margin-bottom:1rem">Suggested referral message frames</div>
 
@@ -1284,7 +1326,7 @@ footer {
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- WORKSTREAMS -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="workstreams">
+<section class="section" id="actions">
 <div class="container">
 
   <h2 class="section-heading">30-day sprint</h2>
@@ -1293,16 +1335,14 @@ footer {
   <div class="filter-row" id="ws-filters">
     <button class="f-pill active" onclick="filterWS('all',this)">All</button>
     <button class="f-pill" onclick="filterWS('branding',this)">Branding + positioning</button>
-    <button class="f-pill" onclick="filterWS('activation',this)">Database activation</button>
-    <button class="f-pill" onclick="filterWS('affiliate',this)">Affiliate + referral</button>
-    <button class="f-pill" onclick="filterWS('site',this)">Site + SEO</button>
+    <button class="f-pill" onclick="filterWS('sales',this)">Sales activation</button>
   </div>
 
   <div id="ws-list">
 
-    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+    <div class="qw-card" data-ws="sales" style="--qw-color:#2d5a3d">
       <div class="qw-header">
-        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
       </div>
       <h3 class="qw-title">Email the "almost ready" segment directly</h3>
       <p class="qw-body">~30% of respondents have been "about to do it" for years. They need a reason to act now — not more information. A personal email from Connirae with a deadline ("next cohort starts May X, here's your spot") could move 5-10 of them.</p>
@@ -1313,9 +1353,9 @@ footer {
       </div>
     </div>
 
-    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+    <div class="qw-card" data-ws="sales" style="--qw-color:#2d5a3d">
       <div class="qw-header">
-        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
       </div>
       <h3 class="qw-title">Address the "I already know CT" misconception</h3>
       <p class="qw-body">19% think they know CT from the book or NLP training. The survey contains the rebuttal — Ron Fiedler: "you need to EXPERIENCE CT, theory is far less effective." One email quoting respondents who felt this way could crack this segment open.</p>
@@ -1326,9 +1366,9 @@ footer {
       </div>
     </div>
 
-    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+    <div class="qw-card" data-ws="sales" style="--qw-color:#2d5a3d">
       <div class="qw-header">
-        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
       </div>
       <h3 class="qw-title">Ask 3 recent alumni: "What changed?"</h3>
       <p class="qw-body">Before building any referral mechanics, send a message to 3 recent CT graduates: "In one sentence — what changed for you after CT Foundation that you didn't expect?" Those answers become the referral message. Free. Immediate.</p>
@@ -1350,9 +1390,9 @@ footer {
       </div>
     </div>
 
-    <div class="qw-card" data-ws="affiliate" style="--qw-color:#d4622a">
+    <div class="qw-card" data-ws="sales" style="--qw-color:#d4622a">
       <div class="qw-header">
-        <span class="ws-tag" style="background:#d4622a">Affiliate</span>
+        <span class="ws-tag" style="background:#2d5a3d">Sales</span>
       </div>
       <h3 class="qw-title">Clone the WW affiliate funnel for CT — find one partner</h3>
       <p class="qw-body">The WW affiliate infrastructure already exists. Duplicate it for CT Foundation and test with one affiliate partner. Connirae, Tamara, or Zach identify one entity (training institute, IFS community, coaching school). One partner, one test, real data.</p>
@@ -1362,9 +1402,9 @@ footer {
       </div>
     </div>
 
-    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+    <div class="qw-card" data-ws="branding" style="--qw-color:#185FA5">
       <div class="qw-header">
-        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
       </div>
       <h3 class="qw-title">LLM SEO — make CT findable by AI</h3>
       <p class="qw-body">Live audit found: no meta descriptions, no Course/FAQ/Review schema, no visible pricing, hero doesn't explain what CT is. When someone asks ChatGPT "what is Core Transformation?" — the answer comes from everywhere except your site. Fix: schema markup, hero rewrite, visible pricing, structured testimonials.</p>
@@ -1374,9 +1414,9 @@ footer {
       </div>
     </div>
 
-    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+    <div class="qw-card" data-ws="branding" style="--qw-color:#185FA5">
       <div class="qw-header">
-        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
       </div>
       <h3 class="qw-title">Fix the website pop-up blocker</h3>
       <p class="qw-body">Survey respondent Hannah: "the website had a blocking pop-up — that was the biggest stumbling block." If there's an aggressive pop-up on the CT page, it's actively blocking conversions. Check and remove or delay it. 5 minutes.</p>
@@ -1386,9 +1426,9 @@ footer {
       </div>
     </div>
 
-    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+    <div class="qw-card" data-ws="branding" style="--qw-color:#185FA5">
       <div class="qw-header">
-        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
       </div>
       <h3 class="qw-title">Add "What CT Foundation is NOT" to the sales page</h3>
       <p class="qw-body">15% of survey respondents are uncertain what CT delivers. They're not cold — they're confused warm leads. A short "This is for you if..." block on the sales page addresses this directly.</p>
@@ -1401,9 +1441,18 @@ footer {
 
   </div>
 
-  <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:0.75rem">What's been tried — team, fill in what you know</div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- DONE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="done">
+<div class="container">
+
+  <h2 class="section-heading">What's been done</h2>
+  <p class="section-intro">Everything that's already been done for CT Foundation growth — so we don't repeat, and so we can see what produced data and what didn't.</p>
 
   <div class="tried-list">
     <div class="tried-row"><span class="tried-q">Dedicated CT Foundation email campaign in the last 12 months?</span><span class="tried-a">—</span></div>
@@ -1411,7 +1460,7 @@ footer {
     <div class="tried-row"><span class="tried-q">Dedicated CT Foundation sales page? URL?</span><span class="tried-a">—</span></div>
     <div class="tried-row"><span class="tried-q">Any A/B testing on sales page or checkout?</span><span class="tried-a">—</span></div>
     <div class="tried-row"><span class="tried-q">Any paid advertising for CT Foundation?</span><span class="tried-a">—</span></div>
-    <div class="tried-row"><span class="tried-q">Any referral or affiliate program tried for CT?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any referral or affiliate program for CT?</span><span class="tried-a">—</span></div>
     <div class="tried-row"><span class="tried-q">Any discounts, early bird, or payment plans offered?</span><span class="tried-a">—</span></div>
     <div class="tried-row"><span class="tried-q">What did Duff send in the last 3 months for CT?</span><span class="tried-a">—</span></div>
   </div>
@@ -1420,13 +1469,13 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<!-- SHARE DATA -->
+<!-- MISSING INFO -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="sharedata">
+<section class="section" id="missinginfo">
 <div class="container">
 
-  <h2 class="section-heading">Data we all need</h2>
-  <p class="section-intro">To make real decisions on April 22, we need these numbers in the room.</p>
+  <h2 class="section-heading">Missing info</h2>
+  <p class="section-intro">Data we still need before April 22. Fill in what you have — numbers, screenshots, PDFs.</p>
 
   <!-- UPLOAD DROPZONE -->
   <div class="dropzone" id="dropzone">
@@ -1478,7 +1527,7 @@ footer {
 
   <!-- WEBSITE TRAFFIC -->
   <div class="section-eyebrow" style="margin-bottom:1rem">1. Website traffic</div>
-  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From Google Analytics — whoever has access.</p>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">From Google Analytics — whoever has access.</p>
 
   <div class="three-col" style="margin-bottom:1.5rem">
     <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
@@ -1502,7 +1551,7 @@ footer {
 
   <!-- REGISTRATION NUMBERS -->
   <div class="section-eyebrow" style="margin-bottom:1rem">2. Registration numbers</div>
-  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From GHL, Stripe, or whoever processes enrollment.</p>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">From GHL, Stripe, or whoever processes enrollment.</p>
 
   <div class="three-col" style="margin-bottom:1.5rem">
     <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
@@ -1526,7 +1575,7 @@ footer {
 
   <!-- EMAIL PERFORMANCE -->
   <div class="section-eyebrow" style="margin-bottom:1rem">3. Email performance</div>
-  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From GHL or the email platform — Duff likely has this.</p>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">From GHL or the email platform — Duff likely has this.</p>
 
   <div class="two-col" style="margin-bottom:1.5rem">
     <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
@@ -1543,28 +1592,9 @@ footer {
 
   <div class="divider"></div>
 
-  <!-- JASON'S SURVEY -->
-  <div class="section-eyebrow" style="margin-bottom:1rem">4. Jason's "Why did you sign up?" survey</div>
-  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">~80 responses from people who DID convert. The counterpart to the Track 1 data above.</p>
-
-  <div class="insight-box warm">
-    <div class="label">Why this matters</div>
-    <p>Track 1 tells us why people don't convert. This survey tells us why people do. The gap between the two is where the strategy lives. We need both in the same room.</p>
-  </div>
-
-  <div class="evidence-row">
-    <div class="ev-icon" style="background:#f5ede0;color:#993C1D">J</div>
-    <div class="ev-body">
-      <strong>Jason — can you share the raw results or a summary?</strong>
-      <span>PDF, spreadsheet, or even a screenshot of the top-line findings. Peter will integrate it into this dashboard.</span>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
   <!-- TEAM ROLES -->
-  <div class="section-eyebrow" style="margin-bottom:1rem">5. Team — who does what</div>
-  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">So everyone knows who owns which piece after April 22.</p>
+  <div class="section-eyebrow" style="margin-bottom:1rem">4. Team — who does what</div>
+  <p style="font-size:var(--text-base);color:var(--ink);margin-bottom:1rem">So everyone knows who owns which piece after April 22.</p>
 
   <div class="two-col" style="margin-bottom:1.5rem">
     <div class="mechanism-card" style="border:1px dashed var(--paper-3)">
@@ -1585,99 +1615,69 @@ footer {
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- AGENDA -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="agenda">
+<section class="section active" id="agenda">
 <div class="container">
 
-  <div class="section-eyebrow">April 22 — Strategy meeting</div>
-  <h2 class="section-heading">What we're deciding</h2>
-  <p class="section-intro">Two decisions. Not a discussion about everything — two decisions we can implement immediately after the meeting.</p>
+  <h2 class="section-heading">April 22 — Strategy meeting</h2>
+  <p class="section-intro">Two decisions we can implement immediately after the meeting.</p>
 
-  <div class="insight-box">
-    <div class="label">The framing question</div>
-    <p>Before campaigns, referral builds, or product ladders: who are we actually talking to — and what would make them act this month rather than next year? This question determines which track gets prioritized first and what the message is.</p>
-  </div>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>Framing question:</strong> Who are we actually talking to — and what would make them act this month rather than next year?</p>
 
   <div class="divider"></div>
 
   <div class="agenda-item">
     <div class="agenda-num">1</div>
     <div class="agenda-body">
-      <div class="agenda-time">20 min — diagnosis</div>
       <h3>Align on the actual blocker</h3>
-      <p>The survey says the problem is activation, not positioning or price. Does the team agree? Review the Track 1 data together. Confirm or challenge the read. This shapes everything that follows.</p>
-      <p class="agenda-decide">Decision needed: Is this an activation problem or a reach problem?</p>
+      <p>20 minutes — diagnosis</p>
+      <p>The survey says the problem is activation, not positioning or price. Does the team agree? This shapes everything that follows.</p>
+      <p><strong>Decision:</strong> Is this an activation problem or a reach problem?</p>
     </div>
   </div>
 
   <div class="agenda-item">
     <div class="agenda-num">2</div>
     <div class="agenda-body">
-      <div class="agenda-time">25 min — Track 1</div>
       <h3>One positioning experiment for the existing list</h3>
-      <p>Based on the survey, the most promising angle is the "you think you know CT" segment — people who read the book or did it in an NLP training. Define the message, the audience segment, and how we measure whether it's working. Not a full campaign — one test.</p>
-      <p class="agenda-decide">Decision needed: Which segment, which message, which channel, what does success look like?</p>
+      <p>25 minutes — subscriber activation</p>
+      <p>The most promising angle is the "you think you know CT" segment. Define the message, the audience, and how we measure success. One test, not a full campaign.</p>
+      <p><strong>Decision:</strong> Which segment, which message, which channel, what does success look like?</p>
     </div>
   </div>
 
   <div class="agenda-item">
     <div class="agenda-num">3</div>
     <div class="agenda-body">
-      <div class="agenda-time">20 min — Track 2</div>
       <h3>Green-light the referral build</h3>
-      <p>Decide on the reward structure so Ivan and Yssa can start building immediately after the meeting. The mechanics are clear. The open question is what the alumni reward actually is.</p>
-      <p class="agenda-decide">Decision needed: What is the reward? Foundation only or all trainings? Campaign or permanent?</p>
+      <p>20 minutes — alumni referral</p>
+      <p>Decide on the reward structure so Ivan and Yssa can start building immediately after the meeting.</p>
+      <p><strong>Decision:</strong> What is the reward? Foundation only or all trainings? Campaign or permanent?</p>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:1rem">What ANLP should bring to April 22</div>
+  <h3 style="font-size:var(--text-body);font-weight:600;color:var(--ink);margin-bottom:1rem">What ANLP should bring</h3>
 
-  <div class="evidence-row">
-    <div class="ev-icon">1</div>
-    <div class="ev-body">
-      <strong>Historical CT registration data</strong>
-      <span>Last 2-3 Foundation cohorts. List size at promo time, registrations, conversion if available. Even rough numbers.</span>
-    </div>
-  </div>
-  <div class="evidence-row">
-    <div class="ev-icon">2</div>
-    <div class="ev-body">
-      <strong>Jason's "Why did you sign up?" survey results</strong>
-      <span>~80 responses. This is the counterpart to the survey above — it tells us what actually works for people who did convert. The gap between the two datasets is the strategy.</span>
-    </div>
-  </div>
-  <div class="evidence-row">
-    <div class="ev-icon">3</div>
-    <div class="ev-body">
-      <strong>Duff on the call</strong>
-      <span>His ground-level read on what's working and what isn't in the email sends is not in any data file. It should be in the room.</span>
-    </div>
-  </div>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>1.</strong> Historical CT registration data — last 2-3 Foundation cohorts, list size, registrations, conversion</p>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>2.</strong> Jason's "Why did you sign up?" survey results — ~80 responses from people who DID convert</p>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:0.5rem"><strong>3.</strong> Duff on the call — his ground-level read on what's working in the email sends</p>
 
   <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:1rem">After April 22 — next steps</div>
-  <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">This section gets filled in during the meeting. Who does what, by when.</p>
+  <h3 style="font-size:var(--text-body);font-weight:600;color:var(--ink);margin-bottom:1rem">After April 22 — next steps</h3>
+  <p style="font-size:var(--text-body);color:var(--ink);margin-bottom:1rem">This section gets filled in during the meeting. Who does what, by when.</p>
 
   <div class="next-steps-list" id="next-steps">
-    <div class="ns-item" style="border-left-color:#2d5a3d">
+    <div class="ns-item">
       <div class="ns-what">—</div>
       <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
     </div>
-    <div class="ns-item" style="border-left-color:#d4622a">
+    <div class="ns-item">
       <div class="ns-what">—</div>
       <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
     </div>
-    <div class="ns-item" style="border-left-color:#185FA5">
-      <div class="ns-what">—</div>
-      <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
-    </div>
-    <div class="ns-item" style="border-left-color:#854F0B">
-      <div class="ns-what">—</div>
-      <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
-    </div>
-    <div class="ns-item" style="border-left-color:#6B4C9A">
+    <div class="ns-item">
       <div class="ns-what">—</div>
       <div class="ns-meta"><span class="ns-who">Owner: TBD</span><span class="ns-when">Deadline: TBD</span></div>
     </div>
