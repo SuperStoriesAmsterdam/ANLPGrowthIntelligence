@@ -51,7 +51,9 @@
     '.ns-who',
     '.ns-when',
     '.qw-owner-name',
-    '.qw-tl-date'
+    '.qw-tl-date',
+    '.tried-q',
+    '.tried-a'
   ].join(', ');
 
   /* ── Selectors for deletable blocks ── */

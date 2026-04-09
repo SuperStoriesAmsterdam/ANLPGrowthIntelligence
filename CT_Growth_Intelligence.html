@@ -55,7 +55,7 @@ body {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
+  text-transform: none;
   color: rgba(247,244,239,0.45);
   margin-bottom: 1rem;
 }
@@ -151,7 +151,7 @@ body {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--ink);
   margin-bottom: 0.5rem;
 }
@@ -199,7 +199,7 @@ body {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--accent);
   margin-bottom: 0.4rem;
 }
@@ -259,7 +259,7 @@ body {
   font-weight: 500;
   color: var(--ink);
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: none;
   margin-bottom: 12px;
 }
 .quote-card {
@@ -389,7 +389,7 @@ body {
 .message-card .mc-label {
   font-size: 11px;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  text-transform: none;
   color: rgba(247,244,239,0.4);
   margin-bottom: 0.5rem;
 }
@@ -484,7 +484,7 @@ body {
   font-weight: 500;
   padding: 2px 8px;
   border-radius: 2px;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.04em;
   flex-shrink: 0;
 }
@@ -524,7 +524,7 @@ body {
   border-radius: 2px;
   background: var(--qw-color, var(--accent));
   color: white;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.04em;
 }
 .qw-effort {
@@ -534,7 +534,7 @@ body {
   border-radius: 2px;
   background: var(--paper-2);
   color: var(--ink);
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.04em;
 }
 .qw-title {
@@ -559,6 +559,26 @@ body {
 .qw-owner, .qw-timeline { font-size: 13px; display: flex; gap: 6px; align-items: center; }
 .qw-owner-label, .qw-tl-label { color: var(--ink); font-weight: 500; }
 .qw-owner-name, .qw-tl-date { color: var(--ink); }
+
+/* ── TRIED LIST ── */
+.tried-list { margin-bottom: 1.5rem; }
+.tried-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--paper-2);
+  font-size: 14px;
+}
+.tried-row:last-child { border-bottom: none; }
+.tried-q { color: var(--ink); flex: 1; }
+.tried-a {
+  color: var(--ink);
+  font-weight: 500;
+  min-width: 80px;
+  text-align: right;
+}
 
 /* ── NEXT STEPS ── */
 .next-steps-list { display: flex; flex-direction: column; gap: 8px; }
@@ -995,6 +1015,9 @@ footer {
 </header>
 
 <nav class="nav-bar">
+  <button class="nav-tab" onclick="showSection('howto', this)">
+    <span class="nav-indicator" style="background:#4a4840"></span>How this works
+  </button>
   <button class="nav-tab active" onclick="showSection('track1', this)">
     <span class="nav-indicator" style="background:#2d5a3d"></span>Track 1 — Database activation
   </button>
@@ -1011,6 +1034,94 @@ footer {
     <span class="nav-indicator" style="background:#4a4840"></span>April 22 agenda
   </button>
 </nav>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- HOW THIS WORKS -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="howto">
+<div class="container">
+
+  <h2 class="section-heading">How this dashboard works</h2>
+  <p class="section-intro">This is a shared workspace for the April 22 strategy meeting. Everyone on the team can contribute before, during, and after the meeting.</p>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">What you can do</div>
+
+  <div class="two-col" style="margin-bottom:2rem">
+    <div class="mechanism-card">
+      <div class="mc-num">💬</div>
+      <div class="mc-title">Comment on any block</div>
+      <div class="mc-body">Hover any card, insight box, or data block — a 💬 icon appears top-right. Click it to open a comment thread. Write your note, hit Post or Cmd+Enter. Your comments are tagged with your name and visible to everyone.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">✎</div>
+      <div class="mc-title">Edit any text</div>
+      <div class="mc-body">Click "Edit page" in the bottom bar. All text becomes editable — click to change. Green dot shows what's been changed. Right-click edited text to revert. "Reset all edits" restores everything. Red ✕ buttons let you delete entire blocks.</div>
+    </div>
+  </div>
+  <div class="two-col" style="margin-bottom:2rem">
+    <div class="mechanism-card">
+      <div class="mc-num">↻</div>
+      <div class="mc-title">Switch who you are</div>
+      <div class="mc-body">Your name chip is in the bottom-right corner. Click ↻ to switch to a different team member. On first visit, you'll be asked to pick your name.</div>
+    </div>
+    <div class="mechanism-card">
+      <div class="mc-num">📤</div>
+      <div class="mc-title">Export comments</div>
+      <div class="mc-body">When there are comments, an export bar appears bottom-left. Click Export to download all comments as a JSON file. Click Clear to start fresh.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">The team</div>
+
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#2d5a3d;width:32px;height:32px;font-size:14px;flex-shrink:0">P</span>
+      <div><strong style="font-size:14px;display:block">Peter</strong><span style="font-size:12px;color:var(--ink)">Strategy — Superstories</span></div>
+    </div>
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#854F0B;width:32px;height:32px;font-size:14px;flex-shrink:0">C</span>
+      <div><strong style="font-size:14px;display:block">Connirae</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    </div>
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#993C1D;width:32px;height:32px;font-size:14px;flex-shrink:0">M</span>
+      <div><strong style="font-size:14px;display:block">Mark</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    </div>
+  </div>
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#185FA5;width:32px;height:32px;font-size:14px;flex-shrink:0">T</span>
+      <div><strong style="font-size:14px;display:block">Tamara</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    </div>
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#6B4C9A;width:32px;height:32px;font-size:14px;flex-shrink:0">Z</span>
+      <div><strong style="font-size:14px;display:block">Zach</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    </div>
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#4a4840;width:32px;height:32px;font-size:14px;flex-shrink:0">D</span>
+      <div><strong style="font-size:14px;display:block">Duff</strong><span style="font-size:12px;color:var(--ink)">ANLP — Email</span></div>
+    </div>
+  </div>
+  <div class="three-col" style="margin-bottom:1.5rem">
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#8B6914;width:32px;height:32px;font-size:14px;flex-shrink:0">P</span>
+      <div><strong style="font-size:14px;display:block">Petrolene</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    </div>
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#9B4D6A;width:32px;height:32px;font-size:14px;flex-shrink:0">L</span>
+      <div><strong style="font-size:14px;display:block">Lavinia</strong><span style="font-size:12px;color:var(--ink)">ANLP</span></div>
+    </div>
+    <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
+      <span class="np-avatar" style="background:#d4622a;width:32px;height:32px;font-size:14px;flex-shrink:0">I</span>
+      <div><strong style="font-size:14px;display:block">Team I&Y</strong><span style="font-size:12px;color:var(--ink)">GHL build</span></div>
+    </div>
+  </div>
+
+</div>
+</section>
 
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- TRACK 1 -->
@@ -1343,16 +1454,16 @@ footer {
   <div class="section-eyebrow" style="margin-bottom:0.75rem">What's been tried — team, fill in what you know</div>
   <p style="font-size:14px;color:var(--ink);margin-bottom:1rem;line-height:1.65">Before we propose new things, we need to know what already ran. Add to this list.</p>
 
-  <ul style="font-size:14px;color:var(--ink);line-height:2;margin-bottom:1rem;padding-left:1.25rem">
-    <li>Dedicated CT Foundation email campaign in the last 12 months? — <strong>—</strong></li>
-    <li>CT welcome/nurture email sequence running? — <strong>—</strong></li>
-    <li>Dedicated CT Foundation sales page? URL? — <strong>—</strong></li>
-    <li>Any A/B testing on sales page or checkout? — <strong>—</strong></li>
-    <li>Any paid advertising for CT Foundation? — <strong>—</strong></li>
-    <li>Any referral or affiliate program tried for CT? — <strong>—</strong></li>
-    <li>Any discounts, early bird, or payment plans offered? — <strong>—</strong></li>
-    <li>What did Duff send in the last 3 months for CT? — <strong>—</strong></li>
-  </ul>
+  <div class="tried-list">
+    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation email campaign in the last 12 months?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">CT welcome/nurture email sequence running?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Dedicated CT Foundation sales page? URL?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any A/B testing on sales page or checkout?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any paid advertising for CT Foundation?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any referral or affiliate program tried for CT?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">Any discounts, early bird, or payment plans offered?</span><span class="tried-a">—</span></div>
+    <div class="tried-row"><span class="tried-q">What did Duff send in the last 3 months for CT?</span><span class="tried-a">—</span></div>
+  </div>
 
   <div class="divider"></div>
 
