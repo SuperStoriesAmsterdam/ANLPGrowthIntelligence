@@ -105,7 +105,7 @@ body {
 }
 .nav-tab {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   padding: 1rem 1.75rem;
   border: none;
@@ -143,7 +143,7 @@ body {
 
 @media (max-width: 640px) {
   .two-col, .three-col { grid-template-columns: 1fr; }
-  .nav-tab { padding: 1rem 1rem; font-size: 12px; }
+  .nav-tab { padding: 1rem 1rem; font-size: 14px; }
 }
 
 /* ── SECTION TITLE ── */
@@ -163,6 +163,7 @@ body {
   line-height: 1.2;
 }
 .section-intro {
+  font-family: var(--sans);
   font-size: 16px;
   color: var(--ink);
   max-width: 660px;
@@ -204,6 +205,7 @@ body {
   margin-bottom: 0.4rem;
 }
 .insight-box p {
+  font-family: var(--sans);
   font-size: 15px;
   color: #1a1814;
   line-height: 1.7;
@@ -545,7 +547,15 @@ body {
   text-transform: none;
   line-height: 1.3;
 }
-.qw-body { font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; text-transform: none; }
+.qw-body { font-family: var(--sans); font-size: 14px; color: var(--ink); line-height: 1.65; margin-bottom: 8px; text-transform: none; }
+.ws-tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 3px;
+  color: white;
+}
 .qw-data { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .qw-ownership {
@@ -1019,13 +1029,10 @@ footer {
     <span class="nav-indicator" style="background:#4a4840"></span>How this works
   </button>
   <button class="nav-tab active" onclick="showSection('track1', this)">
-    <span class="nav-indicator" style="background:#2d5a3d"></span>Track 1 — Database activation
+    <span class="nav-indicator" style="background:#2d5a3d"></span>Research
   </button>
-  <button class="nav-tab" onclick="showSection('track2', this)">
-    <span class="nav-indicator" style="background:#d4622a"></span>Track 2 — Referral from believers
-  </button>
-  <button class="nav-tab" onclick="showSection('quickwins', this)">
-    <span class="nav-indicator" style="background:#2d5a3d"></span>Quick wins
+  <button class="nav-tab" onclick="showSection('workstreams', this)">
+    <span class="nav-indicator" style="background:#d4622a"></span>Workstreams
   </button>
   <button class="nav-tab" onclick="showSection('dataneeded', this)">
     <span class="nav-indicator" style="background:#185FA5"></span>Data we all need
@@ -1398,61 +1405,125 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<!-- QUICK WINS -->
+<!-- WORKSTREAMS -->
 <!-- ══════════════════════════════════════════════════════ -->
-<section class="section" id="quickwins">
+<section class="section" id="workstreams">
 <div class="container">
 
-  <div class="section-eyebrow">30-day sprint</div>
-  <h2 class="section-heading">Quick wins</h2>
-  <p class="section-intro">Each card gets an owner and a deadline on April 22. Run with it, report back May 22. No micro-management in between.</p>
+  <h2 class="section-heading">Workstreams — 30-day sprint</h2>
+  <p class="section-intro">Each card gets one owner and one deadline on April 22. Run with it, report back May 22. No status updates in between.</p>
 
-  <!-- ── FUNNEL ── -->
-  <div class="section-eyebrow" style="margin-bottom:0.75rem;margin-top:1rem">Conversion funnel — fill in what you know</div>
+  <div class="filter-row" id="ws-filters">
+    <button class="f-pill active" onclick="filterWS('all',this)">All</button>
+    <button class="f-pill" onclick="filterWS('branding',this)" style="--pill-active-bg:#993C1D">Branding + positioning</button>
+    <button class="f-pill" onclick="filterWS('activation',this)" style="--pill-active-bg:#2d5a3d">Database activation</button>
+    <button class="f-pill" onclick="filterWS('affiliate',this)" style="--pill-active-bg:#d4622a">Affiliate + referral</button>
+    <button class="f-pill" onclick="filterWS('site',this)" style="--pill-active-bg:#185FA5">Site + SEO</button>
+  </div>
 
-  <div class="funnel" style="margin-bottom:1.5rem">
-    <div class="funnel-step" style="--funnel-width:100%;--funnel-color:#2d5a3d">
-      <div class="fs-bar"></div>
-      <div class="fs-info">
-        <div class="fs-label">Email list size</div>
-        <div class="fs-number">—</div>
-        <div class="fs-note">Total subscribers who receive CT-related emails</div>
+  <div id="ws-list">
+
+    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+      </div>
+      <h3 class="qw-title">Email the "almost ready" segment directly</h3>
+      <p class="qw-body">~30% of respondents have been "about to do it" for years. They need a reason to act now — not more information. A personal email from Connirae with a deadline ("next cohort starts May X, here's your spot") could move 5-10 of them.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
       </div>
     </div>
-    <div class="funnel-arrow">↓</div>
-    <div class="funnel-step" style="--funnel-width:60%;--funnel-color:#185FA5">
-      <div class="fs-bar"></div>
-      <div class="fs-info">
-        <div class="fs-label">Opened promo email</div>
-        <div class="fs-number">—</div>
-        <div class="fs-note">Open rate on last CT Foundation campaign</div>
+
+    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+      </div>
+      <h3 class="qw-title">Address the "I already know CT" misconception</h3>
+      <p class="qw-body">19% think they know CT from the book or NLP training. The survey contains the rebuttal — Ron Fiedler: "you need to EXPERIENCE CT, theory is far less effective." One email quoting respondents who felt this way could crack this segment open.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
       </div>
     </div>
-    <div class="funnel-arrow">↓</div>
-    <div class="funnel-step" style="--funnel-width:25%;--funnel-color:#854F0B">
-      <div class="fs-bar"></div>
-      <div class="fs-info">
-        <div class="fs-label">Clicked through</div>
-        <div class="fs-number">—</div>
-        <div class="fs-note">Click-through rate — opened → clicked the CTA</div>
+
+    <div class="qw-card" data-ws="activation" style="--qw-color:#2d5a3d">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#2d5a3d">Activation</span>
+      </div>
+      <h3 class="qw-title">Ask 3 recent alumni: "What changed?"</h3>
+      <p class="qw-body">Before building any referral mechanics, send a message to 3 recent CT graduates: "In one sentence — what changed for you after CT Foundation that you didn't expect?" Those answers become the referral message. Free. Immediate.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
       </div>
     </div>
-    <div class="funnel-arrow">↓</div>
-    <div class="funnel-step" style="--funnel-width:5%;--funnel-color:#d4622a">
-      <div class="fs-bar"></div>
-      <div class="fs-info">
-        <div class="fs-label">Registered</div>
-        <div class="fs-number">—</div>
-        <div class="fs-note">Actual CT Foundation sign-ups (last cohort)</div>
+
+    <div class="qw-card" data-ws="branding" style="--qw-color:#993C1D">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#993C1D">Branding</span>
+      </div>
+      <h3 class="qw-title">Position CT as parts work — ride the IFS wave</h3>
+      <p class="qw-body">Parts work has gone mainstream thanks to IFS — growing 30%+ YoY. CT is parts work, but the site doesn't say so. The word "parts" appears nowhere. One sentence on the homepage, FAQ schema for "what is parts work," and a comparison page (CT vs IFS) puts CT in the conversation that's already happening.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2</span></div>
       </div>
     </div>
+
+    <div class="qw-card" data-ws="affiliate" style="--qw-color:#d4622a">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#d4622a">Affiliate</span>
+      </div>
+      <h3 class="qw-title">Clone the WW affiliate funnel for CT — find one partner</h3>
+      <p class="qw-body">The WW affiliate infrastructure already exists. Duplicate it for CT Foundation and test with one affiliate partner. Connirae, Tamara, or Zach identify one entity (training institute, IFS community, coaching school). One partner, one test, real data.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Connirae / Tamara + Team I&Y</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1–2</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+      </div>
+      <h3 class="qw-title">LLM SEO — make CT findable by AI</h3>
+      <p class="qw-body">Live audit found: no meta descriptions, no Course/FAQ/Review schema, no visible pricing, hero doesn't explain what CT is. When someone asks ChatGPT "what is Core Transformation?" — the answer comes from everywhere except your site. Fix: schema markup, hero rewrite, visible pricing, structured testimonials.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Peter / Superstories</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2–3</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+      </div>
+      <h3 class="qw-title">Fix the website pop-up blocker</h3>
+      <p class="qw-body">Survey respondent Hannah: "the website had a blocking pop-up — that was the biggest stumbling block." If there's an aggressive pop-up on the CT page, it's actively blocking conversions. Check and remove or delay it. 5 minutes.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
+      </div>
+    </div>
+
+    <div class="qw-card" data-ws="site" style="--qw-color:#185FA5">
+      <div class="qw-header">
+        <span class="ws-tag" style="background:#185FA5">Site + SEO</span>
+      </div>
+      <h3 class="qw-title">Add "What CT Foundation is NOT" to the sales page</h3>
+      <p class="qw-body">15% of survey respondents are uncertain what CT delivers. They're not cold — they're confused warm leads. A short "This is for you if…" block on the sales page addresses this directly.</p>
+      <div class="qw-ownership">
+        <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
+        <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+      </div>
+    </div>
+
   </div>
 
   <div class="divider"></div>
 
-  <!-- ── WHAT'S BEEN TRIED ── -->
   <div class="section-eyebrow" style="margin-bottom:0.75rem">What's been tried — team, fill in what you know</div>
-  <p style="font-size:14px;color:var(--ink);margin-bottom:1rem;line-height:1.65">Before we propose new things, we need to know what already ran. Add to this list.</p>
 
   <div class="tried-list">
     <div class="tried-row"><span class="tried-q">Dedicated CT Foundation email campaign in the last 12 months?</span><span class="tried-a">—</span></div>
@@ -1463,183 +1534,6 @@ footer {
     <div class="tried-row"><span class="tried-q">Any referral or affiliate program tried for CT?</span><span class="tried-a">—</span></div>
     <div class="tried-row"><span class="tried-q">Any discounts, early bird, or payment plans offered?</span><span class="tried-a">—</span></div>
     <div class="tried-row"><span class="tried-q">What did Duff send in the last 3 months for CT?</span><span class="tried-a">—</span></div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ── WORKSTREAM CARDS ── -->
-  <div class="section-eyebrow" style="margin-bottom:0.75rem">The three workstreams</div>
-
-  <div class="divider"></div>
-
-  <div class="qw-card" style="--qw-color:#2d5a3d">
-    <div class="qw-header">
-      <div class="qw-priority">High impact</div>
-      <div class="qw-effort">Low effort</div>
-    </div>
-    <h3 class="qw-title">Email the "almost ready" segment directly</h3>
-    <p class="qw-body">~30% of respondents have been "about to do it" for years. They don't need more information — they need a reason to act <em>now</em>. A single personal email from Connirae with a deadline ("next cohort starts May X, here's your spot") could move 5-10 of them.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#2d5a3d18;color:#2d5a3d">Low urgency cluster — 22 people</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
-    </div>
-  </div>
-
-  <div class="qw-card" style="--qw-color:#854F0B">
-    <div class="qw-header">
-      <div class="qw-priority">High impact</div>
-      <div class="qw-effort">Medium effort</div>
-    </div>
-    <h3 class="qw-title">Address the "I already know CT" misconception</h3>
-    <p class="qw-body">19% think they already know CT from the book or an NLP training. The survey itself contains the rebuttal — Ron Fiedler wrote it: "you need to EXPERIENCE CT, theory is far less effective." One email that quotes actual respondents who felt this way could crack this segment open.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#854F0B18;color:#854F0B">Already know CT cluster — 10 people</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
-    </div>
-  </div>
-
-  <div class="qw-card" style="--qw-color:#993C1D">
-    <div class="qw-header">
-      <div class="qw-priority">Medium impact</div>
-      <div class="qw-effort">Low effort</div>
-    </div>
-    <h3 class="qw-title">Fix the website pop-up blocker</h3>
-    <p class="qw-body">Hannah (survey respondent) explicitly said: "the website had a blocking pop-up — that was the biggest stumbling block." If there's an aggressive pop-up on the CT page, it's actively blocking conversions. Check and remove or delay it — takes 5 minutes.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#993C1D18;color:#993C1D">Directly from survey — 1 mention but likely affects many</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
-    </div>
-  </div>
-
-  <div class="qw-card" style="--qw-color:#185FA5">
-    <div class="qw-header">
-      <div class="qw-priority">Medium impact</div>
-      <div class="qw-effort">Low effort</div>
-    </div>
-    <h3 class="qw-title">Add "What CT Foundation is NOT" to the sales page</h3>
-    <p class="qw-body">15% are uncertain what CT actually delivers. Rose Sowa joined but "can't get past session 2." Ruth Gougian "doesn't really understand what CT is about." These aren't cold leads — they're confused warm leads. A short FAQ or "This is for you if…" block on the sales page addresses this directly.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#185FA518;color:#185FA5">Uncertainty cluster — 8 people</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
-    </div>
-  </div>
-
-  <div class="qw-card" style="--qw-color:#6B4C9A">
-    <div class="qw-header">
-      <div class="qw-priority">Strategic</div>
-      <div class="qw-effort">Zero effort</div>
-    </div>
-    <h3 class="qw-title">Ask 3 recent alumni: "What changed?"</h3>
-    <p class="qw-body">Track 2 (referral) needs alumni voice. Before building any referral mechanics, send a quick message to 3 recent CT graduates: "In one sentence — what changed for you after CT Foundation that you didn't expect?" Those answers become the referral message. Free. Immediate.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#6B4C9A18;color:#6B4C9A">Feeds Track 2 — referral from believers</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1</span></div>
-    </div>
-  </div>
-
-  <div class="qw-card" style="--qw-color:#d4622a">
-    <div class="qw-header">
-      <div class="qw-priority">High impact</div>
-      <div class="qw-effort">Medium effort</div>
-    </div>
-    <h3 class="qw-title">LLM SEO — make the CT site readable by AI</h3>
-    <p class="qw-body">We ran a live analysis of coretransformation.org. The findings: no meta descriptions, no FAQ schema, no Course or Product schema, no pricing on the page, and the hero doesn't explain what CT actually <em>is</em>. When someone asks ChatGPT "what is Core Transformation?" — the answer comes from everywhere except your site. Specific fixes: add Course schema to CT Foundation page, add FAQ schema with the 5 most common questions, rewrite the hero to define CT in one sentence, add visible pricing, and structure testimonials so LLMs can extract them.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#d4622a18;color:#d4622a">Live audit of coretransformation.org — April 2026</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Peter / Superstories</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2–3</span></div>
-    </div>
-  </div>
-
-  <div class="qw-card" style="--qw-color:#993C1D">
-    <div class="qw-header">
-      <div class="qw-priority">High impact</div>
-      <div class="qw-effort">Low effort</div>
-    </div>
-    <h3 class="qw-title">Position CT as parts work — ride the IFS wave</h3>
-    <p class="qw-body">Parts work has gone mainstream thanks to IFS. People are actively searching for it. CT <em>is</em> parts work — but the site doesn't say so. The word "parts" appears nowhere on the homepage. Meanwhile IFS is growing 30%+ year on year. There are only a handful of serious parts work methods in the world. CT is one of them — and it predates most of them. One sentence on the homepage, FAQ schema for "what is parts work," and a comparison page (CT vs IFS vs other approaches) puts CT in the conversation that's already happening. You don't need to compete with IFS. You need to be found alongside it.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#993C1D18;color:#993C1D">Category positioning — parts work is a rising search term</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD — assign on April 22</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 2</span></div>
-    </div>
-  </div>
-
-  <div class="qw-card" style="--qw-color:#d4622a">
-    <div class="qw-header">
-      <div class="qw-priority">High impact</div>
-      <div class="qw-effort">Low effort</div>
-    </div>
-    <h3 class="qw-title">Clone the WW affiliate funnel for CT — find one partner</h3>
-    <p class="qw-body">There's a working affiliate funnel for Wholeness Work. The infrastructure exists. Don't build a new referral system from scratch — duplicate the WW funnel for CT Foundation and test it with one affiliate partner. Connirae, Tamara, or Zach likely know one entity (a training institute, an IFS community, a coaching school) that could send CT-ready people. One partner, one test, real data. If it works, scale. If it doesn't, you've lost a week not a quarter.</p>
-    <div class="qw-data">
-      <span class="tag tag-cluster" style="background:#d4622a18;color:#d4622a">Replaces Track 2 referral build — faster, proven infrastructure</span>
-    </div>
-    <div class="qw-ownership">
-      <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">Connirae / Tamara + Team I&Y (funnel clone)</span></div>
-      <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">Week 1–2</span></div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section-eyebrow" style="margin-bottom:1rem">coretransformation.org — site audit findings</div>
-  <p style="font-size:14px;color:var(--ink);margin-bottom:1.25rem;max-width:660px;line-height:1.7">Live analysis run April 9, 2026. These are the conversion and findability issues on the current site.</p>
-
-  <div class="two-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border-left:3px solid #dc2626">
-      <div class="n" style="color:#dc2626">0</div>
-      <div class="l">Schema markup on CT Foundation page</div>
-      <div class="sub">No Course, Product, FAQ, or Review schema. Invisible to LLMs.</div>
-    </div>
-    <div class="stat-card" style="border-left:3px solid #dc2626">
-      <div class="n" style="color:#dc2626">0</div>
-      <div class="l">Pricing visible on the site</div>
-      <div class="sub">Price only appears after clicking through to Teachable. Major conversion friction.</div>
-    </div>
-  </div>
-  <div class="two-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border-left:3px solid #d4622a">
-      <div class="n" style="color:#d4622a">Weak</div>
-      <div class="l">Hero clarity</div>
-      <div class="sub">"Transform the Root Cause of Limitations" — doesn't say what CT is or how it works.</div>
-    </div>
-    <div class="stat-card" style="border-left:3px solid #d4622a">
-      <div class="n" style="color:#d4622a">Missing</div>
-      <div class="l">Meta descriptions</div>
-      <div class="sub">No meta descriptions on key pages. Google shows whatever it wants in search results.</div>
-    </div>
-  </div>
-  <div class="two-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border-left:3px solid #854F0B">
-      <div class="n" style="color:#854F0B">Present</div>
-      <div class="l">Testimonials</div>
-      <div class="sub">50+ coach/therapist testimonials exist but unstructured — no Review schema, no star ratings.</div>
-    </div>
-    <div class="stat-card" style="border-left:3px solid #2d5a3d">
-      <div class="n" style="color:#2d5a3d">OK</div>
-      <div class="l">Basic SEO + accessibility</div>
-      <div class="sub">Organization schema present. Aria labels on nav. Responsive layout. Foundation is there.</div>
-    </div>
   </div>
 
 </div>
@@ -1973,6 +1867,18 @@ window.showSection = function(id, btn) {
   document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
+};
+
+window.filterWS = function(ws, btn) {
+  document.querySelectorAll('#ws-filters .f-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#ws-list .qw-card').forEach(card => {
+    if (ws === 'all' || card.dataset.ws === ws) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 };
 
 renderBars();
