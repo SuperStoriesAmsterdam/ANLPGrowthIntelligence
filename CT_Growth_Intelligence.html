@@ -1013,6 +1013,98 @@ body {
 }
 #annotate-counter button:hover { background: rgba(255,255,255,0.25); }
 
+/* ── REVIEW MODE ── */
+#review-btn {
+  position: fixed;
+  bottom: 56px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.4);
+}
+#review-btn:hover { background: #6d28d9; }
+#review-btn.active { background: #dc2626; }
+body.review-mode *:not(#review-btn):not(#review-popup):not(#review-popup *):not(.review-dot):not(nav):not(nav *):not(header):not(header *):not(footer):not(footer *):not(#edit-bar):not(#edit-bar *) {
+  cursor: crosshair !important;
+}
+.review-dot {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #7c3aed;
+  z-index: 10;
+  pointer-events: none;
+}
+#review-popup {
+  position: fixed;
+  z-index: 600;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  padding: 14px;
+  width: 300px;
+  font-family: var(--sans);
+  display: none;
+}
+#review-popup textarea {
+  width: 100%;
+  border: 1px solid var(--paper-3);
+  border-radius: 4px;
+  padding: 8px;
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  resize: vertical;
+  min-height: 60px;
+  color: var(--ink);
+}
+#review-popup .rp-context {
+  font-size: var(--text-xs);
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+#review-popup .rp-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+#review-popup button {
+  font-family: var(--sans);
+  font-size: var(--text-xs);
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+#review-popup .rp-save { background: #7c3aed; color: white; }
+#review-popup .rp-cancel { background: var(--paper-2); color: var(--ink); }
+#review-export {
+  position: fixed;
+  bottom: 56px; right: 20px;
+  z-index: 500;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-family: var(--sans);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.4);
+}
+#review-export:hover { background: #6d28d9; }
+
 /* ── FOOTER ── */
 footer {
   background: var(--paper-2);
@@ -1943,6 +2035,171 @@ window.filterWS = function(ws, btn) {
 renderBars();
 renderQuotes();
 </script>
+<button id="review-btn" onclick="toggleReviewMode()">Review for Claude</button>
+<button id="review-export" onclick="exportReview()">Export fixes</button>
+<div id="review-popup">
+  <div class="rp-context" id="rp-context"></div>
+  <textarea id="rp-note" placeholder="Wat moet hier anders?"></textarea>
+  <div class="rp-actions">
+    <button class="rp-cancel" onclick="cancelReview()">Annuleer</button>
+    <button class="rp-save" onclick="saveReview()">Opslaan</button>
+  </div>
+</div>
+
+<script>
+/* ── REVIEW MODE FOR CLAUDE CODE ── */
+(function() {
+  let reviewMode = false;
+  let reviewNotes = JSON.parse(localStorage.getItem('claude-review') || '[]');
+  let currentTarget = null;
+
+  function getActiveTab() {
+    const active = document.querySelector('.section.active');
+    if (!active) return '?';
+    const btn = document.querySelector('.nav-tab.active');
+    return btn ? btn.textContent.trim() : active.id;
+  }
+
+  function getContext(el) {
+    /* Walk up to find nearest heading or card title */
+    let node = el;
+    let heading = '';
+    while (node && node !== document.body) {
+      const h = node.querySelector('h2, h3, .qw-title, .mc-title, .section-heading');
+      if (h && h !== el) { heading = h.textContent.trim().slice(0, 80); break; }
+      node = node.parentElement;
+    }
+    const text = el.textContent.trim().slice(0, 120);
+    return { heading, text };
+  }
+
+  function getSelector(el) {
+    if (el.id) return '#' + el.id;
+    const parts = [];
+    while (el && el !== document.body) {
+      let s = el.tagName.toLowerCase();
+      if (el.className && typeof el.className === 'string') {
+        const cls = el.className.split(' ').filter(c => c && !c.startsWith('review') && !c.startsWith('is-')).slice(0, 2).join('.');
+        if (cls) s += '.' + cls;
+      }
+      parts.unshift(s);
+      el = el.parentElement;
+      if (parts.length > 3) break;
+    }
+    return parts.join(' > ');
+  }
+
+  function showDots() {
+    document.querySelectorAll('.review-dot').forEach(d => d.remove());
+    reviewNotes.forEach(note => {
+      try {
+        const el = document.querySelector(note.selector);
+        if (el && el.style.position !== 'fixed') {
+          if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+          const dot = document.createElement('span');
+          dot.className = 'review-dot';
+          dot.title = note.note;
+          el.appendChild(dot);
+        }
+      } catch(e) {}
+    });
+    const exp = document.getElementById('review-export');
+    if (exp) exp.style.display = reviewNotes.length > 0 ? 'block' : 'none';
+  }
+
+  window.toggleReviewMode = function() {
+    reviewMode = !reviewMode;
+    document.body.classList.toggle('review-mode', reviewMode);
+    const btn = document.getElementById('review-btn');
+    btn.textContent = reviewMode ? 'Stop review' : 'Review for Claude';
+    btn.classList.toggle('active', reviewMode);
+    if (reviewMode) showDots();
+  };
+
+  document.addEventListener('click', function(e) {
+    if (!reviewMode) return;
+    const ignore = e.target.closest('#review-btn, #review-popup, #review-export, .nav-bar, .nav-tab, header, footer, #edit-bar');
+    if (ignore) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    currentTarget = e.target;
+    const ctx = getContext(currentTarget);
+    const tab = getActiveTab();
+    const popup = document.getElementById('review-popup');
+    const ctxDiv = document.getElementById('rp-context');
+
+    ctxDiv.innerHTML = '<strong>Tab:</strong> ' + tab + '<br>' +
+      (ctx.heading ? '<strong>Sectie:</strong> ' + ctx.heading + '<br>' : '') +
+      '<strong>Element:</strong> ' + ctx.text.slice(0, 80) + (ctx.text.length > 80 ? '...' : '');
+
+    document.getElementById('rp-note').value = '';
+    popup.style.display = 'block';
+
+    /* Position near click */
+    const x = Math.min(e.clientX, window.innerWidth - 320);
+    const y = Math.min(e.clientY, window.innerHeight - 200);
+    popup.style.left = x + 'px';
+    popup.style.top = y + 'px';
+
+    setTimeout(() => document.getElementById('rp-note').focus(), 50);
+  }, true);
+
+  window.saveReview = function() {
+    const note = document.getElementById('rp-note').value.trim();
+    if (!note || !currentTarget) { cancelReview(); return; }
+
+    const ctx = getContext(currentTarget);
+    const tab = getActiveTab();
+
+    reviewNotes.push({
+      tab: tab,
+      heading: ctx.heading,
+      elementText: ctx.text.slice(0, 120),
+      selector: getSelector(currentTarget),
+      note: note,
+      time: new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
+    });
+
+    localStorage.setItem('claude-review', JSON.stringify(reviewNotes));
+    cancelReview();
+    showDots();
+  };
+
+  window.cancelReview = function() {
+    document.getElementById('review-popup').style.display = 'none';
+    currentTarget = null;
+  };
+
+  window.exportReview = function() {
+    if (reviewNotes.length === 0) return;
+
+    let md = '# Review fixes voor Claude Code\\n\\n';
+    md += 'Gegenereerd: ' + new Date().toLocaleString('nl-NL') + '\\n';
+    md += 'Aantal opmerkingen: ' + reviewNotes.length + '\\n\\n---\\n\\n';
+
+    reviewNotes.forEach((n, i) => {
+      md += '## ' + (i + 1) + '. ' + n.tab + (n.heading ? ' — ' + n.heading : '') + '\\n';
+      md += '**Element:** ' + n.elementText + '\\n\\n';
+      md += '**Fix:** ' + n.note + '\\n\\n';
+      md += '**Selector:** `' + n.selector + '`\\n\\n---\\n\\n';
+    });
+
+    const blob = new Blob([md.replace(/\\n/g, '\\n')], { type: 'text/markdown' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'fixes.md';
+    a.click();
+
+    /* Also copy to clipboard */
+    navigator.clipboard.writeText(md.replace(/\\n/g, '\\n')).catch(() => {});
+  };
+
+  /* Show dots on load if there are saved notes */
+  showDots();
+})();
+</script>
+
 <script src="js/sync.js" defer></script>
 <script src="js/edit.js" defer></script>
 <script src="js/annotate.js" defer></script>
