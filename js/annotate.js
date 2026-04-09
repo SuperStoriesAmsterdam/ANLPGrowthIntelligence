@@ -159,24 +159,79 @@
       return;
     }
 
-    var text = prompt('Comment:');
-    if (!text) return;
+    var clickX = e.pageX;
+    var clickY = e.pageY;
+    var color = getAuthorColor();
 
-    var annotation = {
-      id: Date.now(),
-      x: e.pageX,
-      y: e.pageY,
-      author: author,
-      color: getAuthorColor(),
-      text: text,
-      timestamp: new Date().toISOString(),
-      section: getCurrentSection()
-    };
+    /* Create inline writing field at click position */
+    var field = document.createElement('div');
+    field.className = 'annotation-write';
+    field.style.left = clickX + 'px';
+    field.style.top = clickY + 'px';
+    field.innerHTML = `
+      <div class="aw-header">
+        <span class="aw-avatar" style="background:${color}">${author.charAt(0)}</span>
+        <span class="aw-name">${author}</span>
+      </div>
+      <textarea class="aw-input" placeholder="Write your note..." rows="3" autofocus></textarea>
+      <div class="aw-actions">
+        <button class="aw-cancel">Cancel</button>
+        <button class="aw-save" style="background:${color}">Save</button>
+      </div>
+    `;
+    document.body.appendChild(field);
 
-    annotations.push(annotation);
-    save();
-    renderPin(annotation);
-    updateCounter();
+    var textarea = field.querySelector('.aw-input');
+    setTimeout(function() { textarea.focus(); }, 10);
+
+    function saveNote() {
+      var text = textarea.value.trim();
+      if (!text) { field.remove(); return; }
+
+      var annotation = {
+        id: Date.now(),
+        x: clickX,
+        y: clickY,
+        author: author,
+        color: color,
+        text: text,
+        timestamp: new Date().toISOString(),
+        section: getCurrentSection()
+      };
+
+      annotations.push(annotation);
+      save();
+      renderPin(annotation);
+      updateCounter();
+      field.remove();
+    }
+
+    function cancelNote() {
+      field.remove();
+    }
+
+    field.querySelector('.aw-save').addEventListener('click', function(e) {
+      e.stopPropagation();
+      saveNote();
+    });
+    field.querySelector('.aw-cancel').addEventListener('click', function(e) {
+      e.stopPropagation();
+      cancelNote();
+    });
+
+    /* Cmd/Ctrl+Enter to save, Escape to cancel */
+    textarea.addEventListener('keydown', function(ev) {
+      if (ev.key === 'Enter' && (ev.metaKey || ev.ctrlKey)) {
+        ev.preventDefault();
+        saveNote();
+      }
+      if (ev.key === 'Escape') {
+        cancelNote();
+      }
+    });
+
+    /* Prevent annotation mode from catching clicks inside the field */
+    field.addEventListener('click', function(ev) { ev.stopPropagation(); });
   }
 
   /* ── Detect which section the click is in ── */

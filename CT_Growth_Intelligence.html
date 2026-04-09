@@ -836,6 +836,73 @@ body {
 }
 .ap-delete:hover { text-decoration: underline; }
 
+/* ── INLINE ANNOTATION WRITING ── */
+.annotation-write {
+  position: absolute;
+  z-index: 300;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.08);
+  font-family: var(--sans);
+  overflow: hidden;
+}
+.aw-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px 0;
+}
+.aw-avatar {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.aw-name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.aw-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 10px 14px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.5;
+  background: transparent;
+}
+.aw-input::placeholder { color: var(--ink-3); }
+.aw-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 0 10px 10px;
+}
+.aw-actions button {
+  font-family: var(--sans);
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+.aw-cancel {
+  background: transparent;
+  color: var(--ink-3);
+}
+.aw-cancel:hover { color: var(--ink); }
+.aw-save {
+  color: white;
+  font-weight: 500;
+}
+.aw-save:hover { opacity: 0.9; }
+
 footer {
   background: var(--paper-2);
   border-top: 1px solid var(--paper-3);
