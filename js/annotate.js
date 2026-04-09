@@ -146,7 +146,9 @@
 
   /* ── Handle click in annotation mode ── */
   function handleAnnotationClick(e) {
-    if (e.target.closest('#annotate-btn, #annotate-wrap, #annotate-counter, .annotation-pin, .annotation-popup, #edit-bar, #name-picker')) return;
+    if (e.target.closest('#annotate-btn, #annotate-wrap, #annotate-counter, .annotation-pin, .annotation-popup, #edit-bar, #name-picker, #edit-ctx')) return;
+    /* Don't annotate while editing text */
+    if (e.target.closest('.is-editable') || e.target.contentEditable === 'true') return;
 
     e.preventDefault();
     e.stopPropagation();

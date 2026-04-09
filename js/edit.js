@@ -96,6 +96,11 @@
     const btn = document.getElementById('edit-toggle');
     const reset = document.getElementById('edit-reset');
 
+    /* Turn off annotation mode if it's on */
+    if (editMode && document.getElementById('annotate-btn') && document.getElementById('annotate-btn').classList.contains('active')) {
+      document.getElementById('annotate-btn').click();
+    }
+
     if (editMode) {
       btn.textContent = 'Stop editing';
       btn.style.background = 'white';
