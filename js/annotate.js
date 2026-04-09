@@ -1,6 +1,7 @@
-/* ── ANNOTATION / COMMENT TOOL ──
-   Team name picker (no auth). Click pencil to comment.
-   Comments stored in localStorage, exportable as JSON. */
+/* ── BLOCK-LEVEL COMMENTS ──
+   Comment icon on each content block.
+   Click → write inline → stays attached to that block.
+   Stored in localStorage by block ID. */
 
 (function() {
   'use strict';
@@ -20,82 +21,72 @@
     { name: 'Team I&Y', role: 'GHL build',          color: '#d4622a' },
   ];
 
-  let annotateMode = false;
-  let annotations = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  /* Selectors for commentable blocks */
+  const COMMENTABLE = [
+    '.insight-box',
+    '.qw-card',
+    '.mechanism-card',
+    '.message-card',
+    '.agenda-item',
+    '.stat-card',
+    '.tried-card',
+    '.funnel-step',
+    '.ns-item',
+    '.evidence-row'
+  ].join(', ');
 
-  /* ── Get current author or show picker ── */
-  function getAuthor() {
-    return localStorage.getItem(AUTHOR_KEY);
-  }
+  let comments = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
+  function getAuthor() { return localStorage.getItem(AUTHOR_KEY); }
   function getAuthorColor() {
     var name = getAuthor();
-    var member = TEAM.find(function(m) { return m.name === name; });
-    return member ? member.color : '#4a4840';
+    var m = TEAM.find(function(t) { return t.name === name; });
+    return m ? m.color : '#4a4840';
   }
 
-  /* ── Name picker overlay ── */
+  /* ── Name picker ── */
   function showNamePicker(callback) {
     var existing = document.getElementById('name-picker');
     if (existing) existing.remove();
 
     var overlay = document.createElement('div');
     overlay.id = 'name-picker';
-    overlay.innerHTML = `
-      <div class="np-box">
-        <div class="np-title">Who are you?</div>
-        <div class="np-subtitle">Pick your name to comment and edit</div>
-        <div class="np-list">
-          ${TEAM.map(function(m) {
-            return '<button class="np-member" data-name="' + m.name + '" style="--member-color:' + m.color + '">' +
-              '<span class="np-avatar" style="background:' + m.color + '">' + m.name.charAt(0) + '</span>' +
-              '<span class="np-info"><strong>' + m.name + '</strong><span>' + m.role + '</span></span>' +
-            '</button>';
-          }).join('')}
-        </div>
-      </div>
-    `;
+    overlay.innerHTML = '<div class="np-box">' +
+      '<div class="np-title">Who are you?</div>' +
+      '<div class="np-subtitle">Pick your name to comment and edit</div>' +
+      '<div class="np-list">' +
+      TEAM.map(function(m) {
+        return '<button class="np-member" data-name="' + m.name + '">' +
+          '<span class="np-avatar" style="background:' + m.color + '">' + m.name.charAt(0) + '</span>' +
+          '<span class="np-info"><strong>' + m.name + '</strong><span>' + m.role + '</span></span>' +
+        '</button>';
+      }).join('') +
+      '</div></div>';
     document.body.appendChild(overlay);
 
     overlay.querySelectorAll('.np-member').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        var name = btn.dataset.name;
-        localStorage.setItem(AUTHOR_KEY, name);
+        localStorage.setItem(AUTHOR_KEY, btn.dataset.name);
         overlay.remove();
-        updateAuthorDisplay();
-        if (callback) callback(name);
+        updateAuthorChip();
+        if (callback) callback(btn.dataset.name);
       });
     });
-
-    /* Close on overlay click */
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) overlay.remove();
     });
   }
 
-  /* ── Build the pencil button + author chip ── */
-  function createButton() {
-    var wrap = document.createElement('div');
-    wrap.id = 'annotate-wrap';
-    wrap.innerHTML = `
-      <div id="annotate-author-chip"></div>
-      <button id="annotate-btn" title="Toggle comment mode">&#9998;</button>
-    `;
-    document.body.appendChild(wrap);
-
-    document.getElementById('annotate-btn').addEventListener('click', function() {
-      if (!getAuthor()) {
-        showNamePicker(function() { toggleAnnotateMode(); });
-      } else {
-        toggleAnnotateMode();
-      }
-    });
-
-    updateAuthorDisplay();
+  /* ── Author chip (bottom right) ── */
+  function createAuthorChip() {
+    var chip = document.createElement('div');
+    chip.id = 'author-chip';
+    document.body.appendChild(chip);
+    updateAuthorChip();
   }
 
-  function updateAuthorDisplay() {
-    var chip = document.getElementById('annotate-author-chip');
+  function updateAuthorChip() {
+    var chip = document.getElementById('author-chip');
     var name = getAuthor();
     if (name) {
       var color = getAuthorColor();
@@ -112,159 +103,164 @@
     }
   }
 
-  /* ── Build annotation counter + export bar ── */
-  function createCounter() {
-    var counter = document.createElement('div');
-    counter.id = 'annotate-counter';
-    counter.innerHTML = `
-      <span id="annotate-count"></span>
-      <button id="annotate-export" title="Export as JSON">Export</button>
-      <button id="annotate-clear" title="Clear all">Clear</button>
-    `;
-    document.body.appendChild(counter);
+  /* ── Attach comment buttons to all blocks ── */
+  function attachCommentButtons() {
+    document.querySelectorAll(COMMENTABLE).forEach(function(block, i) {
+      if (block.dataset.commentId) return; /* already done */
 
-    document.getElementById('annotate-export').addEventListener('click', exportAnnotations);
-    document.getElementById('annotate-clear').addEventListener('click', clearAnnotations);
-    updateCounter();
+      var id = 'block-' + i;
+      block.dataset.commentId = id;
+      block.style.position = 'relative';
+
+      /* Comment trigger button */
+      var btn = document.createElement('button');
+      btn.className = 'block-comment-btn';
+      btn.title = 'Add a comment';
+      btn.innerHTML = '💬';
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!getAuthor()) {
+          showNamePicker(function() { openCommentThread(block, id); });
+        } else {
+          openCommentThread(block, id);
+        }
+      });
+      block.appendChild(btn);
+
+      /* Badge if there are existing comments */
+      updateBadge(block, id);
+    });
   }
 
-  /* ── Toggle annotation mode ── */
-  function toggleAnnotateMode() {
-    annotateMode = !annotateMode;
-    var btn = document.getElementById('annotate-btn');
+  /* ── Show/hide comment thread for a block ── */
+  function openCommentThread(block, id) {
+    /* Close any other open thread */
+    document.querySelectorAll('.comment-thread').forEach(function(t) { t.remove(); });
 
-    if (annotateMode) {
-      btn.classList.add('active');
-      document.body.style.cursor = 'crosshair';
-      document.addEventListener('click', handleAnnotationClick, true);
-    } else {
-      btn.classList.remove('active');
-      document.body.style.cursor = '';
-      document.removeEventListener('click', handleAnnotationClick, true);
-    }
-  }
+    var thread = document.createElement('div');
+    thread.className = 'comment-thread';
 
-  /* ── Handle click in annotation mode ── */
-  function handleAnnotationClick(e) {
-    if (e.target.closest('#annotate-btn, #annotate-wrap, #annotate-counter, .annotation-pin, .annotation-popup, #edit-bar, #name-picker, #edit-ctx')) return;
-    /* Don't annotate while editing text */
-    if (e.target.closest('.is-editable') || e.target.contentEditable === 'true') return;
+    var blockComments = comments[id] || [];
 
-    e.preventDefault();
-    e.stopPropagation();
+    thread.innerHTML =
+      '<div class="ct-header">' +
+        '<span class="ct-title">' + blockComments.length + ' comment' + (blockComments.length !== 1 ? 's' : '') + '</span>' +
+        '<button class="ct-close">✕</button>' +
+      '</div>' +
+      '<div class="ct-list" id="ct-list-' + id + '"></div>' +
+      '<div class="ct-write">' +
+        '<div class="ct-write-header">' +
+          '<span class="aw-avatar" style="background:' + getAuthorColor() + '">' + (getAuthor() || '?').charAt(0) + '</span>' +
+          '<span class="aw-name">' + (getAuthor() || '') + '</span>' +
+        '</div>' +
+        '<textarea class="ct-input" placeholder="Write a comment..." rows="2"></textarea>' +
+        '<div class="ct-actions">' +
+          '<button class="ct-save" style="background:' + getAuthorColor() + '">Post</button>' +
+        '</div>' +
+      '</div>';
 
-    var author = getAuthor();
-    if (!author) {
-      showNamePicker(function() { /* they'll need to click again */ });
-      return;
-    }
+    block.appendChild(thread);
+    renderComments(id);
 
-    var clickX = e.pageX;
-    var clickY = e.pageY;
-    var color = getAuthorColor();
-
-    /* Create inline writing field at click position */
-    var field = document.createElement('div');
-    field.className = 'annotation-write';
-    field.style.left = clickX + 'px';
-    field.style.top = clickY + 'px';
-    field.innerHTML = `
-      <div class="aw-header">
-        <span class="aw-avatar" style="background:${color}">${author.charAt(0)}</span>
-        <span class="aw-name">${author}</span>
-      </div>
-      <textarea class="aw-input" placeholder="Write your note..." rows="3" autofocus></textarea>
-      <div class="aw-actions">
-        <button class="aw-cancel">Cancel</button>
-        <button class="aw-save" style="background:${color}">Save</button>
-      </div>
-    `;
-    document.body.appendChild(field);
-
-    var textarea = field.querySelector('.aw-input');
+    var textarea = thread.querySelector('.ct-input');
     setTimeout(function() { textarea.focus(); }, 10);
 
-    function saveNote() {
-      var text = textarea.value.trim();
-      if (!text) { field.remove(); return; }
-
-      var annotation = {
-        id: Date.now(),
-        x: clickX,
-        y: clickY,
-        author: author,
-        color: color,
-        text: text,
-        timestamp: new Date().toISOString(),
-        section: getCurrentSection()
-      };
-
-      annotations.push(annotation);
-      save();
-      renderPin(annotation);
-      updateCounter();
-      field.remove();
-    }
-
-    function cancelNote() {
-      field.remove();
-    }
-
-    field.querySelector('.aw-save').addEventListener('click', function(e) {
+    thread.querySelector('.ct-close').addEventListener('click', function(e) {
       e.stopPropagation();
-      saveNote();
-    });
-    field.querySelector('.aw-cancel').addEventListener('click', function(e) {
-      e.stopPropagation();
-      cancelNote();
+      thread.remove();
     });
 
-    /* Cmd/Ctrl+Enter to save, Escape to cancel */
+    thread.querySelector('.ct-save').addEventListener('click', function(e) {
+      e.stopPropagation();
+      postComment(id, textarea, block);
+    });
+
     textarea.addEventListener('keydown', function(ev) {
       if (ev.key === 'Enter' && (ev.metaKey || ev.ctrlKey)) {
         ev.preventDefault();
-        saveNote();
+        postComment(id, textarea, block);
       }
-      if (ev.key === 'Escape') {
-        cancelNote();
-      }
+      if (ev.key === 'Escape') { thread.remove(); }
     });
 
-    /* Prevent annotation mode from catching clicks inside the field */
-    field.addEventListener('click', function(ev) { ev.stopPropagation(); });
+    thread.addEventListener('click', function(e) { e.stopPropagation(); });
   }
 
-  /* ── Detect which section the click is in ── */
-  function getCurrentSection() {
-    var active = document.querySelector('.section.active');
-    return active ? active.id : 'header';
-  }
+  function postComment(blockId, textarea, block) {
+    var text = textarea.value.trim();
+    if (!text) return;
 
-  /* ── Render a pin on the page ── */
-  function renderPin(a) {
-    var pin = document.createElement('div');
-    pin.className = 'annotation-pin';
-    pin.style.left = a.x + 'px';
-    pin.style.top = a.y + 'px';
-    pin.dataset.id = a.id;
-    pin.innerHTML = '<span class="pin-dot" style="background:' + (a.color || '#d4622a') + '"></span>';
-
-    var popup = document.createElement('div');
-    popup.className = 'annotation-popup';
-    popup.innerHTML = `
-      <div class="ap-author" style="color:${a.color || '#d4622a'}">${a.author}</div>
-      <div class="ap-text">${a.text}</div>
-      <div class="ap-time">${timeAgo(a.timestamp)}</div>
-      <button class="ap-delete" data-id="${a.id}">Delete</button>
-    `;
-
-    pin.appendChild(popup);
-    document.body.appendChild(pin);
-
-    pin.querySelector('.ap-delete').addEventListener('click', function(e) {
-      e.stopPropagation();
-      deleteAnnotation(a.id);
+    if (!comments[blockId]) comments[blockId] = [];
+    comments[blockId].push({
+      author: getAuthor(),
+      color: getAuthorColor(),
+      text: text,
+      timestamp: new Date().toISOString()
     });
+    save();
+    textarea.value = '';
+    renderComments(blockId);
+    updateBadge(block, blockId);
+
+    /* Update header count */
+    var header = block.querySelector('.ct-title');
+    if (header) {
+      var n = comments[blockId].length;
+      header.textContent = n + ' comment' + (n !== 1 ? 's' : '');
+    }
+  }
+
+  function renderComments(blockId) {
+    var list = document.getElementById('ct-list-' + blockId);
+    if (!list) return;
+    var blockComments = comments[blockId] || [];
+
+    list.innerHTML = blockComments.map(function(c, i) {
+      return '<div class="ct-comment">' +
+        '<div class="ct-comment-header">' +
+          '<span class="aw-avatar" style="background:' + c.color + ';width:20px;height:20px;font-size:10px">' + c.author.charAt(0) + '</span>' +
+          '<span class="ct-comment-author">' + c.author + '</span>' +
+          '<span class="ct-comment-time">' + timeAgo(c.timestamp) + '</span>' +
+          '<button class="ct-comment-delete" data-block="' + blockId + '" data-index="' + i + '">✕</button>' +
+        '</div>' +
+        '<div class="ct-comment-text">' + c.text + '</div>' +
+      '</div>';
+    }).join('');
+
+    list.querySelectorAll('.ct-comment-delete').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var bi = parseInt(btn.dataset.index);
+        var bid = btn.dataset.block;
+        comments[bid].splice(bi, 1);
+        if (comments[bid].length === 0) delete comments[bid];
+        save();
+        renderComments(bid);
+        var block = document.querySelector('[data-comment-id="' + bid + '"]');
+        if (block) updateBadge(block, bid);
+        /* Update header */
+        var header = block ? block.querySelector('.ct-title') : null;
+        if (header) {
+          var n = (comments[bid] || []).length;
+          header.textContent = n + ' comment' + (n !== 1 ? 's' : '');
+        }
+      });
+    });
+  }
+
+  /* ── Badge showing comment count ── */
+  function updateBadge(block, id) {
+    var existing = block.querySelector('.block-comment-badge');
+    if (existing) existing.remove();
+
+    var n = (comments[id] || []).length;
+    if (n > 0) {
+      var badge = document.createElement('span');
+      badge.className = 'block-comment-badge';
+      badge.textContent = n;
+      var btn = block.querySelector('.block-comment-btn');
+      if (btn) btn.appendChild(badge);
+    }
   }
 
   function timeAgo(ts) {
@@ -278,67 +274,69 @@
     return days + 'd ago';
   }
 
-  /* ── Render all saved pins ── */
-  function renderAllPins() {
-    document.querySelectorAll('.annotation-pin').forEach(function(p) { p.remove(); });
-    annotations.forEach(renderPin);
-  }
-
-  /* ── Delete annotation ── */
-  function deleteAnnotation(id) {
-    annotations = annotations.filter(function(a) { return a.id !== id; });
-    save();
-    renderAllPins();
-    updateCounter();
-  }
-
-  /* ── Save to localStorage ── */
   function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(annotations));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+    updateExportBar();
   }
 
-  /* ── Update counter ── */
-  function updateCounter() {
+  /* ── Export bar ── */
+  function createExportBar() {
+    var bar = document.createElement('div');
+    bar.id = 'annotate-counter';
+    bar.innerHTML = '<span id="annotate-count"></span>' +
+      '<button id="annotate-export">Export</button>' +
+      '<button id="annotate-clear">Clear all</button>';
+    document.body.appendChild(bar);
+
+    document.getElementById('annotate-export').addEventListener('click', function() {
+      var blob = new Blob([JSON.stringify(comments, null, 2)], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'comments-' + new Date().toISOString().slice(0, 10) + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('annotate-clear').addEventListener('click', function() {
+      if (confirm('Delete all comments? This cannot be undone.')) {
+        comments = {};
+        save();
+        document.querySelectorAll('.block-comment-badge').forEach(function(b) { b.remove(); });
+        document.querySelectorAll('.comment-thread').forEach(function(t) { t.remove(); });
+      }
+    });
+
+    updateExportBar();
+  }
+
+  function updateExportBar() {
+    var total = 0;
+    Object.keys(comments).forEach(function(k) { total += comments[k].length; });
     var el = document.getElementById('annotate-count');
-    var n = annotations.length;
-    el.textContent = n + ' comment' + (n !== 1 ? 's' : '');
-    document.getElementById('annotate-counter').style.display = n > 0 ? 'flex' : 'none';
-  }
-
-  /* ── Export as JSON ── */
-  function exportAnnotations() {
-    var blob = new Blob([JSON.stringify(annotations, null, 2)], { type: 'application/json' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'annotations-' + new Date().toISOString().slice(0, 10) + '.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  /* ── Clear all ── */
-  function clearAnnotations() {
-    if (confirm('Delete all comments? This cannot be undone.')) {
-      annotations = [];
-      save();
-      renderAllPins();
-      updateCounter();
-    }
+    if (el) el.textContent = total + ' comment' + (total !== 1 ? 's' : '');
+    var bar = document.getElementById('annotate-counter');
+    if (bar) bar.style.display = total > 0 ? 'flex' : 'none';
   }
 
   /* ── Init ── */
   document.addEventListener('DOMContentLoaded', function() {
-    createButton();
-    createCounter();
-    renderAllPins();
+    createAuthorChip();
+    createExportBar();
+    attachCommentButtons();
 
-    /* If no author set, show picker on first visit */
     if (!getAuthor()) {
       setTimeout(function() { showNamePicker(); }, 500);
     }
+
+    /* Re-attach after section changes */
+    var origShow = window.showSection;
+    window.showSection = function(id, btn) {
+      origShow(id, btn);
+      setTimeout(attachCommentButtons, 50);
+    };
   });
 
-  /* Expose for edit.js to use */
   window.anlpGetAuthor = getAuthor;
   window.anlpGetAuthorColor = getAuthorColor;
   window.anlpShowNamePicker = showNamePicker;
