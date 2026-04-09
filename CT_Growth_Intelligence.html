@@ -54,7 +54,7 @@ body {
 .header-label {
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255,255,255,0.45);
+  color: white;
   margin-bottom: 0.75rem;
 }
 .header-title {
@@ -66,7 +66,7 @@ body {
 }
 .header-sub {
   font-size: 14px;
-  color: rgba(255,255,255,0.55);
+  color: white;
   max-width: 560px;
   line-height: 1.6;
 }
@@ -84,7 +84,7 @@ body {
 }
 .header-stat .l {
   font-size: 13px;
-  color: rgba(255,255,255,0.45);
+  color: white;
   margin-top: 2px;
 }
 
@@ -98,6 +98,16 @@ body {
   top: 0;
   z-index: 100;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  mask-image: linear-gradient(to right, black calc(100% - 40px), transparent);
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 40px), transparent);
+}
+.nav-bar::-webkit-scrollbar { display: none; }
+.nav-bar.scrolled-end {
+  mask-image: none;
+  -webkit-mask-image: none;
 }
 .nav-tab {
   font-family: var(--sans);
@@ -132,6 +142,13 @@ body {
   .two-col, .three-col { grid-template-columns: 1fr; }
   .nav-tab { padding: 0.85rem 1rem; font-size: 14px; }
   .container { padding: 1.5rem 1rem; }
+  .cluster-row { flex-wrap: wrap; gap: 6px; }
+  .cluster-name { width: 100%; }
+  .bar-track { flex: 1; min-width: 60px; }
+  .funnel-step { gap: 12px; }
+  .fs-bar { min-width: 16px; }
+  #author-chip { bottom: 48px; right: 12px; padding: 4px 10px 4px 4px; font-size: 13px; }
+  .ac-avatar { width: 20px; height: 20px; font-size: 10px; }
 }
 
 /* ── SECTION TITLE ── */
@@ -173,6 +190,17 @@ body {
 }
 .stat-card .l { font-size: 13px; color: var(--ink); }
 .stat-card .sub { font-size: 13px; color: var(--ink); margin-top: 4px; }
+.stat-card.awaiting .n { color: var(--paper-3) !important; }
+.stat-card.awaiting::after {
+  content: 'awaiting data';
+  position: absolute;
+  top: 6px; right: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--paper-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
 /* ── INSIGHT BOX ── */
 .insight-box {
@@ -216,7 +244,7 @@ body {
 }
 .cluster-row:hover { background: var(--paper-2); }
 .cluster-row.selected { background: var(--paper-2); }
-.cluster-name { font-size: 13px; color: var(--ink); width: 210px; flex-shrink: 0; }
+.cluster-name { font-size: 13px; color: var(--ink); width: 210px; flex-shrink: 0; min-width: 0; }
 .cluster-name strong { font-weight: 500; display: block; }
 .cluster-name span { font-size: 12px; color: var(--ink); }
 .bar-track { flex: 1; height: 6px; background: var(--paper-3); border-radius: 999px; overflow: hidden; }
@@ -301,14 +329,25 @@ body {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  padding: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--paper-3);
+  transition: background 0.15s;
 }
+.responses-toggle:hover { background: var(--paper-3); }
 .responses-arrow {
   font-size: 11px;
   color: var(--ink);
   transition: transform 0.2s;
 }
 .responses-arrow.open { transform: rotate(90deg); }
+.responses-hint {
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0.5;
+  margin-left: auto;
+}
 
 /* ── MECHANISM CARDS ── */
 .mechanism-card {
@@ -366,18 +405,21 @@ body {
   position: relative;
 }
 .message-card .mc-label {
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 0.4rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 .message-card .mc-msg {
   font-family: var(--sans);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: white;
   line-height: 1.45;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
-.message-card .mc-why { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.message-card .mc-why { font-size: 15px; color: white; line-height: 1.6; }
 
 /* ── WORKSTREAM CARDS ── */
 .qw-card {
@@ -421,6 +463,16 @@ body {
 .qw-owner, .qw-timeline { font-size: 13px; display: flex; gap: 6px; align-items: center; }
 .qw-owner-label, .qw-tl-label { color: var(--ink); font-weight: 500; }
 .qw-owner-name, .qw-tl-date { color: var(--ink); }
+.qw-status {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-left: auto;
+}
+.qw-status.not-started { background: var(--paper-2); color: var(--ink); }
+.qw-status.in-progress { background: #e8f0eb; color: #1e3a28; }
+.qw-status.done { background: #2d5a3d; color: white; }
 
 /* ── TRIED LIST ── */
 .tried-list { margin-bottom: 1.25rem; }
@@ -485,21 +537,22 @@ body {
   gap: 16px;
   margin-bottom: 4px;
 }
+.fs-info { width: 120px; flex-shrink: 0; }
 .fs-bar {
-  width: var(--funnel-width);
+  flex: 1;
+  max-width: var(--funnel-width);
   min-width: 20px;
   height: 28px;
   background: var(--funnel-color);
   border-radius: 2px;
   opacity: 0.15;
 }
-.fs-info { flex: 1; }
 .fs-label { font-size: 13px; font-weight: 500; color: var(--ink); }
 .fs-number { font-size: 1.5rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
 .funnel-arrow {
   font-size: 14px;
   color: var(--ink);
-  padding: 2px 0 2px 40px;
+  padding: 2px 0 2px 136px;
   opacity: 0.4;
 }
 
@@ -598,10 +651,10 @@ body {
 #edit-toggle:hover { background: rgba(255,255,255,0.25); }
 #edit-reset {
   background: transparent;
-  color: rgba(255,255,255,0.4);
+  color: white;
   font-size: 12px;
 }
-#edit-reset:hover { color: rgba(255,255,255,0.7); }
+#edit-reset:hover { color: white; }
 .is-editable {
   outline: none;
   cursor: text;
@@ -747,19 +800,20 @@ body {
   z-index: 201;
   display: none;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: var(--ink);
   color: white;
-  padding: 6px 14px 6px 6px;
-  border-radius: 24px;
-  font-size: 14px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 20px;
+  font-size: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, opacity 0.3s;
+  opacity: 0.7;
 }
-#author-chip:hover { background: #2a2820; }
+#author-chip:hover { opacity: 1; }
 .ac-avatar {
-  width: 24px; height: 24px;
+  width: 20px; height: 20px;
   border-radius: 50%;
   color: white;
   font-size: 11px;
@@ -770,7 +824,7 @@ body {
 }
 .ac-name { color: white; }
 .ac-switch {
-  color: rgba(255,255,255,0.5);
+  color: white;
   font-size: 12px;
   padding-left: 4px;
 }
@@ -1106,8 +1160,9 @@ footer {
   <div class="divider"></div>
 
   <div class="responses-toggle" onclick="toggleResponses()">
-    <span class="quotes-label" id="q-label" style="margin-bottom:0;cursor:pointer">All responses — 54</span>
     <span class="responses-arrow" id="responses-arrow">&#9654;</span>
+    <span class="quotes-label" id="q-label" style="margin-bottom:0;cursor:pointer">All responses — 54</span>
+    <span class="responses-hint">click to read individual answers</span>
   </div>
 
   <div id="responses-panel" style="display:none">
@@ -1254,6 +1309,7 @@ footer {
       <div class="qw-ownership">
         <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
         <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+        <span class="qw-status not-started">Not started</span>
       </div>
     </div>
 
@@ -1266,6 +1322,7 @@ footer {
       <div class="qw-ownership">
         <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
         <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+        <span class="qw-status not-started">Not started</span>
       </div>
     </div>
 
@@ -1338,6 +1395,7 @@ footer {
       <div class="qw-ownership">
         <div class="qw-owner"><span class="qw-owner-label">Owner:</span> <span class="qw-owner-name">TBD</span></div>
         <div class="qw-timeline"><span class="qw-tl-label">Deadline:</span> <span class="qw-tl-date">—</span></div>
+        <span class="qw-status not-started">Not started</span>
       </div>
     </div>
 
@@ -1384,35 +1442,35 @@ footer {
 
   <div class="funnel" style="margin-bottom:1.5rem">
     <div class="funnel-step" style="--funnel-width:100%;--funnel-color:var(--accent)">
-      <div class="fs-bar"></div>
       <div class="fs-info">
         <div class="fs-label">Email list</div>
         <div class="fs-number">—</div>
       </div>
+      <div class="fs-bar"></div>
     </div>
     <div class="funnel-arrow">&#8595;</div>
     <div class="funnel-step" style="--funnel-width:60%;--funnel-color:var(--accent)">
-      <div class="fs-bar"></div>
       <div class="fs-info">
         <div class="fs-label">Opened</div>
         <div class="fs-number">—</div>
       </div>
+      <div class="fs-bar"></div>
     </div>
     <div class="funnel-arrow">&#8595;</div>
     <div class="funnel-step" style="--funnel-width:30%;--funnel-color:var(--accent)">
-      <div class="fs-bar"></div>
       <div class="fs-info">
         <div class="fs-label">Clicked</div>
         <div class="fs-number">—</div>
       </div>
+      <div class="fs-bar"></div>
     </div>
     <div class="funnel-arrow">&#8595;</div>
     <div class="funnel-step" style="--funnel-width:10%;--funnel-color:var(--accent-2)">
-      <div class="fs-bar"></div>
       <div class="fs-info">
         <div class="fs-label">Registered</div>
         <div class="fs-number">—</div>
       </div>
+      <div class="fs-bar"></div>
     </div>
   </div>
 
@@ -1423,17 +1481,17 @@ footer {
   <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From Google Analytics — whoever has access.</p>
 
   <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Monthly visitors (CT website)</div>
       <div class="sub">Last 3 months average</div>
     </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Top traffic source</div>
       <div class="sub">Organic / email / social / direct?</div>
     </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Bounce rate on landing page</div>
       <div class="sub">Are people staying or leaving?</div>
@@ -1447,17 +1505,17 @@ footer {
   <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From GHL, Stripe, or whoever processes enrollment.</p>
 
   <div class="three-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Registrations per cohort</div>
       <div class="sub">Last 2-3 Foundation rounds</div>
     </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Email list size at promo time</div>
       <div class="sub">How large was the list when each promo went out?</div>
     </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Conversion rate</div>
       <div class="sub">List to registered (even rough %)</div>
@@ -1471,12 +1529,12 @@ footer {
   <p style="font-size:13px;color:var(--ink);margin-bottom:1rem">From GHL or the email platform — Duff likely has this.</p>
 
   <div class="two-col" style="margin-bottom:1.5rem">
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Open rate on CT promo emails</div>
       <div class="sub">Last campaign or last 3 sends</div>
     </div>
-    <div class="stat-card" style="border:1px dashed var(--paper-3)">
+    <div class="stat-card awaiting" style="border:1px dashed var(--paper-3)">
       <div class="n" style="color:var(--ink)">—</div>
       <div class="l">Click-through rate</div>
       <div class="sub">Opened to clicked the CTA</div>
@@ -1868,6 +1926,17 @@ window.filterWS = function(ws, btn) {
       if (Array.isArray(files)) files.forEach(f => addFileToList(f));
     })
     .catch(() => {});
+})();
+
+/* ── NAV SCROLL FADE ── */
+(function() {
+  const nav = document.querySelector('.nav-bar');
+  if (nav) {
+    nav.addEventListener('scroll', function() {
+      const atEnd = nav.scrollLeft + nav.offsetWidth >= nav.scrollWidth - 10;
+      nav.classList.toggle('scrolled-end', atEnd);
+    });
+  }
 })();
 
 /* ── INIT ── */
