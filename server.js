@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 /* ── Database ── */
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://anlp:anlp@db:5432/anlp'
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres@db:5432/anlp'
 });
 
 async function initDB() {
