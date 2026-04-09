@@ -92,12 +92,10 @@
       var color = getAuthorColor();
       chip.innerHTML = '<span class="ac-avatar" style="background:' + color + '">' + name.charAt(0) + '</span>' +
         '<span class="ac-name">' + name + '</span>' +
-        '<button class="ac-switch" title="Switch user">↻</button>';
+        '<span class="ac-switch">↻ switch</span>';
       chip.style.display = 'flex';
-      chip.querySelector('.ac-switch').addEventListener('click', function(e) {
-        e.stopPropagation();
-        showNamePicker();
-      });
+      chip.style.cursor = 'pointer';
+      chip.onclick = function() { showNamePicker(); };
     } else {
       chip.style.display = 'none';
     }

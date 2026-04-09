@@ -787,15 +787,18 @@ p, span, div, li, td, th, label, button, input, textarea, a {
   z-index: 201;
   display: none;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   background: var(--ink);
   color: var(--paper);
-  padding: 4px 10px 4px 4px;
-  border-radius: 20px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 24px;
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.15s;
 }
+#author-chip:hover { background: #2a2820; }
 .ac-avatar {
   width: 24px; height: 24px;
   border-radius: 50%;
@@ -808,14 +811,10 @@ p, span, div, li, td, th, label, button, input, textarea, a {
 }
 .ac-name { color: var(--paper); }
 .ac-switch {
-  background: none;
-  border: none;
-  color: rgba(247,244,239,0.4);
-  cursor: pointer;
-  font-size: 14px;
-  padding: 0 0 0 4px;
+  color: rgba(247,244,239,0.5);
+  font-size: 12px;
+  padding-left: 4px;
 }
-.ac-switch:hover { color: var(--paper); }
 
 /* ── BLOCK COMMENT BUTTON ── */
 .block-comment-btn {
@@ -1056,41 +1055,12 @@ footer {
 <section class="section" id="howto">
 <div class="container">
 
-  <h2 class="section-heading">How this dashboard works</h2>
-  <p class="section-intro">This is a shared workspace for the April 22 strategy meeting. Everyone on the team can contribute before, during, and after the meeting.</p>
+  <h2 class="section-heading">How this works</h2>
+  <p class="section-intro">Pick your name below. Then go through the tabs — read the research, look at the workstreams, and leave comments on anything you have thoughts on. Hover any card and click 💬 to comment.</p>
 
   <div class="divider"></div>
 
-  <div class="section-eyebrow" style="margin-bottom:0.75rem">What you can do</div>
-
-  <div class="two-col" style="margin-bottom:2rem">
-    <div class="mechanism-card">
-      <div class="mc-num">💬</div>
-      <div class="mc-title">Comment on any block</div>
-      <div class="mc-body">Hover any card, insight box, or data block — a 💬 icon appears top-right. Click it to open a comment thread. Write your note, hit Post or Cmd+Enter. Your comments are tagged with your name and visible to everyone.</div>
-    </div>
-    <div class="mechanism-card">
-      <div class="mc-num">✎</div>
-      <div class="mc-title">Edit any text</div>
-      <div class="mc-body">Click "Edit page" in the bottom bar. All text becomes editable — click to change. Green dot shows what's been changed. Right-click edited text to revert. "Reset all edits" restores everything. Red ✕ buttons let you delete entire blocks.</div>
-    </div>
-  </div>
-  <div class="two-col" style="margin-bottom:2rem">
-    <div class="mechanism-card">
-      <div class="mc-num">↻</div>
-      <div class="mc-title">Switch who you are</div>
-      <div class="mc-body">Your name chip is in the bottom-right corner. Click ↻ to switch to a different team member. On first visit, you'll be asked to pick your name.</div>
-    </div>
-    <div class="mechanism-card">
-      <div class="mc-num">📤</div>
-      <div class="mc-title">Export comments</div>
-      <div class="mc-body">When there are comments, an export bar appears bottom-left. Click Export to download all comments as a JSON file. Click Clear to start fresh.</div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section-eyebrow" style="margin-bottom:0.75rem">The team</div>
+  <div class="section-eyebrow" style="margin-bottom:0.75rem">Pick your name</div>
 
   <div class="three-col" style="margin-bottom:1.5rem">
     <div class="stat-card" style="display:flex;align-items:center;gap:10px;padding:0.75rem 1rem">
